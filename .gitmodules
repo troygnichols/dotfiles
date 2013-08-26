@@ -16,3 +16,6 @@
 [submodule "vim/bundle/vim-sensible"]
 	path = vim/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = https://github.com/troygnichols/oh-my-zsh.git
