@@ -24,6 +24,7 @@ set nowritebackup
 set list
 set relativenumber
 set undofile
+set nolist
 
 let mapleader=","
 
