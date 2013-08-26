@@ -22,10 +22,35 @@ set modelines=3
 set nobackup
 set nowritebackup
 set list
+set relativenumber
+set undofile
+
+let mapleader=","
 
 filetype plugin indent on
 
-noremap <esc> :nohl<cr> :BuffergatorClose<cr>
+nnoremap <leader><space> :noh<cr>
+
+nnoremap <tab> %
+vnoremap <tab> %
+
+nnoremap ; :
+
+inoremap jj <ESC>
+
+" Make ,w split window vertically then focus on new window
+nnoremap <leader>w <C-w>v<C-w>l
+
+" Make ,e split window horizontally then focus on new window
+nnoremap <leader>e <C-w>s<C-w>j
+
+" nnoremap j gj
+" nnoremap k gk
+map <leader>r :NERDTreeFind<cr>
+
+au FocusLost * :wa
+
+nnoremap <leader>v V`]
 
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
@@ -42,5 +67,7 @@ function! RenameFile()
 endfunction
 
 map <leader>rf :call RenameFile()<cr>
-
 map <leader>n :NERDTreeToggle<cr>
+
+colorscheme molokai
+
