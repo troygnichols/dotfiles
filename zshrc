@@ -45,7 +45,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/Users/troygnichols/.rvm/gems/ruby-1.9.3-p392/bin:/Users/troygnichols/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/troygnichols/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/troygnichols/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin
+export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin
 
 # nocorrect
 alias sb="nocorrect sb"
@@ -55,24 +55,5 @@ alias 'ack'='nocorrect ack'
 alias 'iex'='nocorrect iex'
 alias 'mvim'='nocorrect mvim'
 
-# aliases
-alias 'vi'='mvim'
-
-# add arcanist developer tool to path
-export ARCANIST_HOME=/Users/troygnichols/workspaces/thirdparty/facebook/arcanist
-export PATH=$PATH:/$ARCANIST_HOME/bin
-source $ARCANIST_HOME/resources/shell/bash-completion
-
 # default editor
 export EDITOR=vim
-
-# add gradle to path
-export GRADLE_HOME=$HOME/gradle/gradle-1.6
-export PATH=$PATH:$GRADLE_HOME/bin
-
-# add android tools to path
-export ANDROID_HOME=$HOME/android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
-# add portecle (Java Keystore viewer) to path
-export PATH=$PATH:/opt/portecle-1.7
