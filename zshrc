@@ -60,6 +60,7 @@ alias 'guard'='nocorrect guard'
 alias 'ack'='nocorrect ack'
 alias 'iex'='nocorrect iex'
 alias 'mvim'='nocorrect mvim'
+alias 'tmux'='nocorrect tmux'
 
 # default editor
 export EDITOR=vim
