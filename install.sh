@@ -1,7 +1,7 @@
 #!/bin/bash
 dotfiles=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 backup=$HOME/.dotfiles_backup
-files="bashrc vimrc vim zshrc oh-my-zsh gitconfig gitignore"
+files="bashrc vimrc vim zshrc oh-my-zsh gitconfig gitignore gemrc"
 
 echo "Creating backup directory: $backup"
 mkdir -p $backup
