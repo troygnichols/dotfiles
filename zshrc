@@ -7,6 +7,12 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
+# If you want machine-specific settings that don't go into source control,
+# create a file called .zsh-custom.sh and put them in there
+if [ -e $HOME/.zsh-custom.sh ]; then
+  source $HOME/.zsh-custom.sh
+fi
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
