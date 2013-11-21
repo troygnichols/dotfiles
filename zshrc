@@ -13,10 +13,6 @@ if [ -e $HOME/.zsh-custom.sh ]; then
   source $HOME/.zsh-custom.sh
 fi
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -53,14 +49,9 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin
 
-# nocorrect
-alias sb="nocorrect sb"
-alias './config/environment'='nocorrect ./config/environment'
-alias 'guard'='nocorrect guard'
-alias 'ack'='nocorrect ack'
-alias 'iex'='nocorrect iex'
-alias 'mvim'='nocorrect mvim'
-alias 'tmux'='nocorrect tmux'
-
 # default editor
 export EDITOR=vim
+
+source $HOME/.zsh-nocorrect
+
+source $HOME/.aliases
