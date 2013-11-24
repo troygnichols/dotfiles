@@ -1,0 +1,5 @@
+alias reconfig="exec $SHELL"
+alias va="vagrant"
+alias reload="exec $SHELL"
+alias serve="webhere.sh"
+alias ansi="fancy-ansi.sh"

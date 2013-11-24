@@ -2,7 +2,7 @@
 
 dotfiles=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 backup=$HOME/.dotfiles_backup
-files="bashrc aliases zshrc zsh-nocorrect oh-my-zsh vimrc vim gitconfig gitignore gemrc tmux.conf"
+files="bin bashrc aliases zshrc zsh-nocorrect oh-my-zsh vimrc vim gitconfig gitignore gemrc tmux.conf"
 
 echo "Creating backup directory: $backup"
 mkdir -p $backup
