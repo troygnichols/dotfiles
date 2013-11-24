@@ -8,9 +8,9 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # If you want machine-specific settings that don't go into source control,
-# create a file called .zsh-custom.sh and put them in there
-if [ -e $HOME/.zsh-custom.sh ]; then
-  source $HOME/.zsh-custom.sh
+# create a file called .zsh-custom and put them in there
+if [ -e $HOME/.zsh-custom ]; then
+  source $HOME/.zsh-custom
 fi
 
 # Set to this to use case-sensitive completion
