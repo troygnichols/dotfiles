@@ -1,3 +1,5 @@
+set number
+
 nmap ; :
 nmap : ;
 imap jj <ESC>
