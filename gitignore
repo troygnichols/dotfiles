@@ -8,4 +8,4 @@
 .sqlite
 .sqlite3
 .tconsole
-*.un~
+.*.un~
