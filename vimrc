@@ -60,6 +60,9 @@ au FocusLost * :wa
 
 nnoremap <leader>v V`]
 
+" CTRL+R to find/replace selected text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
 
