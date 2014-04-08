@@ -96,9 +96,11 @@ function! RenameFile()
   endif
 endfunction
 
-colorscheme molokai
+" colorscheme molokai
+" hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
-hi Visual ctermbg=DarkGrey guibg=DarkGrey
+set background=dark
+colorscheme solarized
 
 " Tab autocomplete unless at beginning of line
 function! InsertTabWrapper()
