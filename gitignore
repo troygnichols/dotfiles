@@ -1,5 +1,7 @@
 *.swp
 .rvmrc
+.ruby-version
+.ruby-gemset
 .log
 .sql
 .zip
@@ -10,3 +12,5 @@
 .tconsole
 .*.un~
 .DS_Store
+.jhw-cache/
+tags
