@@ -47,7 +47,7 @@ cnoremap ; :
 nnoremap ; :
 nnoremap : ;
 
-inoremap jj <ESC>
+inoremap kj <ESC>
 
 " Make ,w split window vertically then focus on new window
 nnoremap <leader>w <C-w>v<C-w>l
