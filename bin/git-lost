@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Run git-lost from within a git-controlled directory to look for commits that have been
+# accidentally lost or discarded, e.g. a dropped stash.
+
+# git-lost opens up a list of git objects in less, in which you can search for your commit.
+# If you can find the sha of the commit you're after, you can `git checkout` that commit
+# or reset back to it.
+
+for ref in `find .git/objects | sed -e 's#.git/objects/##' | grep / | tr -d /`; do if [ `git cat-file -t $ref` = "commit" ]; then git show --summary $ref; fi; done | less
