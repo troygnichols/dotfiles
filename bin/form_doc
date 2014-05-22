@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Converts the pdf to an image, unpacks the template doc (which is a zip file, if you didn't know),
+# replaces the image with the one of the pdf, and zips it back up.  Then you open the doc and a low-res
+# image of the PDF is in the background.  Usage is as follows:
+#
+# 1. run form_doc to generate the docx
+# 2. open the doc, modify/duplicate the text box, add signature images, whatever
+# 3. delete the background image (the low-res image of the PDF) and save the docx as a PDF
+# 4. pdftk <docx filler material saved as PDF> background <original PDF> output <filled pdf filename>
+# 5. repeat for each page of the PDF (form_doc only works with one page PDFs)
+# 6. stitch pages together with pdftk
+
+# TODO:
+# Some improvements to form_doc would be to burst multi-page PDFs and make a template for each of
+# them, and to have another part (subcommand, maybe?) that would put them all back together.
+
+if [ $# -lt 2 ]; then
+  echo "Usage: form_doc input.pdf output.docx"
+  exit 1
+fi
+
+pdftoppm=`which pdftoppm`
+convert=`which convert`
+zip=`which zip`
+
+if [ ! -e "$pdftoppm" ]; then
+  echo "Can't find pdftoppm"
+  exit 1
+fi
+if [ ! -e "$convert" ]; then
+  echo "Can't find convert"
+  exit 1
+fi
+if [ ! -e "$zip" ]; then
+  echo "Can't find zip"
+  exit 1
+fi
+
+tempdir_prefix=`basename $0`
+tempdir=`mktemp -d -t ${tempdir_prefix}`
+template_doc="/Users/jon/bin/form_doc_template.docx"
+
+if [ -z "$2" ]; then
+  output_filename="${1/%pdf/docx}"
+else
+  output_filename="$2"
+fi
+
+function resolve_filename {
+  if [ -f "$1" ]; then
+    fn="$1"
+  elif [ -f "${cwd}/${1}" ]; then
+    fn="${cwd}/${1}"
+  else
+    echo "Can't find $1 or ${cwd}/$1"
+    exit 1
+  fi
+  output_doc="${cwd}/${2}"
+}
+
+cwd=`pwd`
+
+pushd "$tempdir" > /dev/null
+
+resolve_filename "$1" "$output_filename"
+
+if [ ! -f "$template_doc" ]; then
+  echo "Can't find $template_doc"
+  exit 1
+fi
+
+if [ -f "$output_doc" ]; then
+  echo "$output_doc already exists"
+  exit 1
+fi
+
+mkdir -p {docProps,word/media}
+
+$pdftoppm -r 72 -png "$fn" > "word/media/image1.png"
+$convert "word/media/image1.png" -resize 395x512 "docProps/thumbnail.jpeg"
+cp "$template_doc" "$output_doc"
+
+echo "Writing to $output_doc"
+$zip -qDr "$output_doc" docProps word
+
+popd > /dev/null
+rm -rf "$tempdir"
