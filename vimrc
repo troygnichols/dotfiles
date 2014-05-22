@@ -41,7 +41,7 @@ vnoremap <tab> %
 noremap <leader>rf :call RenameFile()<cr>
 noremap <leader>n :NERDTreeToggle<cr>
 
-map <leader>r :NERDTreeFind<cr>
+noremap <leader>r :NERDTreeFind<cr>
 
 cnoremap ; :
 nnoremap ; :
@@ -84,6 +84,9 @@ function! EnableRelativeNumber()
     set relativenumber
   endif
 endfunction
+
+" Enable spellchecking for Markdown
+autocmd FileType markdown setlocal spell
 
 " Rename the current file
 function! RenameFile()
