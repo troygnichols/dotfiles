@@ -14,3 +14,4 @@
 .DS_Store
 .jhw-cache/
 tags
+node_modules
