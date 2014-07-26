@@ -7,12 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# If you want machine-specific settings that don't go into source control,
-# create a file called .zsh-custom and put them in there
-if [ -e $HOME/.zsh-custom ]; then
-  source $HOME/.zsh-custom
-fi
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -55,3 +49,10 @@ export EDITOR=vim
 source $HOME/.zsh-nocorrect
 
 source $HOME/.aliases
+
+# If you want machine-specific settings that don't go into source control,
+# create a file called .zsh-custom and put them in there
+if [ -e $HOME/.zsh-custom ]; then
+  source $HOME/.zsh-custom
+fi
+
