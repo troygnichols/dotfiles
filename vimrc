@@ -2,6 +2,8 @@ set nocompatible
 
 execute pathogen#infect()
 
+Helptags
+
 syntax on
 
 set tabstop=2
@@ -127,3 +129,7 @@ let g:UltiSnipsEditSplit="vertical"
 " endfunction
 " inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " inoremap <s-tab> <c-p>
+
+" Add a line above/below but stay in normal mode
+nnoremap m o<esc>
+noremap M O<esc>
