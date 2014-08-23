@@ -102,21 +102,28 @@ endfunction
 " colorscheme molokai
 " hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
+
+" UltiSnippets config
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
 
 " Tab autocomplete unless at beginning of line
-function! InsertTabWrapper()
-  let line = getline('.')                     " current line
-
-  let substr = strpart(line, -1, col('.')+1)  " from the start of the current
-                                              " line to one character right
-  let col = col('.') - 1
-  if !col || getline('.')[col - 1] !~ '\k'
-    return "\<tab>"
-  endif
-
-  return "\<C-n>"                     " existing text matching
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-p>
+" -- disabled for now - can't get it to play nice with ulti-snippets
+" function! InsertTabWrapper()
+"   let line = getline('.')                     " current line
+"
+"   let substr = strpart(line, -1, col('.')+1)  " from the start of the current
+"                                               " line to one character right
+"   let col = col('.') - 1
+"   if !col || getline('.')[col - 1] !~ '\k'
+"     return "\<tab>"
+"   endif
+"
+"   return "\<C-n>"                     " existing text matching
+" endfunction
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <s-tab> <c-p>
