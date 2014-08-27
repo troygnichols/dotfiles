@@ -26,6 +26,8 @@ set nowritebackup
 set list
 set undofile
 set nolist
+set virtualedit=insert
+set timeoutlen=1000 ttimeoutlen=0
 
 let mapleader=","
 
@@ -131,5 +133,5 @@ let g:UltiSnipsEditSplit="vertical"
 " inoremap <s-tab> <c-p>
 
 " Add a line above/below but stay in normal mode
-nnoremap m o<esc>
+nnoremap <C-m> o<esc>
 noremap M O<esc>
