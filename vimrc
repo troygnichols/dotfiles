@@ -30,8 +30,12 @@ set virtualedit=insert
 set timeoutlen=1000 ttimeoutlen=0
 set scrolloff=8
 
-"# don't syntax highlight hugely long lines
+" don't syntax highlight hugely long lines
 set synmaxcol=2048
+
+" these two go together
+set ignorecase
+set smartcase
 
 let mapleader=","
 
@@ -56,6 +60,7 @@ nnoremap ; :
 nnoremap : ;
 
 inoremap kj <ESC>
+inoremap jk <ESC>
 
 " Make ,w split window vertically then focus on new window
 nnoremap <leader>w <C-w>v<C-w>l
@@ -136,6 +141,5 @@ let g:UltiSnipsEditSplit="vertical"
 " inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " inoremap <s-tab> <c-p>
 
-" Add a line above/below but stay in normal mode
-nnoremap <C-m> o<esc>
-noremap M O<esc>
+" Add a line above but stay in normal mode
+nnoremap I O<esc>
