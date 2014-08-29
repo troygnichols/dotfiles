@@ -28,6 +28,10 @@ set undofile
 set nolist
 set virtualedit=insert
 set timeoutlen=1000 ttimeoutlen=0
+set scrolloff=8
+
+"# don't syntax highlight hugely long lines
+set synmaxcol=2048
 
 let mapleader=","
 
@@ -37,7 +41,7 @@ noremap <leader>b :BuffergatorToggle<cr>
 
 filetype plugin indent on
 
-nnoremap <leader><space> :noh<cr>
+nnoremap <silent> <leader><space> :noh<cr>
 
 nnoremap <tab> %
 vnoremap <tab> %
