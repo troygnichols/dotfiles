@@ -142,4 +142,8 @@ let g:UltiSnipsEditSplit="vertical"
 " inoremap <s-tab> <c-p>
 
 " Add a line above but stay in normal mode
-nnoremap I O<esc>
+nnoremap U O<esc>
+
+" save/write file shortcut
+inoremap <C-s> <esc>:write<cr>
+nnoremap <C-s> <esc>:write<cr>
