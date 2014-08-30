@@ -50,9 +50,13 @@ source $HOME/.zsh-nocorrect
 
 source $HOME/.aliases
 
+# Don't do XOFF on Ctrl-S
+# See: http://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
+alias vim="stty stop '' -ixoff; vim"
+alias vi="vim"
+
 # If you want machine-specific settings that don't go into source control,
 # create a file called .zsh-custom and put them in there
 if [ -e $HOME/.zsh-custom ]; then
   source $HOME/.zsh-custom
 fi
-
