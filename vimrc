@@ -32,7 +32,7 @@ set scrolloff=8
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
-
+"
 " these two go together
 set ignorecase
 set smartcase
@@ -53,7 +53,7 @@ vnoremap <tab> %
 noremap <leader>rf :call RenameFile()<cr>
 noremap <leader>n :NERDTreeToggle<cr>
 
-noremap <leader>r :NERDTreeFind<cr>
+noremap <leader>f :NERDTreeFind<cr>
 
 cnoremap ; :
 nnoremap ; :
@@ -147,3 +147,21 @@ nnoremap U O<esc>
 " save/write file shortcut
 inoremap <C-s> <esc>:write<cr>
 nnoremap <C-s> <esc>:write<cr>
+
+" Ctrl-C does not trigger InsertLeave by default
+" This will make it trigger InsertLeave
+ino <C-C> <esc>
+
+" Don't move the cursor backwards when returning
+" to Normal Mode from Insert Mode
+function! PreventEscCursorMove()
+  " Don't do this when we're at the beginning of a line
+  " or we'll move forward.
+  let pos = getpos('.')[2]
+  if pos == 1
+    return
+  endif
+  call cursor(0, pos+1)
+endfunction
+
+au InsertLeave * call PreventEscCursorMove()
