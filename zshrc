@@ -60,3 +60,6 @@ alias vi="vim"
 if [ -e $HOME/.zsh-custom ]; then
   source $HOME/.zsh-custom
 fi
+
+# Use custom python environment
+export PYTHONSTARTUP=~/.pythonrc
