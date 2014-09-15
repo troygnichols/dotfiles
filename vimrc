@@ -164,4 +164,7 @@ function! PreventEscCursorMove()
   call cursor(0, pos+1)
 endfunction
 
-au InsertLeave * call PreventEscCursorMove()
+" This breaks Ultisnips.  Perhaps there is a
+" way to tell if we're currently in a snippet
+" and don't run the code if so?
+" au InsertLeave * call PreventEscCursorMove()
