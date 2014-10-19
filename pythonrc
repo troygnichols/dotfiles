@@ -5,11 +5,16 @@ import rlcompleter
 import atexit
 import os
 
+# enable tab completion
 if 'libedit' in readline.__doc__:
   readline.parse_and_bind("bind ^I rl_complete")
 else:
   readline.parse_and_bind("tab: complete")
 
+# persist python shell history across
+# multiple usages (close and re-open
+# python shell and previous history
+# is still available)
 historyPath = os.path.expanduser("~/.pyhistory")
 
 def save_history(historyPath=historyPath):
