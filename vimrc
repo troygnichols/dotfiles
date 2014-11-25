@@ -32,7 +32,7 @@ set scrolloff=8
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
-"
+
 " these two go together
 set ignorecase
 set smartcase
@@ -53,7 +53,7 @@ vnoremap <tab> %
 noremap <leader>rf :call RenameFile()<cr>
 noremap <leader>n :NERDTreeToggle<cr>
 
-noremap <leader>f :NERDTreeFind<cr>
+noremap <leader>m :NERDTreeFind<cr>
 
 cnoremap ; :
 nnoremap ; :
@@ -68,6 +68,11 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Make ,e split window horizontally then focus on new window
 nnoremap <leader>e <C-w>s<C-w>j
 
+" Shortcuts for re-sizing splits
+nnoremap <leader>d :resize +10<cr>
+nnoremap <leader>f :resize -10<cr>
+nnoremap <leader>s :vertical resize +10<cr>
+nnoremap <leader>g :vertical resize -10<cr>
 
 au FocusLost * :wa
 
