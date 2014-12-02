@@ -12,3 +12,17 @@ Are in here.
 
     cd vim/bundle
     git submodule add git@github.com:tpope/vim-surround.git vim-surround
+
+## To update a submodule
+
+### To live dangerously
+
+    git submodule foreach git pull origin master
+
+### To live carefully
+
+    cd [submodule dir]
+    git checkout master
+    git git pull
+
+Then commit those changes to the parent project (this project) if you choose.
