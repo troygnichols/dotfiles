@@ -173,3 +173,9 @@ endfunction
 " way to tell if we're currently in a snippet
 " and don't run the code if so?
 " au InsertLeave * call PreventEscCursorMove()
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
