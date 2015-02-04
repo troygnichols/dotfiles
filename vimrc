@@ -179,3 +179,8 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+let g:multi_cursor_start_key='\'
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-\>'
+let g:multi_cursor_skip_key='<C-g>'
