@@ -123,6 +123,8 @@ endfunction
 " set background=dark
 " colorscheme solarized
 
+colorscheme jellybeans
+
 " UltiSnippets config
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
