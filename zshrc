@@ -67,6 +67,9 @@ export PYTHONSTARTUP=~/.pythonrc
 # Use vi mode in zsh
 bindkey -v
 
+# reduce delay when changing modes
+export KEYTIMEOUT=1
+
 # show vi mode status (INSERT or NORMAL)
 function zle-line-init zle-keymap-select {
   RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
@@ -84,10 +87,13 @@ bindkey -a '^R' redo
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
 
-bindkey '^P' up-history
-bindkey '^N' down-history
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
 
 bindkey '^w' backward-kill-word
+
+bindkey '^[[A' up-line-or-history
+bindkey '^[[B' down-line-or-history
 
 # history search in vim mode
 # http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
