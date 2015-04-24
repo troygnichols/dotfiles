@@ -46,6 +46,7 @@ noremap <leader>b :BuffergatorToggle<cr>
 filetype plugin indent on
 
 nnoremap <silent> <leader><space> :noh<cr>
+nnoremap <silent> <cr> :noh<cr>
 
 nnoremap <tab> %
 vnoremap <tab> %
