@@ -69,6 +69,12 @@ nnoremap <leader>w <C-w>v<C-w>l
 " Make ,e split window horizontally then focus on new window
 nnoremap <leader>e <C-w>s<C-w>j
 
+" Window navigation shortcuts
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
 " Shortcuts for re-sizing splits
 nnoremap <leader>d :resize +10<cr>
 nnoremap <leader>f :resize -10<cr>
@@ -187,3 +193,15 @@ let g:multi_cursor_start_key='\'
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-\>'
 let g:multi_cursor_skip_key='<C-g>'
+
+" paste/nopaste
+nnoremap <silent> <leader>p :call TogglePaste()<cr>
+function! TogglePaste()
+  if &paste == 0
+    set paste
+    echo "Paste On"
+  else
+    set nopaste
+    echo "Paste Off"
+  endif
+endfunction
