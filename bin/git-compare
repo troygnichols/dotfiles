@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Compare one commit hash to another and be pretty.
+
+FROM=$1
+TO=${2:-master}
+
+if [ ! $FROM ]; then
+  cat << EOS
+
+    git-compare
+
+      List which files have changed between two commits.
+
+    Usage: `basename $0` [from commit] ([to commit])
+
+    [to commit] defaults to 'master'
+EOS
+  exit 1
+fi
+
+echo "Comparing from $FROM to $TO..."
+echo "The following files have changed:"
+echo
+
+git log --name-only --pretty=oneline --full-index $FROM..$TO | grep -vE '^[0-9a-f]{40} ' | sort | uniq
