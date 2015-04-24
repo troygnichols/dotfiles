@@ -205,3 +205,5 @@ function! TogglePaste()
     echo "Paste Off"
   endif
 endfunction
+
+au BufRead,BufNewFile *.rabl set filetype=ruby
