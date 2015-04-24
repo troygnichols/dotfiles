@@ -28,7 +28,7 @@ set undofile
 set nolist
 set virtualedit=insert
 set timeoutlen=1000 ttimeoutlen=0
-set scrolloff=8
+set scrolloff=4
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
