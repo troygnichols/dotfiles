@@ -205,4 +205,6 @@ function! TogglePaste()
   endif
 endfunction
 
+" File extension syntax highlighting mappings
 au BufRead,BufNewFile *.rabl set filetype=ruby
+au BufRead,BufNewFile *.es6 set filetype=javascript
