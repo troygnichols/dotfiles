@@ -8,3 +8,6 @@ alias sq="sqlite3 -column -header"
 alias lessr="less -r"
 alias dunnet="emacs -batch -l dunnet"
 alias py="python"
+alias p="padrino"
+
+movie() { imdb -r json -t "$*" | jq "."; }

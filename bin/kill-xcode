@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Killing xcode..."
+kill $(ps aux | grep 'Xcod[e]' | awk '{print $2}')
+
+echo "It's dead"
