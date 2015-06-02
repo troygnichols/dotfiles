@@ -1,1 +1,2 @@
 inoremap :" :=<Space>
+inoremap :: :=<Space>
