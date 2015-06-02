@@ -10,8 +10,6 @@
   excludesfile = ~/.gitignore
 	whitespace = trailing-space,space-before-tab
 	trustctime = false
-[alias]
-	co = checkout
 [github]
 	user = troygnichols
 [push]
@@ -29,6 +27,7 @@
   cpc = cherry-pick --continue
   dc = diff --cached
   di = diff
+  dt = difftool -y
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   la = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lh = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -n 20
@@ -38,3 +37,5 @@
   rba = rebase --abort
   st = status
 
+[url "”git@bitbucket.org:”"]
+	insteadOf = “https://bitbucket.org/”
