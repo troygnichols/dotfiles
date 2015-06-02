@@ -1,0 +1,17 @@
+snippet shd "shoulda test block" b
+should '${1:test something}' do
+	$0
+end
+endsnippet
+
+snippet setup "setup block"	b
+setup do
+	$0
+end
+endsnippet
+
+snippet ctx "test context" b
+context '${1:context name}' do
+	$0
+end
+endsnippet

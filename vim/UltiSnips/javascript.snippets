@@ -1,24 +1,38 @@
 # Immediate function
 snippet (f
-(function(${2}) {
-	${1}
-}(${0}));
+(function(${1}) {
+	${0}
+}(${2}));
+endsnippet
+
+# function variable
+snippet f; "function as variable"
+${1:fnName} = function($2) {
+	$0
+};
+endsnippet
+
+# function with a comma at the end
+snippet f, "function literal for use in a list, ends in comma"
+function($1) {
+	$0
+},
 endsnippet
 
 # console.log
 snippet con "console.log" b
-console.log('${1}');
+console.log(${0});
 endsnippet
 
 # angular log statements
 snippet deb "$log.debug" b
-$log.debug('${1}');
+$log.debug(${0});
 endsnippet
 
 snippet info "$log.info" b
-$log.info('${1}');
+$log.info(${0});
 endsnippet
 
 snippet err "$log.error" b
-$log.error('${1}');
+$log.error(${0});
 endsnippet

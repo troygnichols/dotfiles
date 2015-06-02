@@ -1,3 +1,28 @@
 snippet con "console.log 'foo'" b
 console.log $0
 endsnippet
+
+snippet fp "named fuction with parameters"
+${1:functionName} (${2:param}) ->
+	$0
+endsnippet
+
+snippet afp "anonymous function with parameters"
+(${1:param}) ->
+	$0
+endsnippet
+
+snippet f "named function with no parameters"
+${1:functionName} ->
+	$0
+endsnippet
+
+snippet af "anonymous function with no parameters"
+->
+	$0
+endsnippet
+
+snippet ec "Ember computed property"
+Ember.computed${1: '$2',} ->
+	$0
+endsnippet

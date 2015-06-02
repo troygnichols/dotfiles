@@ -7,3 +7,21 @@ endsnippet
 snippet img "html img element" b
 <img ${1:ng-}src="${3}"${4: alt="$5"}${6: class="$7"} />
 endsnippet
+
+snippet bshfi "Bootstrap horizontal form input" b
+<div class="control-group">
+	<label class="control-label" for="$1">$2</label>
+	<div class="controls">
+		<input id="$1" type="${3:text}" value="$0">
+	</div>
+</div>
+endsnippet
+
+snippet bs3hfi "Bootstrap 3 horizontal form input" b
+<div class="form-group">
+	<label class="col-sm-2 control-label">$1</label>
+	<div class="col-sm-10">
+		$0
+	</div>
+</div>
+endsnippet
