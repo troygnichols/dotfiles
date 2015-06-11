@@ -37,7 +37,7 @@ set synmaxcol=2048
 set ignorecase
 set smartcase
 
-let mapleader=","
+let mapleader="\<Space>"
 
 let g:buffergator_suppress_keymaps=1
 
@@ -193,8 +193,8 @@ let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-\>'
 let g:multi_cursor_skip_key='<C-g>'
 
-" paste/nopaste
-nnoremap <silent> <leader>p :call TogglePaste()<cr>
+" Toggle paste mode
+nnoremap <silent> <leader>t :call TogglePaste()<cr>
 function! TogglePaste()
   if &paste == 0
     set paste
@@ -208,3 +208,19 @@ endfunction
 " File extension syntax highlighting mappings
 au BufRead,BufNewFile *.rabl set filetype=ruby
 au BufRead,BufNewFile *.es6 set filetype=javascript
+
+" Edit vim config
+noremap <leader>c :e ~/.vimrc<cr>
+
+" Reload current file
+noremap <leader>c :e ~/.vimrc<cr>
+noremap <leader>l :source %<cr>
+noremap <leader>l :source %<cr>
+
+" Copy/paste with system clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
