@@ -82,6 +82,7 @@ nnoremap <leader>g :vertical resize -10<cr>
 
 au FocusLost * :wa
 
+" Select to end of file
 nnoremap <leader>v V`]
 
 " CTRL+R to find/replace selected text
