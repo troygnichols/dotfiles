@@ -225,3 +225,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+autocmd FileType make set noexpandtab
+autocmd FileType go set noexpandtab
