@@ -227,3 +227,6 @@ vmap <Leader>P "+P
 
 autocmd FileType make set noexpandtab
 autocmd FileType go set noexpandtab
+
+" Close quickfix window
+noremap <Leader>q :cclose<cr>
