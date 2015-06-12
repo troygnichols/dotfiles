@@ -216,7 +216,6 @@ noremap <leader>c :e ~/.vimrc<cr>
 " Reload current file
 noremap <leader>c :e ~/.vimrc<cr>
 noremap <leader>l :source %<cr>
-noremap <leader>l :source %<cr>
 
 " Copy/paste with system clipboard
 vmap <Leader>y "+y
