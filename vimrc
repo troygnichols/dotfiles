@@ -230,3 +230,6 @@ autocmd FileType go set noexpandtab
 
 " Close quickfix window
 noremap <Leader>q :cclose<cr>
+
+" Run goimports when saving .go files
+let g:go_fmt_command = "goimports"
