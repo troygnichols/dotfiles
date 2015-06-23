@@ -9,5 +9,6 @@ alias lessr="less -r"
 alias dunnet="emacs -batch -l dunnet"
 alias py="python"
 alias p="padrino"
+alias curlt="curl -w '@$HOME/.curl-format' -o /dev/null"
 
 movie() { imdb -r json -t "$*" | jq "."; }
