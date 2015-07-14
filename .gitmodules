@@ -67,3 +67,15 @@
 [submodule "vim/bundle/vim-go"]
 	path = vim/bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule "vim/bundle/vim-kalisi"]
+	path = vim/bundle/vim-kalisi
+	url = https://github.com/freeo/vim-kalisi.git
+[submodule "vim/bundle/Benokai"]
+	path = vim/bundle/Benokai
+	url = https://github.com/benjaminwhite/Benokai.git
+[submodule "vim/bundle/wombat256"]
+	path = vim/bundle/wombat256
+	url = https://github.com/MPiccinato/wombat256.git
+[submodule "vim/bundle/vim-atom-dark"]
+	path = vim/bundle/vim-atom-dark
+	url = https://github.com/gosukiwi/vim-atom-dark.git
