@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cat <<-EOT
+
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+           TTT    HH      HH    XX          XX
+           TTT    HH      HH      XX      XX
+           TTT    HH      HH        XX  XX
+           TTT    HHHHHHHHHH          XXX
+           TTT    HH      HH        XX  XX
+           TTT    HH      HH      XX      XX
+           TTT    HH      HH    XX          XX
+
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+
+EOT
+
+# Play a THX style sound
+play -q -n synth sq F2 sq C3 remix - fade 0 5 .1 norm -4 bend 0.5,2477,3 fade 0 5 0.8 2&> /dev/null
