@@ -130,7 +130,8 @@ endfunction
 " set background=dark
 " colorscheme solarized
 
-colorscheme jellybeans
+" colorscheme jellybeans
+colorscheme atom-dark-256
 
 " UltiSnippets config
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -208,13 +209,16 @@ endfunction
 
 " File extension syntax highlighting mappings
 au BufRead,BufNewFile *.rabl set filetype=ruby
+au BufRead,BufNewFile *.axlsx set filetype=ruby
+au BufRead,BufNewFile *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.es6 set filetype=javascript
+au BufRead,BufNewFile *.gyp set filetype=json
+au BufRead,BufNewFile *.jst.ejs set filetype=html
 
 " Edit vim config
 noremap <leader>c :e ~/.vimrc<cr>
 
 " Reload current file
-noremap <leader>c :e ~/.vimrc<cr>
 noremap <leader>l :source %<cr>
 
 " Copy/paste with system clipboard
