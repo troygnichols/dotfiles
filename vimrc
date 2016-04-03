@@ -238,3 +238,11 @@ noremap <Leader>q :cclose<cr>
 
 " Run goimports when saving .go files
 let g:go_fmt_command = "goimports"
+
+" allow sparkup shorcuts on various other filetypes (besides default .html)
+augroup sparkup_types
+  " Remove ALL autocommands of the current group.
+  autocmd!
+  " Add sparkup to new filetypes
+  autocmd FileType mustache,php,htmldjango,jsx,javascript runtime! bundle/sparkup/ftplugin/html/sparkup.vim
+augroup END
