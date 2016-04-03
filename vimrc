@@ -212,6 +212,7 @@ au BufRead,BufNewFile *.rabl set filetype=ruby
 au BufRead,BufNewFile *.axlsx set filetype=ruby
 au BufRead,BufNewFile *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.es6 set filetype=javascript
+au BufRead,BufNewFile *.jsx set filetype=javascript
 au BufRead,BufNewFile *.gyp set filetype=json
 au BufRead,BufNewFile *.jst.ejs set filetype=html
 
