@@ -37,6 +37,9 @@ set synmaxcol=2048
 set ignorecase
 set smartcase
 
+let g:sparkupExecuteMapping = '<C-l>'
+let g:sparkupNextMapping = '<C-k>'
+
 let mapleader="\<Space>"
 
 let g:buffergator_suppress_keymaps=1
