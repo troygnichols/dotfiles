@@ -130,11 +130,12 @@ endfunction
 " colorscheme molokai
 " hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
-" set background=dark
-" colorscheme solarized
+colorscheme solarized
+let g:solarized_termcolors=256
+set background=dark
 
 " colorscheme jellybeans
-colorscheme atom-dark-256
+" colorscheme atom-dark-256
 
 " UltiSnippets config
 let g:UltiSnipsExpandTrigger="<tab>"
