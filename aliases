@@ -11,4 +11,8 @@ alias py="python"
 alias p="padrino"
 alias curlt="curl -w '@$HOME/.curl-format' -o /dev/null"
 
+# kill the last Ctrl-Z suspended process
+alias k="kill %"
+alias die="kill -9 %"
+
 movie() { imdb -r json -t "$*" | jq "."; }
