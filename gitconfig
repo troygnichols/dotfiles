@@ -10,6 +10,7 @@
   excludesfile = ~/.gitignore
 	whitespace = trailing-space,space-before-tab
 	trustctime = false
+  # pager = "diff-highlight | diff-so-fancy | less --tabs=1,5 -R"
 [github]
 	user = troygnichols
 [push]
@@ -28,14 +29,19 @@
   dc = diff --cached
   di = diff
   dt = difftool -y
+  dtc = difftool -y --cached
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   la = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   lh = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -n 20
   lha = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative -n 20
+  lc = log --pretty=format:'[%h] %ae, %ar: %s' --stat
   rbi = rebase --interactive
   rbc = rebase --continue
   rba = rebase --abort
   st = status
-
-[url "”git@bitbucket.org:”"]
-	insteadOf = “https://bitbucket.org/”
+[url "git@bitbucket.org:"]
+	insteadOf = "https://bitbucket.org/"
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = true
