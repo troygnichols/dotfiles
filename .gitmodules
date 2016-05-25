@@ -79,3 +79,9 @@
 [submodule "vim/bundle/vim-atom-dark"]
 	path = vim/bundle/vim-atom-dark
 	url = https://github.com/gosukiwi/vim-atom-dark.git
+[submodule "vim/bundle/vim-autoclose"]
+	path = vim/bundle/vim-autoclose
+	url = https://github.com/Townk/vim-autoclose.git
+[submodule "vim/bundle/vim-commentary"]
+	path = vim/bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
