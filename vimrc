@@ -217,6 +217,7 @@ au BufRead,BufNewFile *.axlsx set filetype=ruby
 au BufRead,BufNewFile *.jbuilder set filetype=ruby
 au BufRead,BufNewFile *.es6 set filetype=javascript
 au BufRead,BufNewFile *.jsx set filetype=javascript
+au BufRead,BufNewFile *.eslintrc set filetype=json
 au BufRead,BufNewFile *.gyp set filetype=json
 au BufRead,BufNewFile *.jst.ejs set filetype=html
 
@@ -250,3 +251,9 @@ augroup sparkup_types
   " Add sparkup to new filetypes
   autocmd FileType mustache,php,htmldjango,jsx,javascript runtime! bundle/sparkup/ftplugin/html/sparkup.vim
 augroup END
+
+
+let g:ctrlp_custom_ignore = 'node_modules$'
+
+" comment (using commentary plugin)
+map <Leader>/ gcc
