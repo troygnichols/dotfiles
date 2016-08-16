@@ -23,6 +23,6 @@ Are in here.
 
     cd [submodule dir]
     git checkout master
-    git git pull
+    git pull
 
 Then commit those changes to the parent project (this project) if you choose.
