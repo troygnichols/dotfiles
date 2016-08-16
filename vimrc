@@ -11,19 +11,16 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set autoindent
-set backup
 set ruler
 set showcmd
 set incsearch
 set hlsearch
 set backspace=indent,eol,start
 set number
-set ruler
 set modeline
 set modelines=3
 set nobackup
 set nowritebackup
-set list
 set undofile
 set nolist
 set virtualedit=insert
@@ -84,7 +81,8 @@ nnoremap <leader>f :resize -10<cr>
 nnoremap <leader>s :vertical resize +10<cr>
 nnoremap <leader>g :vertical resize -10<cr>
 
-au FocusLost * :wa
+" auto-save all files on focus-lost
+" au FocusLost * :wa
 
 " Select to end of file
 nnoremap <leader>v V`]
@@ -93,7 +91,17 @@ nnoremap <leader>v V`]
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+function! TrimWhiteSpace()
+  let l:save = winsaveview()
+  %s/\s\+$//e
+  call winrestview(l:save)
+endfunction
+
+" make a command you can call like :TrimWhiteSpace
+command! TrimWhiteSpace call TrimWhiteSpace()
+
+" remove whitespace on save
+autocmd BufWritePre * :call TrimWhiteSpace()
 
 autocmd BufEnter * :call OnEnterBuffer()
 
@@ -257,4 +265,5 @@ augroup END
 let g:ctrlp_custom_ignore = 'node_modules$'
 
 " comment (using commentary plugin)
-map <Leader>/ gcc
+nmap <Leader>/ gcc
+vmap <Leader>/ gc
