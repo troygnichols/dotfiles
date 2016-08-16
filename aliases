@@ -10,6 +10,7 @@ alias dunnet="emacs -batch -l dunnet"
 alias py="python"
 alias p="padrino"
 alias curlt="curl -w '@$HOME/.curl-format' -o /dev/null"
+alias ex="elixir"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
