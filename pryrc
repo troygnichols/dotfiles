@@ -24,18 +24,26 @@ if defined?(ActiveRecord)
     @_old_logger, ActiveRecord::Base.logger = ActiveRecord::Base.logger, @_old_logger
     @_old_logger ? 'Logging Off' : 'Logging On'
   end
+end
 
-  def tail_app_events
-    toggle_logger if ActiveRecord::Base.logger
-    last_event = AppEvent.order(:id).last
-    loop do
-      events = AppEvent.where('id > ?', last_event)
-      events.each do |event|
-        puts event.details
-        last_event = event
-      end
-      sleep 1
+def fake_process_instructions(sleep_seconds: 5, status: Instruction::INSTRUCTION_STATUS_FINISHED)
+  while true
+    now = DateTime.current
+    pending_instructions = Instruction.where(status: (0..2), delay_run_time: nil)
+
+    pending_instructions.where({
+      instruction_type: Instruction::INSTRUCTION_TYPE_TRANSMIT
+    }).includes(:controller).find_each do |instr|
+      instr.controller.update!(has_unsent_changes: false)
     end
+
+    pending_instructions.update_all({
+      status:     status,
+      started_at: now,
+      ended_at:   now + 15.minutes
+    })
+
+    sleep(sleep_seconds)
   end
 end
 
