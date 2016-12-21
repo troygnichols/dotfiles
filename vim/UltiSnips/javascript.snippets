@@ -1,42 +1,379 @@
-# Immediate function
-snippet (f
-(function(${1}) {
-	${0}
-}(${2}));
+#
+#  React snippets
+#
+
+#
+## create standard component
+#
+snippet stdCom "create a standard React component" b
+const ${1:MyComponent} = React.createClass({
+  render() {
+    return (
+      $0
+    );
+  }
+});
 endsnippet
 
-# function variable
-snippet f; "function as variable"
-${1:fnName} = function($2) {
-	$0
+#
+## create class component
+#
+
+snippet rcc "create class component" b
+class ${2:ClassComponent} extends Component {
+  $0render() {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    );
+  }
+}
+endsnippet
+
+#
+## functional component
+#
+
+snippet funCom "create simple functional component" b
+const ${1:functionalComponent} = (${2:props}) => {
+  $0
+  return (
+    ${3:<div>
+      $4
+    </div>}
+  );
 };
+
+export default $1;
 endsnippet
 
-# function with a comma at the end
-snippet f, "function literal for use in a list, ends in comma"
-function($1) {
-	$0
+#
+## class component
+#
+
+snippet classCom "create cimple class component" b
+
+class ${1:ClassComponent} extends Component {
+  constructor(props) {
+    super(props);
+
+    ${2:this.state = {
+      $3
+    };}
+  }
+
+  $0
+  render() {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    );
+  }
+}
+
+export default $1;
+endsnippet
+
+#
+## imports & exports
+#
+
+snippet impR "import React from 'react'" b
+import React from 'react';$0
+endsnippet
+
+snippet impRC "import React and Component from 'react'" b
+import React, { Component } from 'react';$0
+endsnippet
+
+snippet impD "import ReactDOM from 'react-dom'" b
+import ReactDOM from 'react-dom';$0
+endsnippet
+
+snippet impRD "import React & ReactDOM" b
+import React from 'react';
+import ReactDOM from 'react-dom';$0
+endsnippet
+
+snippet impRR "import React Router" b
+import ${1:Router} from 'react-router';$0
+endsnippet
+
+snippet imp "import" b
+import $1 from '$2';$0
+endsnippet
+
+snippet jsx "define jsx dom" b
+/**
+ * @jsx React.DOM
+ */
+$0
+endsnippet
+
+snippet expdef "export default" b
+export default $0;
+endsnippet
+
+#
+## return jsx
+#
+
+snippet ret() "return ();" b
+return (
+  ${1:<div>
+    $2
+  </div>}
+);
+endsnippet
+
+#
+## Component specs & lifecycle
+#
+
+snippet cs "React.addons.classSet" b
+var cx = React.addons.classSet;
+endsnippet
+
+snippet cdm "component did mount" b
+componentDidMount() {
+  ${1}
+}$0
+endsnippet
+
+snippet cdup "component did update" b
+componentDidUpdate(prevProps, prevState) {
+  ${1}
+}$0
+endsnippet
+
+snippet scu "should component update"
+shouldComponentUpdate(nextProps, nextState) {
+  ${1}
+}$0
+endsnippet
+
+snippet cwm "component will mount" b
+componentWillMount() {
+  ${1}
+}$0
+endsnippet
+
+snippet cwr "component will receive props" b
+componentWillReceiveProps(nextProps) {
+  ${1}
+}$0
+endsnippet
+
+snippet cwun "component will unmount" b
+componentWillUnmount() {
+  ${1}
+}$0
+endsnippet
+
+snippet cwu "component will update" b
+componentWillUpdate(nextProps, nextState) {
+  ${1}
+}$0
+endsnippet
+
+snippet cx
+cx({
+  ${1}: ${2}
+});
+endsnippet
+
+snippet fup
+forceUpdate(${1:callback});
+endsnippet
+
+snippet gdp "get default props" b
+getDefaultProps() {
+  return {
+    ${1}
+  };
+},$0
+endsnippet
+
+snippet ism "is mounted"
+isMounted()
+endsnippet
+
+snippet ren
+render() {
+  return (
+    ${1:<div>
+      $2
+    </div>}
+  );
+}
+$0
+endsnippet
+
+#
+## state
+#
+
+snippet constr "construct state" b
+constructor(props) {
+  super(props);
+
+  ${1:this.state = {
+    $2
+  };}
+}
+
+$0
+endsnippet
+
+snippet gis "get initial state" b
+getInitialState() {
+  return {
+    ${1}: ${2}
+  };
+}
+
+$0
+endsnippet
+
+snippet pt "propTypes" b
+propTypes: {
+  ${1}: React.PropTypes.${2:string}
 },
 endsnippet
 
-# console.log
-snippet con "console.log" b
-console.log(${0});
+snippet sst "set state" b
+this.setState({
+  ${1}: ${2}
+});$0
 endsnippet
 
-# angular log statements
-snippet deb "$log.debug" b
-$log.debug(${0});
+snippet props "get property" i
+this.props.${1}
 endsnippet
 
-snippet info "$log.info" b
-$log.info(${0});
+snippet state "get state" i
+this.state.${1}
 endsnippet
 
-snippet err "$log.error" b
-$log.error(${0});
+snippet trp
+this.transferPropsTo(${VISUAL}$0);
 endsnippet
 
-snippet dbg "Debugger statement" b
-debugger
+#
+## DOM render
+#
+
+snippet domren "render component to DOM" b
+ReactDOM.render(${1:<$2 />}, document.${3:querySelector('$4')});
 endsnippet
+
+########################################
+
+# snippet f "Function" w
+# function($1) {
+#   $2
+# }$0
+# endsnippet
+#
+# snippet (f "Immediate function"
+# (function(${1}) {
+#   ${0}
+# }(${2}));
+# endsnippet
+#
+# # function variable
+# snippet f; "function as variable"
+# ${1:fnName} = function($2) {
+#   $0
+# };
+# endsnippet
+#
+# # function with a comma at the end
+# snippet f, "function literal for use in a list, ends in comma"
+# function($1) {
+#   $0
+# },
+# endsnippet
+#
+# snippet dbg "Debugger statement" b
+# debugger
+# endsnippet
+#
+# snippet nul "Check for null/undefined" b
+# if (typeof($1) !== 'undefined' && $1 !== null) {
+#   $0
+# }
+# endsnippet
+#
+# snippet _ "arrow function without parens" w
+# $1 => {
+#   $0
+# }
+# endsnippet
+#
+# snippet (> "arrow function with parens" i
+# ($1) => {
+#   $0
+# }
+# endsnippet
+#
+# snippet c> "named arrow function as const" b
+# const $1 = ($2) => {
+#   $0
+# };
+# endsnippet
+#
+# snippet l> "named arrow function as let" b
+# let $1 = ($2) => {
+#   $0
+# };
+# endsnippet
+#
+# snippet { "Object" i
+# {
+#   ${1:'${2:key}'}: ${3:'${4:value}'}${5:,}
+# }$0
+# endsnippet
+#
+# snippet [ "Array" w
+# [
+#   $1
+# ]$0
+# endsnippet
+#
+# snippet c "Const definition" b
+# const $1 = $2;$0
+# endsnippet
+#
+# snippet sw "Switch statement"
+# switch ($1) {
+#   case $2:
+#     $3
+#   default:
+#     $0
+# }
+# endsnippet
+#
+# snippet (* "Parens pair" i
+# ($1)$0
+# endsnippet
+#
+# snippet (( "Multi-line parens pair" i
+# (
+#   $1
+# )$0
+# endsnippet
+#
+# snippet (; "Multi-line parens with semicolon at the end" i
+# (
+#   $1
+# );$0
+# endsnippet
+#
+# snippet (({} "Mutli-line parens containing object(s)" i
+# ({
+#   ${1:'${2:key}'}: ${3:'${4:value}'}${5:,}
+# }$6)$0
+# endsnippet
