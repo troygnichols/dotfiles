@@ -23,7 +23,7 @@ set nobackup
 set nowritebackup
 set undofile
 set nolist
-set virtualedit=insert
+set virtualedit=insert,block
 set timeoutlen=1000 ttimeoutlen=0
 set scrolloff=4
 set visualbell t_vb=
@@ -60,8 +60,8 @@ cnoremap ; :
 nnoremap ; :
 nnoremap : ;
 
-inoremap kj <ESC>
-inoremap jk <ESC>
+" inoremap kj <ESC>
+" inoremap jk <ESC>
 
 " Make ,w split window vertically then focus on new window
 nnoremap <leader>w <C-w>v<C-w>l
@@ -207,6 +207,7 @@ let g:multi_cursor_start_key='\'
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-\>'
 let g:multi_cursor_skip_key='<C-g>'
+let g:multi_cursor_quit_key='<C-c>'
 
 " Toggle paste mode
 nnoremap <silent> <leader>t :call TogglePaste()<cr>
