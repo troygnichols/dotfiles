@@ -65,7 +65,7 @@ fi
 export PYTHONSTARTUP=~/.pythonrc
 #
 # Use vi mode in zsh
-bindkey -v
+# bindkey -v
 
 # reduce delay when changing modes
 export KEYTIMEOUT=1
@@ -99,3 +99,18 @@ bindkey '^[[B' history-beginning-search-forward
 # http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
+
+
+## experimental
+# function zle-keymap-select () {
+#   case $KEYMAP in
+#     vicmd) print -rn -- $terminfo[cvvis];; # block cursor
+#     viins|main) print -rn -- $terminfo[cnorm];; # less visible cursor
+#   esac
+# }
+
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
