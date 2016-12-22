@@ -268,3 +268,12 @@ let g:ctrlp_custom_ignore = 'node_modules$'
 " comment (using commentary plugin)
 nmap <Leader>/ gcc
 vmap <Leader>/ gc
+
+" for vim-fugitive: open the output of Ggrep (git grep) in a quickfix window
+" instead of raw terminal output
+autocmd QuickFixCmdPost *grep* cwindow
+
+" Command to wrap vim-fugitive's Ggrep in 'silent' to it doesn't
+" flash the terminal output before opening the quickfix window.
+" Call it like :Gg foo.c
+command! -nargs=1 Gg silent Ggrep! <f-args>
