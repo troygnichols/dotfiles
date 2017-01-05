@@ -15,7 +15,7 @@
 	url = https://github.com/tpope/vim-sensible.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
-	url = git@github.com:robbyrussell/oh-my-zsh.git
+	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/bundle/mustache"]
 	path = vim/bundle/mustache
 	url = git://github.com/mustache/vim-mode.git
@@ -24,46 +24,46 @@
 	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "vim/bundle/vim-surround"]
 	path = vim/bundle/vim-surround
-	url = git@github.com:tpope/vim-surround.git
+	url = git://github.com/tpope/vim-surround.git
 [submodule "vim/bundle/vim-rails"]
 	path = vim/bundle/vim-rails
-	url = git@github.com:tpope/vim-rails.git
+	url = git://github.com/tpope/vim-rails.git
 [submodule "vim/bundle/ag.vim"]
 	path = vim/bundle/ag.vim
-	url = git@github.com:rking/ag.vim.git
+	url = git://github.com/rking/ag.vim.git
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
-	url = git@github.com:bling/vim-airline.git
+	url = git://github.com/bling/vim-airline.git
 [submodule "vim/bundle/vim-javascript"]
 	path = vim/bundle/vim-javascript
-	url = git@github.com:pangloss/vim-javascript.git
+	url = git://github.com/pangloss/vim-javascript.git
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
-	url = git@github.com:SirVer/ultisnips.git
+	url = git://github.com/SirVer/ultisnips.git
 [submodule "vim/bundle/vim-snippets"]
 	path = vim/bundle/vim-snippets
-	url = git@github.com:honza/vim-snippets.git
+	url = git://github.com/honza/vim-snippets.git
 [submodule "vim/bundle/vim-unimpaired"]
 	path = vim/bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
 [submodule "vim/bundle/sparkup"]
 	path = vim/bundle/sparkup
-	url = git@github.com:rstacruz/sparkup.git
+	url = git://github.com/rstacruz/sparkup.git
 [submodule "vim/bundle/html5.vim"]
 	path = vim/bundle/html5.vim
-	url = git@github.com:othree/html5.vim.git
+	url = git://github.com/othree/html5.vim.git
 [submodule "vim/bundle/vim-easy-align"]
 	path = vim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "vim/bundle/jellybeans.vim"]
 	path = vim/bundle/jellybeans.vim
-	url = git@github.com:nanotech/jellybeans.vim.git
+	url = git://github.com/nanotech/jellybeans.vim.git
 [submodule "vim/bundle/vim-projectionist"]
 	path = vim/bundle/vim-projectionist
-	url = git@github.com:tpope/vim-projectionist.git
+	url = git://github.com/tpope/vim-projectionist.git
 [submodule "vim/bundle/vim-go"]
 	path = vim/bundle/vim-go
-	url = git@github.com:fatih/vim-go.git
+	url = git://github.com/fatih/vim-go.git
 [submodule "vim/bundle/vim-kalisi"]
 	path = vim/bundle/vim-kalisi
 	url = https://github.com/freeo/vim-kalisi.git
