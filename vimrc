@@ -277,3 +277,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 " flash the terminal output before opening the quickfix window.
 " Call it like :Gg foo.c
 command! -nargs=1 Gg silent Ggrep! <f-args>
+
+" Open Dash.app for current word under cursor
+nmap <silent> <leader>D <Plug>DashSearch
+
