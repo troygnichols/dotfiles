@@ -71,13 +71,13 @@ export PYTHONSTARTUP=~/.pythonrc
 export KEYTIMEOUT=1
 
 # show vi mode status (INSERT or NORMAL)
-function zle-line-init zle-keymap-select {
-  RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-  RPS2=$RPS1
-  zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+# function zle-line-init zle-keymap-select {
+#   RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+#   RPS2=$RPS1
+#   zle reset-prompt
+# }
+# zle -N zle-line-init
+# zle -N zle-keymap-select
 
 # add missing vim hotkeys
 # fixes backspace deletion issues
@@ -109,8 +109,10 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 #   esac
 # }
 
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
+# function zle-line-init zle-keymap-select {
+#     RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+#     RPS2=$RPS1
+#     zle reset-prompt
+# }
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
