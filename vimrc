@@ -281,3 +281,14 @@ command! -nargs=1 Gg silent Ggrep! <f-args>
 " Open Dash.app for current word under cursor
 nmap <silent> <leader>D <Plug>DashSearch
 
+" adds a slight delay when using ctrlp
+" better experience with large projects
+" let g:ctrlp_lazy_update=1
+
+" ctrlp caching
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+" ctrlp use ag for searching, faster
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
