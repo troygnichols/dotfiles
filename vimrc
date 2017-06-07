@@ -301,14 +301,10 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-" Run 'Ack' with no args to search for word under cursor
-let g:ack_use_cword_for_empty_search = 0
-noremap <Leader>a :Ack! <cword><cr>
-
 " Ack.vim folds results from same file
 let g:ack_autofold_results = 1
 
-nnoremap <Leader>a :Ack!<Space>
+noremap <Leader>a :Ack! <cword>
 
 nnoremap <Leader>j :cnext<cr>
 nnoremap <Leader>k :cprev<cr>
