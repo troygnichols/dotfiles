@@ -292,3 +292,20 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" ack.vim really use ag
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Run 'Ack' with no args to search for word under cursor
+let g:ack_use_cword_for_empty_search = 0
+noremap <Leader>a :Ack! <cword><cr>
+
+" Ack.vim folds results from same file
+let g:ack_autofold_results = 1
+
+nnoremap <Leader>a :Ack!<Space>
+
+nnoremap <Leader>j :cnext<cr>
+nnoremap <Leader>k :cprev<cr>
