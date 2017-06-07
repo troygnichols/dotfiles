@@ -28,6 +28,9 @@ set timeoutlen=1000 ttimeoutlen=0
 set scrolloff=4
 set visualbell t_vb=
 
+" vim-airline likes this
+set laststatus=2
+
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
 
