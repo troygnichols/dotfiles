@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # If we're in a git repo try to open it in github
+# Works for bitbucket too, maybe others
 
-if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 ];
+git rev-parse --git-dir > /dev/null 2>&1
+
+if [ $? -eq 0 ];
 then
-  # lol this is so crappy
-  url=$(git remote get-url origin | ruby -e 'url=STDIN.gets; if url =~ /^https\:\/\// then puts url else puts "https://github.com/#{url.split(":")[1].gsub(".git", "")}" end')
+  url=$(git remote get-url origin | ruby -e 'url=STDIN.gets; if url =~ /^https\:\/\// then puts url else parts=url.split(":"); site=parts[0]; path=parts[1].gsub(/\.git$/, ""); puts "#{site.gsub(/^git@/, "https://")}/#{path}" end;')
   echo "Opening URL: $url"
   open $url
 else
