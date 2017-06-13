@@ -1,0 +1,3 @@
+# Seems to fix line wrapping issues
+# https://superuser.com/questions/46948/any-way-to-fix-screens-mishandling-of-line-wrap-maybe-only-terminal-app
+termcapinfo xterm* ti@:te@
