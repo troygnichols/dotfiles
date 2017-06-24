@@ -304,7 +304,8 @@ endif
 " Ack.vim folds results from same file
 let g:ack_autofold_results = 1
 
-noremap <Leader>a :Ack! <cword>
+noremap <Leader>a :Ack!<space>
+noremap <Leader>z :Ack! <cword><cr>
 
 nnoremap <Leader>j :cnext<cr>
 nnoremap <Leader>k :cprev<cr>
