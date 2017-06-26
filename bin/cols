@@ -1,0 +1,8 @@
+# Only works in Terminal.app
+
+echo "Setting terminal emulator back to 80 columns"
+
+# Give em time to read the message
+sleep 0.5
+
+printf '\e[8;40;80t'
