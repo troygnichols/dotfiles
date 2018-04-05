@@ -29,7 +29,7 @@ set scrolloff=4
 set visualbell t_vb=
 
 " vim-airline likes this
-set laststatus=2
+" set laststatus=2
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
@@ -309,3 +309,8 @@ noremap <Leader>z :Ack! <cword><cr>
 
 nnoremap <Leader>j :cnext<cr>
 nnoremap <Leader>k :cprev<cr>
+
+let g:airline_powerline_fonts = 1
+
+" set-window-option -g utf8 on
+" set -g default-terminal "screen-256color"
