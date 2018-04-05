@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+
+# TODO: support finding a band by an album name
+
+import argparse
+import urllib
+import urllib2
+import sys
+import json
+
+class MusicSearch:
+
+    def run(self):
+        args = self.parse_args()
+        artist = self.join_list_name(args.band)
+        album = self.join_list_name(args.album)
+        artists = self.fetch_artists(args.band)
+        print artists
+
+    def parse_args(self):
+        parser = argparse.ArgumentParser(description='Get AMG data for a band or album')
+        parser.add_argument('-a', '--album', nargs='*', help='Search for an album like "Raw Power" or "Hunky Dory", (no quotes)')
+        parser.add_argument('-d', '--description', action='store_true', help='Include long descriptions')
+        parser.add_argument('-b', '--band', nargs='*', help='Name of artist like "The Stooges", "David Bowie" (no quotes)')
+        args = parser.parse_args()
+        if args.band == None and args.album == None:
+            print "Bad args: Need an Artist or Album to search\n"
+            parser.print_help()
+            exit(1)
+        return args
+
+    def join_list_name(self, name):
+        if name is None:
+            return ''
+        ' '.join(name)
+
+    def api_token(self):
+        return 'FZxpDcbTpFSktvSuBjVAPuBAkZlioppMjVXTtKJV'
+
+    def fetch_artists(self, artist):
+        params = {'token' : self.api_token(), 'artist' : artist, 'type' : 'artist'}
+        resp = urllib2.urlopen("https://api.discogs.com/database/search?" + urllib.urlencode(params))
+        json_resp = resp.read()
+        data = json.loads(json_resp)
+        return data['results']
+
+    def extract_artists(self, data):
+        return self.filter_type(data['results'], 'artist')
+
+MusicSearch().run()
