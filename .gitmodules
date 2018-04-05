@@ -97,3 +97,6 @@
 [submodule "oh-my-zsh-custom/themes/powerlevel9k"]
 	path = oh-my-zsh-custom/themes/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
+[submodule "vim/bundle/vim-ale"]
+	path = vim/bundle/vim-ale
+	url = https://github.com/w0rp/ale.git

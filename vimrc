@@ -314,3 +314,5 @@ let g:airline_powerline_fonts = 1
 
 " set-window-option -g utf8 on
 " set -g default-terminal "screen-256color"
+
+let NERDTreeShowHidden=1
