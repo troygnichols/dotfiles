@@ -1,11 +1,27 @@
+export TERM="xterm-256color"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+
+# Custom ZSH confg dir, as described here:
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Customization
+# Not to be confused with the ~/.zsh-custom config while, which is
+# just a machine-specific addition to this ~/.zshrc config file.
+# Has nothing to do with that.
+ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
+
+# Powerlevel9k config. This has to come before
+# actually setting the theme to Powerlevel9k
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_SHORTEN_STRATEGY=Default
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
