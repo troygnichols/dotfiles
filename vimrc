@@ -1,8 +1,111 @@
+call plug#begin('~/.config/vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'w0rp/ale'
+
+Plug 'haya14busa/incsearch.vim'
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+Plug 'jeetsukumaran/vim-buffergator'
+
+Plug 'mileszs/ack.vim'
+
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+ Plug 'wokalski/autocomplete-flow'
+
+" various colorschemes
+" http://vimcolors.com/
+Plug 'freeo/vim-kalisi'
+Plug 'w0ng/vim-hybrid'
+Plug 'bitterjug/vim-colors-bitterjug'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'crusoexia/vim-monokai'
+Plug 'jacoborus/tender.vim'
+Plug 'pbrisbin/vim-colors-off'
+Plug 'muellan/am-colors'
+Plug 'blueshirts/darcula'
+Plug 'altercation/vim-colors-solarized'
+
+" Language Support {{{3
+" JavaScript {{{4
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'rhysd/npm-debug-log.vim'
+Plug 'AndrewRadev/ember_tools.vim'
+" Plug 'neovim/node-host',                  { 'do': 'npm install' }
+Plug 'Quramy/vim-js-pretty-template'
+
+" TypeScript {{{4
+Plug 'HerringtonDarkholme/yats.vim'
+" Plug 'mhartington/nvim-typescript',       { 'do': ':UpdateRemotePlugins' }
+
+" Elm {{{4
+Plug 'ElmCast/elm-vim'
+
+" HTML {{{4
+Plug 'othree/html5.vim'
+Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'mattn/emmet-vim'
+
+" CSS {{{4
+Plug 'hail2u/vim-css3-syntax',            { 'for': 'css' }
+
+" Sass {{{4
+Plug 'cakebaker/scss-syntax.vim'
+
+" Ruby {{{4
+Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+
+" Python {{{4
+Plug 'klen/python-mode',                  { 'for': 'python' }
+Plug 'davidhalter/jedi-vim',              { 'for': 'python' }
+Plug 'alfredodeza/pytest.vim',            { 'for': 'python' }
+
+" Rust {{{4
+Plug 'wellbredgrapefruit/tomdoc.vim',     { 'for': 'ruby' }
+Plug 'wting/rust.vim'
+Plug 'cespare/vim-toml'
+
+" Go {{{4
+Plug 'fatih/vim-go'
+" Plug 'nsf/gocode',                        { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
+
+" Markdown {{{4
+Plug 'reedes/vim-pencil'                  " Markdown, Writing
+Plug 'godlygeek/tabular',                 { 'for': 'markdown' } " Needed for vim-markdown
+Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
+
+" Elixir {{{4
+Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
+call plug#end()
+
 set nocompatible
 
-execute pathogen#infect()
+" execute pathogen#infect()
 
-Helptags
+" Helptags
 
 syntax on
 
@@ -58,6 +161,11 @@ noremap <leader>rf :call RenameFile()<cr>
 noremap <leader>n :NERDTreeToggle<cr>
 
 noremap <leader>m :NERDTreeFind<cr>
+
+" Auto start NERD tree when opening a directory
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
+
+let g:NERDTreeWinPos='right'
 
 cnoremap ; :
 nnoremap ; :
@@ -142,9 +250,13 @@ endfunction
 " colorscheme molokai
 " hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
-colorscheme solarized
-let g:solarized_termcolors=256
-set background=dark
+colorscheme tender
+" only relevant with tender theme, makes highlights more visible
+highlight Visual ctermbg=102
+
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" set background=dark
 
 " colorscheme jellybeans
 " colorscheme atom-dark-256
@@ -316,3 +428,12 @@ let g:airline_powerline_fonts = 1
 " set -g default-terminal "screen-256color"
 
 let NERDTreeShowHidden=1
+
+" use only eslint (not jshint)
+let g:ale_linters = {'javascript': ['eslint']}
+
+let g:ale_sign_error='✖'
+let g:ale_sign_warning=''
+
+" use emmet-vim to complete a CSS abbreviation to HTML
+imap <c-l> <c-y>,
