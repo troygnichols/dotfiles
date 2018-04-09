@@ -23,12 +23,22 @@ Plug 'jeetsukumaran/vim-buffergator'
 
 Plug 'mileszs/ack.vim'
 
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'alexbyk/vim-ultisnips-js-testing'
 
- Plug 'wokalski/autocomplete-flow'
+" Plug 'Townk/vim-autoclose'
+
+Plug 'tpope/vim-fugitive'
+
+" deoplete + requirements
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+Plug 'wokalski/autocomplete-flow'
+
+Plug 'junegunn/vim-easy-align'
 
 " various colorschemes
 " http://vimcolors.com/
@@ -165,8 +175,6 @@ noremap <leader>m :NERDTreeFind<cr>
 " Auto start NERD tree when opening a directory
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
 
-let g:NERDTreeWinPos='right'
-
 cnoremap ; :
 nnoremap ; :
 nnoremap : ;
@@ -263,8 +271,8 @@ highlight Visual ctermbg=102
 
 " UltiSnippets config
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Tab autocomplete unless at beginning of line
@@ -416,7 +424,11 @@ endif
 " Ack.vim folds results from same file
 let g:ack_autofold_results = 1
 
-noremap <Leader>a :Ack!<space>
+" HACK ALERT: close NERDTree before starting a search to
+" prevent the Quickfix window from getting all shifted around.
+" This might be unncessary in a future version of ack.txt
+" so you could take out the :NERDTreeClose<CR> part
+noremap <Leader>a :NERDTreeClose<CR>:Ack!<space>
 noremap <Leader>z :Ack! <cword><cr>
 
 nnoremap <Leader>j :cnext<cr>
@@ -427,7 +439,7 @@ let g:airline_powerline_fonts = 1
 " set-window-option -g utf8 on
 " set -g default-terminal "screen-256color"
 
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 
 " use only eslint (not jshint)
 let g:ale_linters = {'javascript': ['eslint']}
@@ -437,3 +449,21 @@ let g:ale_sign_warning=''
 
 " use emmet-vim to complete a CSS abbreviation to HTML
 imap <c-l> <c-y>,
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" if we're in a Quickfix window, " <c-p> should move up, not open CtrlP
+function! MaybeOpenCtrlP()
+  if &buftype == 'quickfix'
+    normal! k
+  else
+    :CtrlP
+  endif
+endfunction
+
+command! MaybeOpenCtrlP call MaybeOpenCtrlP()
+" let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'MaybeOpenCtrlP'
+
+let g:NERDTreeWinPos='right'
