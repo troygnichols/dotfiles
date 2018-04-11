@@ -1,4 +1,0 @@
-# TODO
-
-- Almost have neovim working but Ultisnips is kinda flakey, doesn't seem to find all the snippets, maybe need to tell it where to look...read the docs and figure it out.
-- Finsih moving vim plugins to plug system. Remove the old submodules from the git repo
