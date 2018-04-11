@@ -60,7 +60,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:~/.bin:~/.user_scripts
 
 # default editor
-export EDITOR=vim
+export EDITOR=nvim
 
 source $HOME/.zsh-nocorrect
 
