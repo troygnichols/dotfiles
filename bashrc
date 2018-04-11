@@ -6,3 +6,5 @@ export PS1='\W \$ '
 if [ -e $HOME/.bash-custom.sh ]; then
   source $HOME/.bash-custom.sh
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
