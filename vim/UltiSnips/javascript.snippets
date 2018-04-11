@@ -105,6 +105,10 @@ snippet imp "import" b
 import $1 from '$2';$0
 endsnippet
 
+snippet impp "import from same name" b
+import $1 from '$1';$0
+endsnippet
+
 snippet jsx "define jsx dom" b
 /**
  * @jsx React.DOM
@@ -261,28 +265,20 @@ snippet trp
 this.transferPropsTo(${VISUAL}$0);
 endsnippet
 
-#
-## DOM render
-#
-
-snippet domren "render component to DOM" b
-ReactDOM.render(${1:<$2 />}, document.${3:querySelector('$4')});
-endsnippet
-
 ########################################
 
 # snippet f "Function" w
 # function($1) {
-#   $2
+#		$2
 # }$0
 # endsnippet
-#
-# snippet (f "Immediate function"
-# (function(${1}) {
-#   ${0}
-# }(${2}));
-# endsnippet
-#
+
+snippet (f "Immediate function"
+(function(${1}) {
+	${0}
+}(${2}));
+endsnippet
+
 # # function variable
 # snippet f; "function as variable"
 # ${1:fnName} = function($2) {
@@ -330,13 +326,13 @@ endsnippet
 #   $0
 # };
 # endsnippet
-#
-# snippet { "Object" i
-# {
-#   ${1:'${2:key}'}: ${3:'${4:value}'}${5:,}
-# }$0
-# endsnippet
-#
+
+snippet { "Object" i
+{
+  ${1:'${2:key}'}: ${3:'${4:value}'}${5:,}
+}$0
+endsnippet
+
 # snippet [ "Array" w
 # [
 #   $1
