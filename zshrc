@@ -116,6 +116,8 @@ bindkey '^[[B' history-beginning-search-forward
 bindkey -M viins '^s' history-incremental-search-backward
 bindkey -M vicmd '^s' history-incremental-search-backward
 
+# enable persistent history in erlang/elixir shell
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 ## experimental
 # function zle-keymap-select () {
