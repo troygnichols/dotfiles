@@ -28,8 +28,8 @@ Plug 'mileszs/ack.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "
 " Plug 'roxma/nvim-completion-manager'
 "
@@ -384,6 +384,9 @@ let g:deoplete#enable_at_startup = 1
 " inoremap <silent> <c-u> <c-r>=cm#sources#ultisnips#trigger_or_popup("\<Plug>(ultisnips_expand)")<cr>
 
 " let g:UltiSnipsSnippetsDir = $HOME . '/.config/nvim/UltiSnips'
+
+let g:UltiSnipsListSnippets='<S-tab>'
+
 
 " vim-windowswap config
 " prevent default bindings
