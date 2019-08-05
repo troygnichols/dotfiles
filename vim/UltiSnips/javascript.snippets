@@ -19,7 +19,7 @@ endsnippet
 ## create class component
 #
 
-snippet rcc "create class component" b
+snippet rcc "react class component" b
 class ${2:ClassComponent} extends Component {
   $0render() {
     return (
@@ -29,6 +29,32 @@ class ${2:ClassComponent} extends Component {
     );
   }
 }
+endsnippet
+
+snippet rccp "react class pure component" b
+class ${2:PureClassComponent} extends PureComponent {
+  $0render() {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    );
+  }
+}
+endsnippet
+
+snippet rcce "exported react class component" b
+class ${2:ClassComponent} extends Component {
+  $0render() {
+    return (
+      ${4:<div>
+        $5
+      </div>}
+    );
+  }
+}
+
+export default $2;
 endsnippet
 
 #
@@ -49,55 +75,31 @@ export default $1;
 endsnippet
 
 #
-## class component
-#
-
-snippet classCom "create cimple class component" b
-
-class ${1:ClassComponent} extends Component {
-  constructor(props) {
-    super(props);
-
-    ${2:this.state = {
-      $3
-    };}
-  }
-
-  $0
-  render() {
-    return (
-      ${4:<div>
-        $5
-      </div>}
-    );
-  }
-}
-
-export default $1;
-endsnippet
-
-#
 ## imports & exports
 #
 
-snippet impR "import React from 'react'" b
+snippet impr "import React from 'react'" b
 import React from 'react';$0
 endsnippet
 
-snippet impRC "import React and Component from 'react'" b
+snippet imprc "import React and Component from 'react'" b
 import React, { Component } from 'react';$0
 endsnippet
 
-snippet impD "import ReactDOM from 'react-dom'" b
+snippet imprp "import React and PureComponent from 'react'" b
+import React, { PureComponent } from 'react';$0
+endsnippet
+
+snippet impd "import ReactDOM from 'react-dom'" b
 import ReactDOM from 'react-dom';$0
 endsnippet
 
-snippet impRD "import React & ReactDOM" b
+snippet imprd "import React & ReactDOM" b
 import React from 'react';
 import ReactDOM from 'react-dom';$0
 endsnippet
 
-snippet impRR "import React Router" b
+snippet imprr "import React Router" b
 import ${1:Router} from 'react-router';$0
 endsnippet
 
@@ -293,9 +295,9 @@ endsnippet
 # },
 # endsnippet
 #
-# snippet dbg "Debugger statement" b
-# debugger
-# endsnippet
+snippet dbg "Debugger statement" b
+debugger;
+endsnippet
 #
 # snippet nul "Check for null/undefined" b
 # if (typeof($1) !== 'undefined' && $1 !== null) {
