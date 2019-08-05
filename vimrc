@@ -109,6 +109,9 @@ Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
 Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 
+" Java
+Plug 'artur-shaik/vim-javacomplete2'
+
 call plug#end()
 
 set nocompatible
