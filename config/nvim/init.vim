@@ -115,8 +115,15 @@ Plug 'slashmili/alchemist.vim'
 Plug 'kchmck/vim-coffee-script'
 
 Plug 'junegunn/vader.vim'
-
 Plug 'junegunn/gv.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
+Plug 'elzr/vim-json'
+
+Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'rustushki/JavaImp.vim'
+
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
