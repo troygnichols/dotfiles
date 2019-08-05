@@ -419,6 +419,8 @@ let g:vim_json_syntax_conceal = 0
 
 " Java Complete 2 plugin setup
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" Remove unused import on save, in java files
+autocmd FileType java autocmd BufWritePre <buffer> call javacomplete#imports#RemoveUnused()
 " let g:JavaComplete_CheckServerVersionAtStartup = 0
 nmap <leader>ji <Plug>(JavaComplete-Imports-Add)
 nmap <leader>jis <Plug>(JavaComplete-Imports-AddSmart)
