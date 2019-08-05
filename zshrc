@@ -57,7 +57,7 @@ plugins=(git docker)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin:~/.bin:~/.user_scripts
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~/.bin:~/.user_scripts
 
 # default editor
 export EDITOR=nvim
@@ -134,3 +134,5 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # }
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
