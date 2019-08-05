@@ -243,7 +243,7 @@ autocmd FileType markdown setlocal spell
 " colorscheme tender
 colorscheme hybrid
 " only relevant with tender theme, makes highlights more visible
-highlight Visual ctermbg=102
+" highlight Visual ctermbg=102
 
 " let g:solarized_termcolors=256
 
