@@ -403,3 +403,49 @@ set cursorline
 
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
+
+set exrc
+set secure
+
+" Insert newline above/below without leaving Normal mode
+nmap <M-Enter> mao<Esc>`a
+nmap <CR> maO<Esc>`a
+
+" In visual mode - remove blank lines in selection (and remove highlights)
+vnoremap <M-l> :g/^\s*$/d<cr>:let @/ = ""<cr>
+
+" Needed to make vim-json plugin play nicely with indentLines
+let g:vim_json_syntax_conceal = 0
+
+" Java Complete 2 plugin setup
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" let g:JavaComplete_CheckServerVersionAtStartup = 0
+nmap <leader>ji <Plug>(JavaComplete-Imports-Add)
+nmap <leader>jis <Plug>(JavaComplete-Imports-AddSmart)
+
+"
+""""""""""""""""""
+" PHP
+""""""""""""""""""
+
+" linting
+let g:ale_php_phpcs_standard='PSR2'
+
+" indentation
+augroup FileTypeSpecificAutocommands
+  autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+augroup END
+
+" insert space before (stay in normal mode)
+nnoremap <leader>, i<space><esc>
+
+" insert space after (stay in normal mode)
+nnoremap <leader>. a<space><esc>
+
+"
+""""""""""""""""""
+" Golang
+""""""""""""""""""
+"
+" auto import
+let g:go_fmt_command = "goimports"
