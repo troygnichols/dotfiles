@@ -66,7 +66,7 @@ Plug 'Quramy/vim-js-pretty-template'
 
 " TypeScript {{{4
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'mhartington/nvim-typescript',       { 'do': ':UpdateRemotePlugins' }
+" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 " Elm {{{4
 Plug 'ElmCast/elm-vim'
