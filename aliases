@@ -3,24 +3,20 @@ alias va="vagrant"
 alias reload="exec $SHELL"
 alias serve="webhere.sh"
 alias ansi="fancy-ansi.sh"
-alias ph="phonegap"
 alias sq="sqlite3 -column -header"
 alias lessr="less -r"
 alias dunnet="emacs -batch -l dunnet"
 alias py="python"
-alias p="padrino"
 alias curlt="curl -w '@$HOME/.curl-format' -o /dev/null"
 alias ex="elixir"
 alias dk="docker"
 alias dkc="docker-compose"
-alias scr="screen"
 alias lc="colorls"
+alias lcl="colorls -lha"
 alias unix="date +%s"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
 alias die="kill -9 %"
-
-movie() { imdb -r json -t "$*" | jq "."; }
 
 # vim: syntax=zsh
