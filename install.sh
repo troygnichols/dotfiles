@@ -26,5 +26,5 @@ done
 
 for script in $scripts; do
   echo "Running script $script"
-  source $script
+
 done
