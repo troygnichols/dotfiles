@@ -14,7 +14,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'haya14busa/incsearch.vim'
 
