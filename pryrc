@@ -3,8 +3,16 @@ require 'rubygems'
 begin
   require 'interactive_editor'
 rescue LoadError
-  warn 'Could not find interactive_editor, run "gem install interactive_editor" to ' +
+  warn 'Could not find interactive_editor, run `gem install interactive_editor` to ' +
     'use an external editor with irb'
+end
+
+begin
+  require 'bond'
+  require 'pry-bond'
+rescue LoadError
+  warn 'Could not find pry-bond, run `gem install bond pry-bond` to ' +
+    'get improved completions'
 end
 
 if defined?(ActiveRecord)
