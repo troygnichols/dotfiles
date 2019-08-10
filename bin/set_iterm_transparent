@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") <value>
+
+  <value> should be a number between 0 and 1, where 0 is completely opaque, 1 is completely transparent
+
+  NOTE: CMD+u toggles transparency mode.
+EOF
+  exit 1
+}
+
+if (($# != 1)); then
+  usage
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+osascript "$DIR/_set_iterm_transparent.scpt" "$@"
