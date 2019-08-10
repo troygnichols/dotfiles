@@ -12,7 +12,7 @@ alias ex="elixir"
 alias dk="docker"
 alias dkc="docker-compose"
 alias lc="colorls"
-alias lcl="colorls -lha"
+alias lcl="colorls -lh"
 alias unix="date +%s"
 
 # kill the last Ctrl-Z suspended process
