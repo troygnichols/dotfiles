@@ -17,5 +17,11 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 EOT
 
-# Play a THX style sound
-play -q -n synth sq F2 sq C3 remix - fade 0 5 .1 norm -4 bend 0.5,2477,3 fade 0 5 0.8 2&> /dev/null
+if command -v play; then
+  # Play a THX style sound
+  play -q -n synth sq F2 sq C3 remix - fade 0 5 .1 norm -4 bend 0.5,2477,3 fade 0 5 0.8 2&> /dev/null
+else
+  echo "play command not found, run 'brew install sox'"
+  exit 1
+fi
+
