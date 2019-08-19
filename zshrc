@@ -136,3 +136,17 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# mkdir + cd
+function mkcd() {
+  DIR="$1"
+  if [[ -f "$DIR" ]]; then
+    >&2 echo "error: cannot create: $DIR, it is a file."
+    return 1
+  elif [[ -d "$DIR" ]]; then
+    echo "warn: already exists, changing directory to: $DIR"
+  else
+    mkdir -p $DIR
+  fi
+  cd $DIR
+}
