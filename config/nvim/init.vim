@@ -55,6 +55,7 @@ Plug 'muellan/am-colors'
 Plug 'blueshirts/darcula'
 Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/seoul256.vim'
+Plug 'davebarkerxyz/wombat256dave'
 
 " Language Support {{{3
 " JavaScript {{{4
@@ -89,13 +90,14 @@ Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 
 " Python {{{4
-Plug 'klen/python-mode',                  { 'for': 'python' }
 Plug 'davidhalter/jedi-vim',              { 'for': 'python' }
 Plug 'alfredodeza/pytest.vim',            { 'for': 'python' }
+Plug 'deoplete-plugins/deoplete-jedi'
 
 " Rust {{{4
 Plug 'wellbredgrapefruit/tomdoc.vim',     { 'for': 'ruby' }
-Plug 'wting/rust.vim'
+" Plug 'wting/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 
 " Go {{{4
@@ -176,9 +178,11 @@ noremap <leader>m :NERDTreeFind<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-cnoremap ; :
-nnoremap ; :
-nnoremap : ;
+" Use : instead of ; (avoid a SHIFT press)
+" XXX this is more trouble than it's worth.
+" cnoremap ; :
+" nnoremap ; :
+" nnoremap : ;
 
 " Make ,w split window vertically then focus on new window
 nnoremap <leader>w <C-w>v<C-w>l
@@ -240,14 +244,17 @@ endfunction
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
 
-" colorscheme tender
-colorscheme hybrid
-" only relevant with tender theme, makes highlights more visible
+colorscheme tender
+highlight Visual ctermbg=66
+
+" colorscheme hybrid
 " highlight Visual ctermbg=102
 
+""" solarized colorscheme
+" colorscheme solarized
 " let g:solarized_termcolors=256
-
 " set background=dark
+""""""""""""""""""""""""""""""""
 
 " Add a line above but stay in normal mode
 nnoremap U O<esc>
@@ -314,7 +321,7 @@ autocmd FileType make set noexpandtab
 autocmd FileType go set noexpandtab
 
 " Close quickfix window
-noremap <Leader>q :cclose<cr>
+noremap <Leader>q :cclose<cr>:lclose<cr>
 
 " ctrlp caching
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
@@ -353,15 +360,26 @@ let g:ctrlp_custom_ignore = 'node_modules$'
 nmap <Leader>/ gcc
 vmap <Leader>/ gc
 
+""" Setup ALE
 " use only eslint (not jshint)
 let g:ale_linters = {'javascript': ['eslint']}
+
+let g:ale_sign_warning = '•'
+let g:ale_sign_error = '•'
+let g:ale_sign_style_error = ''
+let g:ale_sign_style_warning = ''
+let g:ale_sign_column_always=1
+
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+" set signcolumn=yes
+"""""
+
 
 let g:buffergator_suppress_keymaps=1
 
 noremap <leader>b :BuffergatorToggle<cr>
-
-let g:ale_sign_error='✖'
-let g:ale_sign_warning=''
 
 " use emmet-vim to complete a CSS abbreviation to HTML
 imap <c-l> <c-y>,
@@ -396,8 +414,9 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Unfold everything
-set foldmethod=indent
-set foldlevel=20
+set foldmethod=manual
+set nofoldenable
+set foldlevel=99
 
 set cursorline
 
@@ -436,6 +455,8 @@ let g:ale_php_phpcs_standard='PSR2'
 " indentation
 augroup FileTypeSpecificAutocommands
   autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType make setlocal tabstop=4 softtabstop=4 shiftwidth=4 list
+  autocmd FileType c setlocal list
 augroup END
 
 " insert space before (stay in normal mode)
@@ -451,3 +472,14 @@ nnoremap <leader>. a<space><esc>
 "
 " auto import
 let g:go_fmt_command = "goimports"
+
+set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
+" set listchars=tab:>.,trail:.,extends:\#,nbsp:.
+
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+
+let g:rustfmt_autosave=1
+
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#auto_initialization = 0
