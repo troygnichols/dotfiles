@@ -15,6 +15,9 @@ alias lc="colorls"
 alias lcl="colorls -lh"
 alias unix="date +%s"
 alias nv="nvim"
+alias t=tmux
+alias ta="tmux attach -t"
+alias tl="tmux ls"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
