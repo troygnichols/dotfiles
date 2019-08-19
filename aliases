@@ -14,6 +14,7 @@ alias dkc="docker-compose"
 alias lc="colorls"
 alias lcl="colorls -lh"
 alias unix="date +%s"
+alias nv="nvim"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
