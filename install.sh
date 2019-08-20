@@ -6,8 +6,9 @@ files="bin bashrc aliases zshrc zsh-nocorrect oh-my-zsh oh-my-zsh-custom vimrc g
 scripts="neovim.sh"
 
 echo "Creating backup directory: $backup"
-mkdir -p $backup
+mkdir -p "$backup"
 
+echo "Changing directory to: $dotfiles"
 cd $dotfiles
 
 for file in $files; do
@@ -20,8 +21,14 @@ for file in $files; do
       mv $HOME/.$file $backup
     fi
   fi
-  echo "Linking $file"
-  ln -vsfF $dotfiles/$file $HOME/.$file
+  filepath="$HOME/.$file"
+  parent_dir="${filepath%/*}"
+  if ! [[ -d "$parent_dir" ]]; then
+    echo "*** Creating parent directory: $parent_dir, for file: $file"
+    mkdir -p "$parent_dir"
+  fi
+  echo "==> Linking $file"
+  ln -vsfF "$dotfiles/$file" "$filepath"
 done
 
 for script in $scripts; do
