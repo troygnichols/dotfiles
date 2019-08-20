@@ -24,6 +24,7 @@
   au = add --update
   br = branch
   ca = commit --amend
+  cv = commit --verbose
   co = checkout
   cp = cherry-pick
   cpc = cherry-pick --continue
