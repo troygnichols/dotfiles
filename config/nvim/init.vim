@@ -185,7 +185,7 @@ vnoremap <tab> %
 " nnoremap : ;
 
 " split window vertically then focus on new window
-nnoremap <leader>w\| <C-w>v<C-w>l
+nnoremap <leader>w/ <C-w>v<C-w>l
 
 " split window horizontally then focus on new window
 nnoremap <leader>w- <C-w>s<C-w>j
