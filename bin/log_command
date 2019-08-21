@@ -28,6 +28,7 @@ print_verbose_status() {
   cat <<EOF
 $command_message
 Logging to:       $output_file
+Date format:      $date_format
 Interval:         ${sleep_duration}s
 EOF
   print_bumper "$command_message"
