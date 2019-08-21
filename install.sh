@@ -42,6 +42,7 @@ files=(
   user_scripts
   screenrc
   config/nvim/init.vim
+  zsh/completion/_docker_compose
 )
 
 echo "*** Creating backup directory: $backup"
