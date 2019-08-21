@@ -1,0 +1,146 @@
+#!/bin/bash
+
+# Run a command on a loop and log its output to a file.
+
+default_output_file="/tmp/log_command.log"
+default_date_format="+%Y-%m-%d %H:%M:%S"
+default_sleep_duration="2"
+
+output_file="$default_output_file"
+date_format="$default_date_format"
+sleep_duration="$default_sleep_duration"
+allow_append=""
+verbose=""
+command=""
+
+main() {
+  [[ "$verbose" == "1" ]] && print_verbose_status
+  while true
+  do
+    echo "$(date "$date_format") $(eval "$command")" >> "$output_file"
+    sleep $sleep_duration
+  done
+}
+
+print_verbose_status() {
+  local command_message="Running Command:  $command"
+  print_bumper "$command_message"
+  cat <<EOF
+$command_message
+Logging to:       $output_file
+Date format:      $date_format
+Interval:         ${sleep_duration}s
+EOF
+  print_bumper "$command_message"
+}
+
+set_flags() {
+  while (( "$#" )); do
+    case "$1" in
+      -o|--output-file)
+        output_file="$2"
+        shift 2
+        ;;
+      -d|--date-format)
+        date_format="$2"
+        shift 2
+        ;;
+      -s|--sleep-duration)
+        sleep_duration=" $2"
+        shift 2
+        ;;
+      -a|--append)
+        allow_append="1"
+        shift
+        ;;
+      -v|--verbose)
+        verbose="1"
+        shift
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*|--*)
+        message_and_die "Unsupported flag(s): $1"
+        usage
+        break
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+  command="$@"
+}
+
+print_bumper() {
+  for ((i=1;i<=${#1};i++)); do echo -n "*"; done
+  echo
+}
+
+message_and_die() {
+  local message="ERROR: $1"
+  print_bumper "$message"
+  echo "$message"
+  print_bumper "$message"
+  usage
+}
+
+check_inputs() {
+  if [[ -e "$output_file" ]] && [[ "$allow_append" != "1" ]]; then
+    message_and_die "Output file '$output_file' exists! Use --append or choose other file."
+  fi
+
+  if [[ -z "$sleep_duration" ]]; then
+    message_and_die "Bad sleep duration: $sleep_duration"
+  fi
+}
+
+usage() {
+  echo "
+Usage: $(basename "$0") <options> -- <command to run>
+
+  Run a command repeatedly and log its output to a file.
+
+  Options:
+      -d --date-format
+          The date format to use in the log. Use empty string '' for no date.
+          Defaults to '$default_date_format'
+      -a --append
+          Don't error if output-file already exists. Append to the existing file.
+      -o --output-file
+          Where to write the output from <command to run>.
+          Defaults to $default_output_file. Error if file already exists.
+      -s --sleep-duration
+          How long to sleep between runs, in seconds. Decimals e.g. 0.5 also allowed.
+          Defaults to $default_sleep_duration.
+      -v --verbose
+          Verbose output. Say more about what it's doing before it starts.
+
+
+  If <command to run> also requires its own arguments,
+    separate the command portion with '--', e.g.
+
+      $(basename "$0") -a -o /tmp/my.log -d "+%H:%M:%S" -s 10 -- wc -l /path/to/some/file.txt
+
+  The above will write lines like this:
+
+      23:24:52 42
+      23:25:02 42
+      23:25:12 44
+      ...
+
+  to the file: '/tmp/my.log', running 'wc -l ...' once every 10 seconds.
+"
+  exit 1
+}
+
+if (( $# == 0 )); then
+  usage
+  exit 1
+fi
+
+set_flags "$@"
+check_inputs
+main "$@"

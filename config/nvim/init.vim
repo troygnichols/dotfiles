@@ -184,11 +184,11 @@ vnoremap <tab> %
 " nnoremap ; :
 " nnoremap : ;
 
-" Make ,w split window vertically then focus on new window
-nnoremap <leader>w <C-w>v<C-w>l
+" split window vertically then focus on new window
+nnoremap <leader>w\| <C-w>v<C-w>l
 
-" Make ,e split window horizontally then focus on new window
-nnoremap <leader>e <C-w>s<C-w>j
+" split window horizontally then focus on new window
+nnoremap <leader>w- <C-w>s<C-w>j
 
 " Window navigation shortcuts
 nnoremap <c-h> <c-w>h

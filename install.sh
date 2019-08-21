@@ -3,9 +3,46 @@
 ## set VERBOSE for more output, .e.g run the script this way:
 ## VERBOSE=yes ./install.sh
 
+if [[ "$1" == "--help" ]]; then
+  echo "Usage: $(basename "$0")"
+  echo "
+  Install dotfiles by symlinking them into this repo.
+  Backup existing dotfiles first.
+  Run with VERBOSE for details on what is being linked where., e.g.
+
+      VERBOSE=1 ./$(basename $0)
+"
+
+  exit 0
+fi
+
+
 dotfiles=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 backup=$HOME/.dotfiles_backup
-files=(bin bashrc aliases zshrc zsh-nocorrect oh-my-zsh oh-my-zsh-custom vimrc gvimrc vim gitconfig gitignore gemrc tmux.conf pythonrc irbrc pryrc curl-format user_scripts screenrc config/nvim/init.vim)
+
+files=(
+  bin
+  bashrc
+  aliases
+  zshrc
+  zsh-nocorrect
+  oh-my-zsh
+  oh-my-zsh-custom
+  vimrc
+  gvimrc
+  vim
+  gitconfig
+  gitignore
+  gemrc
+  tmux.conf
+  pythonrc
+  irbrc
+  pryrc
+  curl-format
+  user_scripts
+  screenrc
+  config/nvim/init.vim
+)
 
 echo "*** Creating backup directory: $backup"
 mkdir -p "$backup"
@@ -44,11 +81,6 @@ copy_file() {
   [[ -n "$VERBOSE" ]] && args+="v"
   ln -"$args" "$dotfiles/$filename" "$filepath"
 }
-
-if [[ "$1" -eq "--help" ]]; then
-  echo "help"
-  exit 0
-fi
 
 for filename in "${files[@]}"; do
   copy_file "$filename"
