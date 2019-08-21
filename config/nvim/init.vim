@@ -328,8 +328,11 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 
 " ctrlp use ag for searching, faster
 if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -u -l --nocolor -g ""'
 endif
+
+" ctrlp find dotfiles
+let g:ctrlp_show_hidden = 1
 
 " Ack.vim folds results from same file
 let g:ack_autofold_results = 1
@@ -435,6 +438,19 @@ vnoremap <M-l> :g/^\s*$/d<cr>:let @/ = ""<cr>
 
 " Needed to make vim-json plugin play nicely with indentLines
 let g:vim_json_syntax_conceal = 0
+
+" Don't conceal in markdown
+let g:vim_markdown_conceal = 0
+
+" Better looking indentLine character
+let g:indentLine_char = '│'
+
+" indentLine conceals things we don't want to conceal in some files
+" so diable its concealing there.
+autocmd Filetype markdown :IndentLinesDisable
+autocmd Filetype json :IndentLinesDisable
+" set conceallevel=0
+
 
 " Java Complete 2 plugin setup
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
