@@ -158,6 +158,7 @@ set virtualedit=insert,block
 set timeoutlen=1000 ttimeoutlen=0
 set scrolloff=4
 set visualbell t_vb=
+set relativenumber
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
@@ -220,26 +221,6 @@ command! TrimWhiteSpace call TrimWhiteSpace()
 
 " remove whitespace on save
 autocmd BufWritePre * :call TrimWhiteSpace()
-
-autocmd BufEnter * :call OnEnterBuffer()
-
-function! OnEnterBuffer()
-  :call EnableRelativeNumber()
-  :call SetBuffergatorSettings()
-endfunction
-
-function! SetBuffergatorSettings()
-  let g:buffergator_viewport_split_policy="B"
-  let g:buffergator_hsplit_size=10
-endfunction
-
-
-function! EnableRelativeNumber()
-  " Don't do it for the NERDTree buffer
-  if bufname('%') !~ 'NERD'
-    set relativenumber
-  endif
-endfunction
 
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
