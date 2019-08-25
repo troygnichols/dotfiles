@@ -158,6 +158,7 @@ set virtualedit=insert,block
 set timeoutlen=1000 ttimeoutlen=0
 set scrolloff=4
 set visualbell t_vb=
+set gdefault
 
 " don't syntax highlight hugely long lines
 set synmaxcol=2048
@@ -499,3 +500,6 @@ let g:rustfmt_autosave=1
 
 let g:jedi#usages_command = "<leader>u"
 let g:jedi#auto_initialization = 0
+
+nnoremap <leader>5 :%s/
+set inccommand=nosplit
