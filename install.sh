@@ -43,6 +43,7 @@ files=(
   screenrc
   config/nvim/init.vim
   zsh/completion/_docker_compose
+  data/_lipsum_static.txt
 )
 
 echo "*** Creating backup directory: $backup"
