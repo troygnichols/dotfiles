@@ -18,6 +18,7 @@ alias nv="nvim"
 alias t=tmux
 alias ta="tmux attach -t"
 alias tl="tmux ls"
+alias tn="tmux new -s"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
