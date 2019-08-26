@@ -42,6 +42,7 @@ files=(
   user_scripts
   screenrc
   config/nvim/init.vim
+  config/nvim/pluginit.vim
   zsh/completion/_docker_compose
   data/_lipsum_static.txt
 )
@@ -49,7 +50,7 @@ files=(
 echo "*** Creating backup directory: $backup"
 mkdir -p "$backup"
 
-echo "*** Changing directory to: $dotfiles" cd $dotfiles
+[[ -n "$VERBOSE" ]] && echo "*** Changing directory to: $dotfiles" cd $dotfiles
 
 # create the config file's parent dir if needed
 make_parent_dir() {
