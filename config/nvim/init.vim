@@ -5,10 +5,6 @@ source ~/.config/nvim/pluginit.vim
 " Auto start NERD tree when opening a directory
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
 
-" Auto start NERD tree if no files are specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
-
 syntax on
 set tabstop=2
 set softtabstop=2
@@ -51,12 +47,6 @@ noremap <leader>m :NERDTreeFind<cr>
 
 nnoremap <tab> %
 vnoremap <tab> %
-
-" Use : instead of ; (avoid a SHIFT press)
-" XXX this is more trouble than it's worth.
-" cnoremap ; :
-" nnoremap ; :
-" nnoremap : ;
 
 " split window vertically then focus on new window
 nnoremap <leader>w/ <C-w>v<C-w>l
@@ -266,23 +256,9 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 " deoplete config
 let g:deoplete#enable_at_startup = 1
-" " disable autocomplete
-" " let g:deoplete#disable_auto_complete = 1
-" if has("gui_running")
-"     inoremap <silent><expr><C-Space> deoplete#mappings#manual_complete()
-" else
-"     inoremap <silent><expr><C-@> deoplete#mappings#manual_complete()
-" endif
 
 " UltiSnips config
 let g:UltiSnipsListSnippets='<S-tab>'
-
-
-" vim-windowswap config
-" prevent default bindings
-let g:windowswap_map_keys = 0
-" Ctrl-M to grab window, Ctrl-M again to swap w/other window
-nnoremap <leader>x :call WindowSwap#EasyWindowSwap()<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -375,4 +351,5 @@ let g:jedi#usages_command = "<leader>u"
 let g:jedi#auto_initialization = 0
 
 nnoremap <leader>5 :%s/
+
 set inccommand=nosplit
