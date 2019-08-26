@@ -1,28 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 
-AMOUNT=5
-WHAT=paras
-START=false
+amount="5"
+what="paras"
+start="false"
 
 while getopts ":n:wpbls" opt; do
   case $opt in
     n)
-      AMOUNT=$OPTARG
+      amount="$OPTARG"
       ;;
     w)
-      WHAT=words
+      what="words"
       ;;
     p)
-      WHAT=paras
+      what="paras"
       ;;
     b)
-      WHAT=bytes
+      what="bytes"
       ;;
     l)
-      WHAT=lines
+      what="lines"
       ;;
     s)
-      START=true
+      start="true"
       ;;
     *)
       echo "Invalid option: -$OPTARG" >&2
@@ -30,4 +30,10 @@ while getopts ":n:wpbls" opt; do
   esac
 done
 
-curl -s -X POST lipsum.com/feed/json -d "amount=$AMOUNT" -d "what=$WHAT" -d"start=$START" | jq -r '.feed.lipsum'
+fetched="$(curl -s "https://lipsum.com/feed/json?amount=$amount&what=$what&start=$start" | jq -r '.feed.lipsum' | sed '/^$/d;G')"
+if [[ -n "$fetched"  ]]; then
+  echo "$fetched"
+else
+  echo "*** could connect to lorem ipsum server, falling back to local static file ***\n" >>/dev/stderr
+  cat $HOME/.data/_lipsum_static.txt
+fi
