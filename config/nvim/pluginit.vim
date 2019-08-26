@@ -16,8 +16,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'dense-analysis/ale'
 
-Plug 'haya14busa/incsearch.vim'
-
 " Plug 'tpope/vim-commentary'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
@@ -127,5 +125,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'rustushki/JavaImp.vim'
 
 Plug 'sheerun/vim-polyglot'
+
+Plug 'mtth/scratch.vim'
 
 call plug#end()

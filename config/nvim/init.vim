@@ -197,11 +197,6 @@ noremap <Leader>z :Ack! <cword><cr>
 nnoremap <Leader>j :cnext<cr>
 nnoremap <Leader>k :cprev<cr>
 
-" configure incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-
 " let NERDTreeShowHidden=1
 let g:NERDTreeWinPos='right'
 
