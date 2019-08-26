@@ -57,6 +57,12 @@ nnoremap <leader>w/ <C-w>v<C-w>l
 " split window horizontally then focus on new window
 nnoremap <leader>w- <C-w>s<C-w>j
 
+" swap TWO vertically split windows for horizontal split
+nnoremap <leader>wh <C-w>t<C-w>K
+
+" swap TWO horizontally split windows for vertical split
+nnoremap <leader>wv <C-w>t<C-w>H
+
 " Window navigation shortcuts
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
@@ -94,14 +100,14 @@ autocmd FileType markdown setlocal spell
 " colorscheme tender
 " highlight Visual ctermbg=66
 
-" colorscheme hybrid
+colorscheme hybrid
 " highlight Visual ctermbg=102
 
 """ solarized colorscheme
-colorscheme solarized
-let g:solarized_termcolors=256
-set background=dark
-hi clear SignColumn " kill ugly gray gutters
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" set background=dark
+" hi clear SignColumn " kill ugly gray gutters
 """"""""""""""""""""""""""""""""
 
 " Add a line above but stay in normal mode
@@ -114,18 +120,6 @@ nnoremap <C-s> <esc>:write<cr>
 " Ctrl-C does not trigger InsertLeave by default
 " This will make it trigger InsertLeave
 ino <C-C> <esc>
-
-" Don't move the cursor backwards when returning
-" to Normal Mode from Insert Mode
-function! PreventEscCursorMove()
-  " Don't do this when we're at the beginning of a line
-  " or we'll move forward.
-  let pos = getpos('.')[2]
-  if pos == 1
-    return
-  endif
-  call cursor(0, pos+1)
-endfunction
 
 " Toggle paste mode
 nnoremap <silent> <leader>t :call TogglePaste()<cr>
@@ -277,6 +271,7 @@ let g:indentLine_char = '│'
 " indentLine conceals things we don't want to conceal in some files
 " so diable its concealing there.
 autocmd Filetype markdown :IndentLinesDisable
+autocmd Filetype text :IndentLinesDisable
 autocmd Filetype json :IndentLinesDisable
 " set conceallevel=0
 
