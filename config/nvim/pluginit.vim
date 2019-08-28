@@ -128,4 +128,6 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'mtth/scratch.vim'
 
+Plug 'rizzatti/dash.vim'
+
 call plug#end()
