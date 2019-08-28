@@ -340,7 +340,7 @@ let g:rustfmt_autosave=1
 let g:jedi#usages_command = "<leader>u"
 let g:jedi#auto_initialization = 0
 
-nnoremap <leader>5 :%s/
+nnoremap <leader>5 :%s/\v
 
 " add debugger line above cursor in ruby files
 :autocmd FileType ruby nnoremap <buffer> <leader>h Obinding.pry<esc>j0w
