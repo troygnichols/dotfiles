@@ -256,6 +256,16 @@ let g:python3_host_prog='/usr/local/bin/python3'
 set exrc
 set secure
 
+" save recent cursor position
+function! SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$") |
+      execute 'normal! g`"zvzz' |
+    endif
+  end
+endfunction
+autocmd BufReadPost * call SetCursorPosition()
+
 " Insert newline above/below without leaving Normal mode
 nmap <M-Enter> mao<Esc>`a
 " only do this maping if we are not in a Quickfix or Location window
