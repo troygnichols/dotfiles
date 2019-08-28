@@ -254,7 +254,9 @@ set secure
 
 " Insert newline above/below without leaving Normal mode
 nmap <M-Enter> mao<Esc>`a
-nmap <CR> maO<Esc>`a
+" only do this maping if we are not in a Quickfix or Location window
+" or we will clobber <CR>'s select functionality in some plugins like ack.vim
+nnoremap <expr> <CR> &buftype ==# 'quickfix' ? "\<CR>" : 'maO<Esc>`a'
 
 " In visual mode - remove blank lines in selection (and remove highlights)
 vnoremap <M-l> :g/^\s*$/d<cr>:let @/ = ""<cr>
