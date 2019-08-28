@@ -345,3 +345,14 @@ nnoremap <leader>5 :%s/\v
 " add debugger line above cursor in ruby files
 :autocmd FileType ruby nnoremap <buffer> <leader>h Obinding.pry<esc>j0w
 :autocmd FileType ruby nnoremap <buffer> <leader>r Obinding.remote_pry<esc>j0w
+
+" scratch plugin config
+nnoremap <leader>S :Scratch<cr>
+let g:scratch_horizontal = 0
+let g:scratch_filetype = 'text'
+let g:scratch_height = 50
+
+" Airline
+
+" show ALE linting errors in airline status line
+let g:airline#extensions#ale#enabled = 1
