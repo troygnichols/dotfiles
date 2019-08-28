@@ -210,6 +210,10 @@ let g:ale_sign_style_error = ''
 let g:ale_sign_style_warning = ''
 let g:ale_sign_column_always=1
 
+nnoremap <leader>1 :ALEFirst<cr>
+nmap <leader>] <Plug>(ale_next_wrap)
+nmap <leader>[ <Plug>(ale_previous_wrap)
+
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
