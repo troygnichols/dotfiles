@@ -12,8 +12,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'ctrlpvim/ctrlp.vim'
-
 Plug 'dense-analysis/ale'
 
 " Plug 'tpope/vim-commentary'

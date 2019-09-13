@@ -165,17 +165,6 @@ autocmd FileType go set noexpandtab
 " Close quickfix window
 noremap <Leader>q :cclose<cr>:lclose<cr>
 
-" ctrlp caching
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-" ctrlp use ag for searching, faster
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -u -l --nocolor -g ""'
-endif
-
-" ctrlp find dotfiles
-let g:ctrlp_show_hidden = 1
-
 " Ack.vim folds results from same file
 let g:ack_autofold_results = 1
 
@@ -193,8 +182,6 @@ nnoremap <Leader>k :cprev<cr>
 
 " let NERDTreeShowHidden=1
 let g:NERDTreeWinPos='right'
-
-let g:ctrlp_custom_ignore = 'node_modules$'
 
 " comment (using commentary plugin)
 nmap <Leader>/ gcc
@@ -356,3 +343,5 @@ let g:scratch_height = 50
 
 " show ALE linting errors in airline status line
 let g:airline#extensions#ale#enabled = 1
+
+nnoremap <c-p> :FZF<cr>
