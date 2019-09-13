@@ -177,6 +177,9 @@ endif
 noremap <Leader>a :Ack!<space>
 noremap <Leader>z :Ack! <cword><cr>
 
+" paste visual selection into ack search
+vnoremap <leader>a y:Ack! <c-r>"
+
 nnoremap <Leader>j :cnext<cr>
 nnoremap <Leader>k :cprev<cr>
 
