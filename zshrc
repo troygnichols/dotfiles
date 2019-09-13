@@ -133,8 +133,6 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 #     zle reset-prompt
 # }
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # mkdir + cd
@@ -154,3 +152,5 @@ function mkcd() {
 # extra completions
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
