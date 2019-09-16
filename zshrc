@@ -150,7 +150,12 @@ function mkcd() {
 }
 
 # extra completions
+
+# this one needs to be sourced for some reason
+source ~/.zsh/completion/_azure_cli
+
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
+
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

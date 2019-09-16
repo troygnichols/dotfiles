@@ -44,6 +44,7 @@ files=(
   config/nvim/init.vim
   config/nvim/pluginit.vim
   zsh/completion/_docker_compose
+  zsh/completion/_azure_cli
   data/_lipsum_static.txt
 )
 
