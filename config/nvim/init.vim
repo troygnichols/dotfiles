@@ -146,7 +146,10 @@ au BufRead,BufNewFile *.ejs set filetype=html
 " au BufRead,BufNewFile *.coffee set filetype=javascript
 
 " Edit vim config
-noremap <leader>c :e ~/.config/nvim/init.vim<cr>
+noremap <leader>cc :e ~/.config/nvim/init.vim<cr>
+
+" Edit plug config
+noremap <leader>cx :e ~/.config/nvim/pluginit.vim<cr>
 
 " Reload current file
 noremap <leader>l :source %<cr>
