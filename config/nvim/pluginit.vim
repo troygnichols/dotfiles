@@ -128,4 +128,6 @@ Plug 'mtth/scratch.vim'
 
 Plug 'rizzatti/dash.vim'
 
+Plug 'maxbane/vim-asm_ca65'
+
 call plug#end()
