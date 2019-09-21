@@ -377,3 +377,11 @@ nnoremap <leader>B :%!xxd<cr>
 " convert hex back to binary text using xxd
 nnoremap <leader>N :%!xxd -r<cr>
 
+" Set emmet leader key
+let g:user_emmet_leader_key=','
+
+" treat .asm files as 6502 Assembly
+filetype plugin indent on
+augroup filetypedetect
+    au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
+augroup END
