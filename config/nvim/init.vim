@@ -385,3 +385,8 @@ filetype plugin indent on
 augroup filetypedetect
     au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
 augroup END
+
+" Tabularize
+augroup tabcomments
+  au BufNewFile,BufRead *.asm nnoremap <leader>t/ :Tabularize /;/l4r1<cr>
+augroup END

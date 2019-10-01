@@ -102,7 +102,7 @@ Plug 'nsf/gocode',                        { 'rtp': 'nvim', 'do': './nvim/symlink
 
 " Markdown {{{4
 Plug 'reedes/vim-pencil'                  " Markdown, Writing
-Plug 'godlygeek/tabular',                 { 'for': 'markdown' } " Needed for vim-markdown
+Plug 'godlygeek/tabular',
 Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
 Plug 'junegunn/vim-xmark'
 
