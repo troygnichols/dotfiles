@@ -102,7 +102,7 @@ Plug 'fatih/vim-go'
 
 " Markdown {{{4
 Plug 'reedes/vim-pencil'                  " Markdown, Writing
-Plug 'godlygeek/tabular',                 { 'for': 'markdown' } " Needed for vim-markdown
+Plug 'godlygeek/tabular',
 Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
 
 " Elixir {{{4
@@ -111,6 +111,10 @@ Plug 'slashmili/alchemist.vim'
 
 " Java
 Plug 'artur-shaik/vim-javacomplete2'
+
+Plug 'Yggdroot/indentLine'
+
+Plug 'maxbane/vim-asm_ca65'
 
 call plug#end()
 
@@ -185,17 +189,28 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " inoremap kj <ESC>
 " inoremap jk <ESC>
 
-" Make ,w split window vertically then focus on new window
-nnoremap <leader>w <C-w>v<C-w>l
+" split window vertically then focus on new window
+nnoremap <leader>w/ <C-w>v<C-w>l
 
-" Make ,e split window horizontally then focus on new window
-nnoremap <leader>e <C-w>s<C-w>j
+" split window horizontally then focus on new window
+nnoremap <leader>w- <C-w>s<C-w>j
+
+" swap TWO vertically split windows for horizontal split
+nnoremap <leader>wh <C-w>t<C-w>K
+
+" swap TWO horizontally split windows for vertical split
+nnoremap <leader>wv <C-w>t<C-w>H
 
 " Window navigation shortcuts
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+nnoremap <C-h> <c-w>h
+nnoremap <C-j> <c-w>j
+nnoremap <C-k> <c-w>k
+nnoremap <C-l> <c-w>l
+
+nnoremap <leader>wh <c-w>h
+nnoremap <leader>wj <c-w>j
+nnoremap <leader>wk <c-w>k
+nnoremap <leader>wl <c-w>l
 
 " Shortcuts for re-sizing splits
 nnoremap <leader>d :resize +10<cr>
@@ -261,7 +276,8 @@ endfunction
 " colorscheme molokai
 " hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
-colorscheme tender
+" colorscheme tender
+colorscheme off
 " only relevant with tender theme, makes highlights more visible
 highlight Visual ctermbg=102
 
@@ -447,8 +463,18 @@ let NERDTreeShowHidden=0
 " use only eslint (not jshint)
 let g:ale_linters = {'javascript': ['eslint']}
 
-let g:ale_sign_error='✖'
-let g:ale_sign_warning=''
+let g:ale_sign_warning = '•'
+let g:ale_sign_error = '•'
+let g:ale_sign_style_error = ''
+let g:ale_sign_style_warning = ''
+let g:ale_sign_column_always=1
+
+nnoremap <leader>1 :ALEFirst<cr>
+nmap <leader>] <Plug>(ale_next_wrap)
+nmap <leader>[ <Plug>(ale_previous_wrap)
+
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " use emmet-vim to complete a CSS abbreviation to HTML
 imap <c-l> <c-y>,
@@ -470,3 +496,142 @@ command! MaybeOpenCtrlP call MaybeOpenCtrlP()
 let g:ctrlp_cmd = 'MaybeOpenCtrlP'
 
 let g:NERDTreeWinPos='right'
+
+" Unfold everything
+set foldmethod=manual
+set nofoldenable
+set foldlevel=99
+
+set cursorline
+
+" save recent cursor position
+function! SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$") |
+      execute 'normal! g`"zvzz' |
+    endif
+  end
+endfunction
+autocmd BufReadPost * call SetCursorPosition()
+
+" Insert newline above/below without leaving Normal mode
+nmap <M-Enter> mao<Esc>`a
+" only do this maping if we are not in a Quickfix or Location window
+" or we will clobber <CR>'s select functionality in some plugins like ack.vim
+function! OnEnterPressed()
+  if &buftype ==# 'quickfix'
+    exec "normal! \<CR>"
+  else
+    exec "normal! maO\<Esc>`a"
+  endif
+endfunction
+nnoremap <CR> :call OnEnterPressed()<CR>
+
+" In visual mode - remove blank lines in selection (and remove highlights)
+vnoremap <M-l> :g/^\s*$/d<cr>:let @/ = ""<cr>
+
+" Needed to make vim-json plugin play nicely with indentLines
+let g:vim_json_syntax_conceal = 0
+
+" Don't conceal in markdown
+let g:vim_markdown_conceal = 0
+
+" Better looking indentLine character
+let g:indentLine_char = '│'
+
+" indentLine conceals things we don't want to conceal in some files
+" so diable its concealing there.
+autocmd Filetype markdown :IndentLinesDisable
+autocmd Filetype text :IndentLinesDisable
+autocmd Filetype json :IndentLinesDisable
+" set conceallevel=0
+
+"
+""""""""""""""""""
+" PHP
+""""""""""""""""""
+
+" linting
+let g:ale_php_phpcs_standard='PSR2'
+
+" indentation
+augroup FileTypeSpecificAutocommands
+  autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd FileType make setlocal tabstop=4 softtabstop=4 shiftwidth=4 list
+  autocmd FileType c setlocal list
+augroup END
+
+" insert space before (stay in normal mode)
+nnoremap <leader>, i<space><esc>
+
+" insert space after (stay in normal mode)
+nnoremap <leader>. a<space><esc>
+
+"
+""""""""""""""""""
+" Golang
+""""""""""""""""""
+"
+" auto import
+let g:go_fmt_command = "goimports"
+
+set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
+" set listchars=tab:>.,trail:.,extends:\#,nbsp:.
+
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+
+let g:rustfmt_autosave=1
+
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#auto_initialization = 0
+
+nnoremap <leader>5 :%s/\v
+
+" add debugger line above cursor in ruby files
+:autocmd FileType ruby nnoremap <buffer> <leader>h Obinding.pry<esc>j0w
+:autocmd FileType ruby nnoremap <buffer> <leader>r Obinding.remote_pry<esc>j0w
+
+" scratch plugin config
+nnoremap <leader>S :Scratch<cr>
+let g:scratch_horizontal = 0
+let g:scratch_filetype = 'text'
+let g:scratch_height = 50
+
+" Airline
+
+" show ALE linting errors in airline status line
+let g:airline#extensions#ale#enabled = 1
+
+nnoremap <c-p> :FZF<cr>
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+augroup END
+
+" convert a binary file to hex using xxd
+nnoremap <leader>B :%!xxd<cr>
+
+" convert hex back to binary text using xxd
+nnoremap <leader>N :%!xxd -r<cr>
+
+" Set emmet leader key
+let g:user_emmet_leader_key=','
+
+" treat .asm files as 6502 Assembly
+filetype plugin indent on
+augroup filetypedetect
+    au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
+augroup END
+" Tabularize
+augroup tabcomments
+  au BufNewFile,BufRead *.asm nnoremap <leader><enter> :Tabularize /;/l4r1<cr>
+augroup END
