@@ -72,8 +72,11 @@ nnoremap <c-l> <c-w>l
 " Shortcuts for re-sizing splits
 nnoremap <leader>d :resize +10<cr>
 nnoremap <leader>f :resize -10<cr>
-nnoremap <leader>s :vertical resize +10<cr>
-nnoremap <leader>g :vertical resize -10<cr>
+
+nnoremap <m-l> :vertical resize +10<cr>
+nnoremap <m-h> :vertical resize -10<cr>
+nnoremap <leader>l :vertical resize +2<cr>
+nnoremap <leader>h :vertical resize -2<cr>
 
 " Select to end of file
 nnoremap <leader>v V`]
@@ -96,19 +99,6 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
-
-" colorscheme tender
-" highlight Visual ctermbg=66
-
-" colorscheme hybrid
-" highlight Visual ctermbg=102
-
-""" solarized colorscheme
-colorscheme solarized
-let g:solarized_termcolors=256
-set background=dark
-hi clear SignColumn " kill ugly gray gutters
-""""""""""""""""""""""""""""""""
 
 " Add a line above but stay in normal mode
 nnoremap U O<esc>
@@ -236,10 +226,9 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Unfold everything
-set foldmethod=manual
-set nofoldenable
-set foldlevel=99
+" set foldmethod=manual
+" set nofoldenable
+" set foldlevel=99
 
 set cursorline
 
@@ -282,13 +271,15 @@ let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 
 " Better looking indentLine character
-let g:indentLine_char = '│'
+" let g:indentLine_char = '│'
+let g:indentLine_char = '┋'
 
 " indentLine conceals things we don't want to conceal in some files
 " so diable its concealing there.
 autocmd Filetype markdown :IndentLinesDisable
 autocmd Filetype text :IndentLinesDisable
 autocmd Filetype json :IndentLinesDisable
+autocmd Filetype notes :IndentLinesDisable
 " set conceallevel=0
 
 
@@ -343,8 +334,8 @@ let g:jedi#auto_initialization = 0
 nnoremap <leader>5 :%s/\v
 
 " add debugger line above cursor in ruby files
-:autocmd FileType ruby nnoremap <buffer> <leader>h Obinding.pry<esc>j0w
-:autocmd FileType ruby nnoremap <buffer> <leader>r Obinding.remote_pry<esc>j0w
+:autocmd FileType ruby nnoremap <buffer> <leader>rr  Obinding.pry<esc>j0w
+:autocmd FileType ruby nnoremap <buffer> <leader>re Obinding.remote_pry<esc>j0w
 
 " scratch plugin config
 nnoremap <leader>S :Scratch<cr>
@@ -390,3 +381,40 @@ augroup END
 augroup tabcomments
   au BufNewFile,BufRead *.asm nnoremap <leader>t/ :Tabularize /;/l4r1<cr>
 augroup END
+
+if exists('g:fvim_loaded')
+    " set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+    " set guifont=Roboto\ Mono\ for\ Powerline:h14
+    set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+    " Ctrl-ScrollWheel for zooming in/out
+    nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
+    nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
+    nnoremap <A-CR> :FVimToggleFullScreen<CR>
+
+    " colorscheme tender
+    " highlight Visual ctermbg=66
+
+    colorscheme hybrid
+    highlight Visual ctermbg=102
+
+    " cd ~/Code
+else
+  " colorscheme tender
+  " highlight Visual ctermbg=66
+
+  " colorscheme hybrid
+  " highlight Visual ctermbg=102
+
+  """ solarized colorscheme
+  colorscheme solarized
+  let g:solarized_termcolors=256
+  set background=dark
+  hi clear SignColumn " kill ugly gray gutters
+  """"""""""""""""""""""""""""""""
+endif
+
+""" vim-notes config
+let g:notes_directories = ['~/Notes']
+let g:notes_suffix = '.txt'
+" let g:notes_smart_quotes = 0
+
