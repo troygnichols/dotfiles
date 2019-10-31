@@ -23,9 +23,9 @@ Plug 'jeetsukumaran/vim-buffergator'
 
 Plug 'mileszs/ack.vim'
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'alexbyk/vim-ultisnips-js-testing'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'alexbyk/vim-ultisnips-js-testing'
 
 " Plug 'Townk/vim-autoclose'
 
@@ -277,7 +277,7 @@ endfunction
 " hi Visual ctermbg=DarkGrey guibg=DarkGrey
 
 " colorscheme tender
-colorscheme off
+" colorscheme tender
 " only relevant with tender theme, makes highlights more visible
 highlight Visual ctermbg=102
 
@@ -287,12 +287,13 @@ highlight Visual ctermbg=102
 
 " colorscheme jellybeans
 " colorscheme atom-dark-256
+colorscheme off
 
 " UltiSnippets config
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsEditSplit="vertical"
 
 " Tab autocomplete unless at beginning of line
 " -- disabled for now - can't get it to play nice with ulti-snippets
