@@ -63,7 +63,7 @@ export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~
 # default editor
 export EDITOR=nvim
 
-source $HOME/.zsh-nocorrect
+# source $HOME/.zsh-nocorrect
 
 source $HOME/.aliases
 
@@ -153,10 +153,28 @@ function mkcd() {
 # extra completions
 
 # this one needs to be sourced for some reason
-source ~/.zsh/completion/_azure_cli
+# source ~/.zsh/completion/_azure_cli
 
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# slow...
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# faster version of above NVM loader from https://www.growingwiththeweb.com/2018/01/slow-nvm-init.html
+# load nvm and node laziy
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
