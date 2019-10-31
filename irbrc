@@ -1,5 +1,7 @@
 require 'rubygems'
 
+puts 'Loading global .irbrc'
+
 begin
   require 'interactive_editor'
 rescue LoadError
@@ -28,4 +30,10 @@ begin
 rescue LoadError
   warn 'Could not find awesome_print, run `gem install awesome_print` to ' +
     'get the `ap` method'
+end
+
+# if there is a different .irbrc file in the current directory, load it
+if Dir.pwd != ENV['HOME'] && File.exist?('.irbrc')
+  puts 'Loading local .irbrc'
+  load '.irbrc'
 end
