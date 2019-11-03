@@ -20,6 +20,8 @@ alias t=tmux
 alias ta="tmux attach -t"
 alias tl="tmux ls"
 alias tn="tmux new -s"
+alias rc="nvim $HOME/.zshrc"
+alias mdl="mdless"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"

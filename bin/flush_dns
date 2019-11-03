@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+# To edit local host names, see /etc/hosts
+# Run this command after editing them, to reload
+
+echo "reloading /etc/hosts"
+dscacheutil -flushcache
+echo "done"

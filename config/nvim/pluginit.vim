@@ -115,7 +115,7 @@ Plug 'kchmck/vim-coffee-script'
 
 Plug 'junegunn/vader.vim'
 Plug 'junegunn/gv.vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'Yggdroot/indentLine'
 Plug 'elzr/vim-json'
 
@@ -130,5 +130,10 @@ Plug 'rizzatti/dash.vim'
 
 " Plug 'maxbane/vim-asm_ca65'
 Plug 'thentenaar/vim-syntax-obscure'
+
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
+Plug 'bpstahlman/txtfmt'
 
 call plug#end()

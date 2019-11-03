@@ -52,7 +52,8 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git docker)
+plugins=(git docker zsh-autosuggestions)
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 source $ZSH/oh-my-zsh.sh
 
@@ -62,7 +63,7 @@ export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~
 # default editor
 export EDITOR=nvim
 
-source $HOME/.zsh-nocorrect
+# source $HOME/.zsh-nocorrect
 
 source $HOME/.aliases
 
@@ -159,3 +160,21 @@ function mkcd() {
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# slow...
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# faster version of above NVM loader from https://www.growingwiththeweb.com/2018/01/slow-nvm-init.html
+# load nvm and node laziy
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+source /usr/local/etc/bash_completion.d/az
