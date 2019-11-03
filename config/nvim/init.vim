@@ -104,10 +104,10 @@ autocmd FileType markdown setlocal spell
 " highlight Visual ctermbg=102
 
 """ solarized colorscheme
-colorscheme solarized
-let g:solarized_termcolors=256
-set background=dark
-hi clear SignColumn " kill ugly gray gutters
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" set background=dark
+" hi clear SignColumn " kill ugly gray gutters
 """"""""""""""""""""""""""""""""
 
 " Add a line above but stay in normal mode
@@ -383,10 +383,18 @@ let g:user_emmet_leader_key=','
 " treat .asm files as 6502 Assembly
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
+  au BufNewFile,BufRead *.s,*.inc,*.asm call SetupNESASM()
 augroup END
+function! SetupNESASM()
+  set filetype=nesasm
+  set commentstring=;\ %s
+endfunction
 
 " Tabularize
 augroup tabcomments
   au BufNewFile,BufRead *.asm nnoremap <leader>t/ :Tabularize /;/l4r1<cr>
 augroup END
+
+" work with transparent bg
+colorscheme darcula
+hi! Normal ctermbg=NONE guibg=NONE
