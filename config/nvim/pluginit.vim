@@ -137,6 +137,7 @@ Plug 'mtth/scratch.vim'
 
 Plug 'rizzatti/dash.vim'
 
+" Plug 'maxbane/vim-asm_ca65'
 Plug 'thentenaar/vim-syntax-obscure'
 
 Plug 'xolox/vim-misc'

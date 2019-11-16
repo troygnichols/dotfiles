@@ -21,7 +21,16 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -155,8 +164,8 @@ function mkcd() {
 # this one needs to be sourced for some reason
 # source ~/.zsh/completion/_azure_cli
 
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
+# fpath=(~/.zsh/completion $fpath)
+# autoload -Uz compinit && compinit -i
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
@@ -176,5 +185,8 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
 fi
 
-autoload -U +X bashcompinit && bashcompinit
-source /usr/local/etc/bash_completion.d/az
+# autoload -U +X bashcompinit && bashcompinit
+# source /usr/local/etc/bash_completion.d/az
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -100,6 +100,23 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
 
+" colorscheme tender
+" highlight Visual ctermbg=66
+
+" colorscheme hybrid
+" highlight Visual ctermbg=102
+
+""" solarized colorscheme
+" colorscheme solarized
+" let g:solarized_termcolors=256
+" set background=dark
+" hi clear SignColumn " kill ugly gray gutters
+""""""""""""""""""""""""""""""""
+
+" work with transparent bg
+colorscheme darcula
+hi! Normal ctermbg=NONE guibg=NONE
+
 " Add a line above but stay in normal mode
 nnoremap U O<esc>
 
@@ -384,8 +401,12 @@ let g:user_emmet_leader_key=','
 " treat .asm files as 6502 Assembly
 filetype plugin indent on
 augroup filetypedetect
-    au BufNewFile,BufRead *.s,*.inc,*.asm set ft=asm_ca65
+  au BufNewFile,BufRead *.s,*.inc,*.asm call SetupNESASM()
 augroup END
+function! SetupNESASM()
+  set filetype=nesasm
+  set commentstring=;\ %s
+endfunction
 
 " Tabularize
 augroup tabcomments
