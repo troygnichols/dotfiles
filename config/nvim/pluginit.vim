@@ -9,6 +9,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -22,9 +27,10 @@ Plug 'jeetsukumaran/vim-buffergator'
 
 Plug 'mileszs/ack.vim'
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 "
 " Plug 'roxma/nvim-completion-manager'
@@ -52,6 +58,7 @@ Plug 'blueshirts/darcula'
 Plug 'altercation/vim-colors-solarized'
 Plug 'junegunn/seoul256.vim'
 Plug 'davebarkerxyz/wombat256dave'
+Plug 'morhetz/gruvbox'
 
 " Language Support {{{3
 " JavaScript {{{4
@@ -79,6 +86,8 @@ Plug 'hail2u/vim-css3-syntax',            { 'for': 'css' }
 " Sass {{{4
 Plug 'cakebaker/scss-syntax.vim'
 
+Plug 'ap/vim-css-color'
+
 " Ruby {{{4
 " Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
 Plug 'tpope/vim-rails'
@@ -88,7 +97,7 @@ Plug 'tpope/vim-endwise'
 " Python {{{4
 Plug 'davidhalter/jedi-vim',              { 'for': 'python' }
 Plug 'alfredodeza/pytest.vim',            { 'for': 'python' }
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'deoplete-plugins/deoplete-jedi'
 
 " Rust {{{4
 Plug 'wellbredgrapefruit/tomdoc.vim',     { 'for': 'ruby' }

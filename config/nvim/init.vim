@@ -217,6 +217,16 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " deoplete config
 let g:deoplete#enable_at_startup = 1
 
+" coc config
+let g:coc_global_extension = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ ]
+
 " UltiSnips config
 let g:UltiSnipsListSnippets='<S-tab>'
 
@@ -227,7 +237,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " set foldmethod=manual
-" set nofoldenable
+set nofoldenable
 " set foldlevel=99
 
 set cursorline
@@ -420,11 +430,20 @@ else
   " hi clear SignColumn " kill ugly gray gutters
   """"""""""""""""""""""""""""""""
 
-  " works well with transparent bg:
   """"""""""""""""""""""""""""""""
-  colorscheme darcula
-  hi! Normal ctermbg=NONE guibg=NONE
+  " colorscheme darcula
+  " *** works well with transparent bg ***
+  " hi! Normal ctermbg=NONE guibg=NONE
   """"""""""""""""""""""""""""""""
+
+  """"""""""""""""""""""""""""""""
+  " colorscheme solarized
+  " let g:solarized_termcolors=256
+  " set background=dark
+  " hi clear SignColumn " kill ugly gray gutters
+  """"""""""""""""""""""""""""""""
+
+  colorscheme gruvbox
 endif
 
 """ vim-notes config
@@ -432,3 +451,68 @@ let g:notes_directories = ['~/Notes']
 let g:notes_suffix = '.txt'
 " let g:notes_smart_quotes = 0
 
+nnoremap <leader>i :IndentLinesToggle<cr>
+
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+function! IsNERDTreeFocused()
+  return exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) == winnr()
+endfunction
+
+function! ResetTree()
+  " call SetTreeDir()
+  call SyncTree()
+endfunction
+
+" XXX TODO make this work
+" Try to see if we are in a project subdirectory. If so, set NERDTree's root
+" to the project directory, not the project's subdirectory. This is
+" necessary e.g. if you navigate outside of the project and then back.
+" function! SetTreeDir()
+"   if &modifiable && IsNERDTreeOpen() && !IsNERDTreeFocused() && strlen(expand('%')) > 0 && !&diff
+"     let t:nerdTreeRoot = g:NERDTree.ForCurrentTab().getRoot().path.str()
+"     " If NERDTree's current dir is a subdir of the cwd, change NERDTree dir to cwd.
+"     if stridx(t:nerdTreeRoot, getcwd()) == 0
+"       execute 'NERDTree '.getcwd()
+"       NERDTreeFind
+"       wincmd p
+"     endif
+"   endif
+" endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current buffer is not NERDTree,
+" current window contains a modifiable file, and we're not in vimdiff.
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && !IsNERDTreeFocused() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    normal! zb
+    wincmd p
+  endif
+endfunction
+
+" Help NERDTree get resituated when changing buffers
+" autocmd BufEnter * call ResetTree()
+
+
+" From normal mode, add a semicolon at end of line and
+" return curosor to original position, stayng in normal mode.
+nnoremap ; maA;<esc>`a
+
+" Format code with Prettier
+nnoremap F :Prettier<cr>
+
+function! FixWebDevIcons()
+  if exists('g:loaded_webdevicons')
+      call webdevicons#refresh()
+  endif
+endfunction
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+" https://github.com/ryanoasis/vim-devicons/issues/154
+call FixWebDevIcons()
+" autocmd BufEnter * call FixWebDevIcons()
+
+
+nnoremap <leader>F :NERDTreeFind<cr>
