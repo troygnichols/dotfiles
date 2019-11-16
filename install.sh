@@ -46,6 +46,7 @@ files=(
   zsh/completion/_docker_compose
   zsh/completion/_azure_cli
   data/_lipsum_static.txt
+  p10k.zsh
 )
 
 echo "*** Creating backup directory: $backup"
