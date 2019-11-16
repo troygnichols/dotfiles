@@ -1,120 +1,122 @@
 call plug#begin('~/.config/vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+source ~/.config/nvim/pluginit.vim
 
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
-Plug 'w0rp/ale'
+" Plug 'ctrlpvim/ctrlp.vim'
 
-Plug 'haya14busa/incsearch.vim'
+" Plug 'w0rp/ale'
 
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
+" Plug 'haya14busa/incsearch.vim'
 
-Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-surround'
 
-Plug 'mileszs/ack.vim'
+" Plug 'jeetsukumaran/vim-buffergator'
 
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
-" Plug 'alexbyk/vim-ultisnips-js-testing'
+" Plug 'mileszs/ack.vim'
 
-" Plug 'Townk/vim-autoclose'
+" " Plug 'SirVer/ultisnips'
+" " Plug 'honza/vim-snippets'
+" " Plug 'alexbyk/vim-ultisnips-js-testing'
 
-Plug 'tpope/vim-fugitive'
+" " Plug 'Townk/vim-autoclose'
 
-" deoplete + requirements
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+" Plug 'tpope/vim-fugitive'
 
-Plug 'wokalski/autocomplete-flow'
+" " deoplete + requirements
+" Plug 'Shougo/deoplete.nvim'
+" Plug 'roxma/nvim-yarp'
+" Plug 'roxma/vim-hug-neovim-rpc'
 
-Plug 'junegunn/vim-easy-align'
+" Plug 'wokalski/autocomplete-flow'
 
-" various colorschemes
-" http://vimcolors.com/
-Plug 'freeo/vim-kalisi'
-Plug 'w0ng/vim-hybrid'
-Plug 'bitterjug/vim-colors-bitterjug'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'crusoexia/vim-monokai'
-Plug 'jacoborus/tender.vim'
-Plug 'pbrisbin/vim-colors-off'
-Plug 'muellan/am-colors'
-Plug 'blueshirts/darcula'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'junegunn/vim-easy-align'
 
-" Language Support {{{3
-" JavaScript {{{4
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'rhysd/npm-debug-log.vim'
-Plug 'AndrewRadev/ember_tools.vim'
-" Plug 'neovim/node-host',                  { 'do': 'npm install' }
-Plug 'Quramy/vim-js-pretty-template'
+" " various colorschemes
+" " http://vimcolors.com/
+" Plug 'freeo/vim-kalisi'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'bitterjug/vim-colors-bitterjug'
+" Plug 'jonathanfilip/vim-lucius'
+" Plug 'crusoexia/vim-monokai'
+" Plug 'jacoborus/tender.vim'
+" Plug 'pbrisbin/vim-colors-off'
+" Plug 'muellan/am-colors'
+" Plug 'blueshirts/darcula'
+" Plug 'altercation/vim-colors-solarized'
 
-" TypeScript {{{4
-Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'mhartington/nvim-typescript',       { 'do': ':UpdateRemotePlugins' }
+" " Language Support {{{3
+" " JavaScript {{{4
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'rhysd/npm-debug-log.vim'
+" Plug 'AndrewRadev/ember_tools.vim'
+" " Plug 'neovim/node-host',                  { 'do': 'npm install' }
+" Plug 'Quramy/vim-js-pretty-template'
 
-" Elm {{{4
-Plug 'ElmCast/elm-vim'
+" " TypeScript {{{4
+" Plug 'HerringtonDarkholme/yats.vim'
+" " Plug 'mhartington/nvim-typescript',       { 'do': ':UpdateRemotePlugins' }
 
-" HTML {{{4
-Plug 'othree/html5.vim'
-Plug 'joukevandermaas/vim-ember-hbs'
-Plug 'mattn/emmet-vim'
+" " Elm {{{4
+" Plug 'ElmCast/elm-vim'
 
-" CSS {{{4
-Plug 'hail2u/vim-css3-syntax',            { 'for': 'css' }
+" " HTML {{{4
+" Plug 'othree/html5.vim'
+" Plug 'joukevandermaas/vim-ember-hbs'
+" Plug 'mattn/emmet-vim'
 
-" Sass {{{4
-Plug 'cakebaker/scss-syntax.vim'
+" " CSS {{{4
+" Plug 'hail2u/vim-css3-syntax',            { 'for': 'css' }
 
-" Ruby {{{4
-Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-endwise'
+" " Sass {{{4
+" Plug 'cakebaker/scss-syntax.vim'
 
-" Python {{{4
-Plug 'klen/python-mode',                  { 'for': 'python' }
-Plug 'davidhalter/jedi-vim',              { 'for': 'python' }
-Plug 'alfredodeza/pytest.vim',            { 'for': 'python' }
+" " Ruby {{{4
+" Plug 'vim-ruby/vim-ruby',                 { 'for': 'ruby' }
+" Plug 'tpope/vim-rails'
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-endwise'
 
-" Rust {{{4
-Plug 'wellbredgrapefruit/tomdoc.vim',     { 'for': 'ruby' }
-Plug 'wting/rust.vim'
-Plug 'cespare/vim-toml'
+" " Python {{{4
+" Plug 'klen/python-mode',                  { 'for': 'python' }
+" Plug 'davidhalter/jedi-vim',              { 'for': 'python' }
+" Plug 'alfredodeza/pytest.vim',            { 'for': 'python' }
 
-" Go {{{4
-Plug 'fatih/vim-go'
-" Plug 'nsf/gocode',                        { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
+" " Rust {{{4
+" Plug 'wellbredgrapefruit/tomdoc.vim',     { 'for': 'ruby' }
+" Plug 'wting/rust.vim'
+" Plug 'cespare/vim-toml'
 
-" Markdown {{{4
-Plug 'reedes/vim-pencil'                  " Markdown, Writing
-Plug 'godlygeek/tabular',
-Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
+" " Go {{{4
+" Plug 'fatih/vim-go'
+" " Plug 'nsf/gocode',                        { 'rtp': 'nvim', 'do': './nvim/symlink.sh' }
 
-" Elixir {{{4
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim'
+" " Markdown {{{4
+" Plug 'reedes/vim-pencil'                  " Markdown, Writing
+" Plug 'godlygeek/tabular',
+" Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
 
-" Java
-Plug 'artur-shaik/vim-javacomplete2'
+" " Elixir {{{4
+" Plug 'elixir-editors/vim-elixir'
+" Plug 'slashmili/alchemist.vim'
 
-Plug 'Yggdroot/indentLine'
+" " Java
+" Plug 'artur-shaik/vim-javacomplete2'
 
-Plug 'maxbane/vim-asm_ca65'
+" Plug 'Yggdroot/indentLine'
+
+" Plug 'maxbane/vim-asm_ca65'
 
 call plug#end()
 
@@ -157,6 +159,8 @@ set synmaxcol=2048
 " these two go together
 set ignorecase
 set smartcase
+
+set relativenumber
 
 let g:sparkupExecuteMapping = '<C-l>'
 let g:sparkupNextMapping = '<C-k>'
@@ -243,7 +247,7 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 autocmd BufEnter * :call OnEnterBuffer()
 
 function! OnEnterBuffer()
-  :call EnableRelativeNumber()
+  " :call EnableRelativeNumber()
   :call SetBuffergatorSettings()
 endfunction
 
@@ -252,12 +256,13 @@ function! SetBuffergatorSettings()
   let g:buffergator_hsplit_size=10
 endfunction
 
-function! EnableRelativeNumber()
-  " Don't do it for the NERDTree buffer
-  if bufname('%') !~ 'NERD'
-    set relativenumber
-  endif
-endfunction
+" NERDTree handles this now.
+" function! EnableRelativeNumber()
+"   " Don't do it for the NERDTree buffer
+"   if bufname('%') !~ 'NERD'
+"     set relativenumber
+"   endif
+" endfunction
 
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
@@ -287,7 +292,9 @@ highlight Visual ctermbg=102
 
 " colorscheme jellybeans
 " colorscheme atom-dark-256
-colorscheme off
+" colorscheme off
+colorscheme gruvbox
+set background=light
 
 " UltiSnippets config
 " let g:UltiSnipsExpandTrigger="<tab>"
@@ -636,3 +643,7 @@ augroup END
 augroup tabcomments
   au BufNewFile,BufRead *.asm nnoremap <leader><enter> :Tabularize /;/l4r1<cr>
 augroup END
+
+" Better tab completion
+set wildmode=longest,list
+set completeopt+=longest
