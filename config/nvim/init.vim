@@ -101,23 +101,6 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " Enable spellchecking for Markdown
 autocmd FileType markdown setlocal spell
 
-" colorscheme tender
-" highlight Visual ctermbg=66
-
-" colorscheme hybrid
-" highlight Visual ctermbg=102
-
-""" solarized colorscheme
-" colorscheme solarized
-" let g:solarized_termcolors=256
-" set background=dark
-" hi clear SignColumn " kill ugly gray gutters
-""""""""""""""""""""""""""""""""
-
-" work with transparent bg
-colorscheme darcula
-hi! Normal ctermbg=NONE guibg=NONE
-
 " Add a line above but stay in normal mode
 nnoremap U O<esc>
 
@@ -441,13 +424,30 @@ if exists('g:fvim_loaded')
 
     " cd ~/Code
 else
+  """"""""""""""""""""""""""""""""
   " colorscheme tender
   " highlight Visual ctermbg=66
+  """"""""""""""""""""""""""""""""
 
+  """"""""""""""""""""""""""""""""
   " colorscheme hybrid
   " highlight Visual ctermbg=102
+  """"""""""""""""""""""""""""""""
 
-  """ solarized colorscheme
+  """"""""""""""""""""""""""""""""
+  " colorscheme solarized
+  " let g:solarized_termcolors=256
+  " set background=dark
+  " hi clear SignColumn " kill ugly gray gutters
+  """"""""""""""""""""""""""""""""
+
+  """"""""""""""""""""""""""""""""
+  " colorscheme darcula
+  " *** works well with transparent bg ***
+  " hi! Normal ctermbg=NONE guibg=NONE
+  """"""""""""""""""""""""""""""""
+
+  """"""""""""""""""""""""""""""""
   " colorscheme solarized
   " let g:solarized_termcolors=256
   " set background=dark
