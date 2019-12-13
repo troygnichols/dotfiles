@@ -1,0 +1,17 @@
+#!/bin/bash
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+files=("troll.txt" "troll2.txt")
+data_dir="$dir/../data"
+index=0
+
+
+while true; do
+  file="$data_dir/${files[$index]}"
+  printf "%s\n" "$(<$file)"
+  case "$index" in
+    1) index=0 ;;
+    *) index=1 ;;
+  esac
+  sleep .1
+done
