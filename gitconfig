@@ -61,3 +61,5 @@
 	whitespace = red reverse
 [merge]
 	conflictstyle = diff3
+[commit]
+	verbose = true
