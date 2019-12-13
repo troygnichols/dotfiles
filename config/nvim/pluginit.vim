@@ -10,7 +10,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
@@ -67,6 +67,8 @@ Plug 'mxw/vim-jsx'
 Plug 'rhysd/npm-debug-log.vim'
 Plug 'AndrewRadev/ember_tools.vim'
 Plug 'Quramy/vim-js-pretty-template'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'jelera/vim-javascript-syntax'
 
 " TypeScript {{{4
 Plug 'HerringtonDarkholme/yats.vim'
@@ -140,9 +142,14 @@ Plug 'rizzatti/dash.vim'
 " Plug 'maxbane/vim-asm_ca65'
 Plug 'thentenaar/vim-syntax-obscure'
 
+Plug 'vbextreme/dumpx'
+
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 
 Plug 'bpstahlman/txtfmt'
+
+Plug 'AndrewRadev/inline_edit.vim'
+
 
 call plug#end()

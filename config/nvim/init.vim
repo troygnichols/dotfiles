@@ -43,7 +43,8 @@ let mapleader="\<Space>"
 
 filetype plugin indent on
 
-nnoremap <silent> <leader><space> :let @/ = ""<cr>
+" nnoremap <silent> <leader><space> :let @/ = ""<cr>
+nnoremap <silent> <leader><space> :noh<cr>
 
 noremap <leader>n :NERDTreeToggle<cr>
 noremap <leader>m :NERDTreeFind<cr>
@@ -235,6 +236,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:deoplete#enable_at_startup = 1
 
 " coc config
+" run :CocInstall coc-<foo>
+" for each of these:
 let g:coc_global_extension = [
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -243,6 +246,13 @@ let g:coc_global_extension = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ ]
+
+" Rename current word
+nmap <leader>rn <Plug>(coc-rename)
+" Various coc commands
+nnoremap <leader>cd  :<C-u>CocList diagnostics<cr>
+nnoremap <leader>co  :<C-u>CocList outline<cr>
+nnoremap <leader>ce  :<C-u>CocList commands<cr>
 
 " UltiSnips config
 let g:UltiSnipsListSnippets='<S-tab>'
@@ -298,8 +308,8 @@ let g:vim_json_syntax_conceal = 0
 let g:vim_markdown_conceal = 0
 
 " Better looking indentLine character
-" let g:indentLine_char = '│'
-let g:indentLine_char = '┋'
+let g:indentLine_char = '│'
+" let g:indentLine_char = '┋'
 
 " indentLine conceals things we don't want to conceal in some files
 " so diable its concealing there.
@@ -416,7 +426,8 @@ augroup END
 if exists('g:fvim_loaded')
     " set guifont=Source\ Code\ Pro\ for\ Powerline:h14
     " set guifont=Roboto\ Mono\ for\ Powerline:h14
-    set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+    " set guifont=Meslo\ LG\ L\ DZ\ for\ Powerline:h12
+    set guifont=Fira\ Mono\ for\ Powerline:h12
     " Ctrl-ScrollWheel for zooming in/out
     nnoremap <silent> <C-ScrollWheelUp> :set guifont=+<CR>
     nnoremap <silent> <C-ScrollWheelDown> :set guifont=-<CR>
@@ -501,7 +512,7 @@ endfunction
 nnoremap ; maA;<esc>`a
 
 " Format code with Prettier
-nnoremap F :Prettier<cr>
+nnoremap <leader>F :Prettier<cr>
 
 function! FixWebDevIcons()
   if exists('g:loaded_webdevicons')
@@ -514,5 +525,12 @@ endfunction
 call FixWebDevIcons()
 " autocmd BufEnter * call FixWebDevIcons()
 
-
-nnoremap <leader>F :NERDTreeFind<cr>
+let g:inline_edit_patterns = [
+      \   {
+      \     'main_filetype': 'typescript',
+      \     'sub_filetype': 'html',
+      \     'indent_adjustment': 1,
+      \     'start': '^\s*template: `\s*$',
+      \     'end': '^\s*`\s*$'
+      \   }
+      \ ]
