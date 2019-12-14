@@ -61,7 +61,7 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git docker zsh-autosuggestions fd)
+plugins=(git docker zsh-autosuggestions fd docker docker-compose)
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 source $ZSH/oh-my-zsh.sh
@@ -164,8 +164,8 @@ function mkcd() {
 # this one needs to be sourced for some reason
 # source ~/.zsh/completion/_azure_cli
 
-# fpath=(~/.zsh/completion $fpath)
-# autoload -Uz compinit && compinit -i
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
