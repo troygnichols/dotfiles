@@ -151,5 +151,6 @@ Plug 'bpstahlman/txtfmt'
 
 Plug 'AndrewRadev/inline_edit.vim'
 
+Plug 'vim/killersheep'
 
 call plug#end()
