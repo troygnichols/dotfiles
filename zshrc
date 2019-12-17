@@ -78,7 +78,7 @@ source $HOME/.aliases
 
 # Don't do XOFF on Ctrl-S
 # See: http://stackoverflow.com/questions/3446320/in-vim-how-to-map-save-to-ctrl-s
-alias vim="stty stop '' -ixoff; vim"
+# alias vim="stty stop '' -ixoff; vim"
 alias vi="vim"
 
 # If you want machine-specific settings that don't go into source control,
