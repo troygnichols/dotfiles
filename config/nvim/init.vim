@@ -534,3 +534,5 @@ let g:inline_edit_patterns = [
       \     'end': '^\s*`\s*$'
       \   }
       \ ]
+
+nmap <leader>e :InlineEdit<cr>
