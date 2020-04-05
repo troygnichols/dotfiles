@@ -647,3 +647,35 @@ augroup END
 " Better tab completion
 set wildmode=longest,list
 set completeopt+=longest
+
+" coc config
+let g:coc_global_extension = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ ]
+
+" From normal mode, add a semicolon at end of line and
+" return curosor to original position, stayng in normal mode.
+nnoremap ; maA;<esc>`a
+
+" Format code with Prettier
+nnoremap F :Prettier<cr>
+
+function! FixWebDevIcons()
+  if exists('g:loaded_webdevicons')
+      call webdevicons#refresh()
+  endif
+endfunction
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+" https://github.com/ryanoasis/vim-devicons/issues/154
+call FixWebDevIcons()
+" autocmd BufEnter * call FixWebDevIcons()
+
+nnoremap <leader>F :NERDTreeFind<cr>
+
+nnoremap <leader>i :IndentLinesToggle<cr>

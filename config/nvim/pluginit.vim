@@ -153,4 +153,6 @@ Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'vim/killersheep'
 
+Plug 'triglav/vim-visual-increment'
+
 call plug#end()
