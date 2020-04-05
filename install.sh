@@ -47,6 +47,7 @@ files=(
   zsh/completion/_azure_cli
   data/_lipsum_static.txt
   p10k.zsh
+  emacs
 )
 
 echo "*** Creating backup directory: $backup"
