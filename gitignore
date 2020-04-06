@@ -16,3 +16,5 @@
 .jhw-cache/
 tags
 node_modules
+*~
+\#*\#
