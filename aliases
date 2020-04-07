@@ -22,6 +22,7 @@ alias tl="tmux ls"
 alias tn="tmux new -s"
 alias rc="nvim $HOME/.zshrc"
 alias mdl="mdless"
+alias be="bundle exec"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"

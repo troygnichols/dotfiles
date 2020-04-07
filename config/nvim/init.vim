@@ -108,6 +108,7 @@ nnoremap U O<esc>
 inoremap <C-s> <esc>:write<cr>
 nnoremap <C-s> <esc>:write<cr>
 
+
 " Ctrl-C does not trigger InsertLeave by default
 " This will make it trigger InsertLeave
 ino <C-C> <esc>
@@ -236,6 +237,13 @@ nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>cd  :<C-u>CocList diagnostics<cr>
 nnoremap <leader>co  :<C-u>CocList outline<cr>
 nnoremap <leader>ce  :<C-u>CocList commands<cr>
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " UltiSnips config
 let g:UltiSnipsListSnippets='<S-tab>'
