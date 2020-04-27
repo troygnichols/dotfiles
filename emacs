@@ -11,29 +11,18 @@
 ; (require 'evil)
 ; (evil-mode 1)
 
+(unless (package-installed-p 'projectile-rails)
+ (package-install 'projectile-rails))
+
+(unless (package-installed-p 'neotree)
+ (package-install 'neotree))
+
+(unless (package-installed-p 'avy)
+ (package-install 'avy))
+
 ;; Disable some UX stuff
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
-
-;;(unless (package-installed-p 'neotree)
-;;  (package-install 'neotree))
-;; (require 'neotree)
-;; (global-set-key (kbd "C-x C-n") 'neotree-toggle)
-;; (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-;; '(ansi-color-faces-vector
-;;   [default default default italic underline success warning error])
-;; '(custom-enabled-themes (quote (misterioso)))
-;;  '(package-selected-packages (quote (avy))))
-;; (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-;; )
 
 (set-face-attribute 'region nil :background "#666")
 
@@ -53,14 +42,11 @@
 (setq vc-handled-backends nil)
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 
-;; Indentation
-;; (setq-default indent-tabs-mode nil)
-;; (setq-default tab-width 4)
-;; (setq standard-indent 4)
-;; (setq indent-line-function 'insert-tab)
-;; (setq tab-width 4)
-;; (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80))
-;; (setq indent-tabs-mode nil)
+;; Use spaces not tabs
+(setq-default indent-tabs-mode nil)
+(setq tab-always-indent 'complete)
+;; Make tab key do indent first then completion
+(setq-default tab-always-indent 'complete)
 
 ;; Switch to previous buffer like vim
 (defun switch-to-last-buffer()
@@ -84,25 +70,10 @@
 (global-display-line-numbers-mode)
 
 ;; Enable ido mode everywhere
-; (setq ido-enable-flex-matching t)
-; (setq ido-everywhere t)
-; (ido-mode 1)
-
-
-; (setq ido-use-filename-at-point 'guess)
-
-;; Make NeoTree work with evil mode
-; (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-; (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-; (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-; (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-; (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-; (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-; (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-; (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-; (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-
-
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(setq ido-use-filename-at-point 'guess)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -114,21 +85,22 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes (quote (wombat)))
+ '(fringe-mode 0 nil (fringe))
  '(global-subword-mode t)
  '(global-superword-mode t)
+ '(helm-completion-style (quote emacs))
  '(ido-mode nil nil (ido))
  '(package-selected-packages
    (quote
-    (highlight-indentation projectile-rails typescript-mode neotree evil avy)))
- '(sentence-end-double-space nil))
+    (helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
+ '(sentence-end-double-space nil)
+ '(window-divider-default-right-width 1))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
-
-(global-set-key (kbd "M-o") 'other-window)
+ '(window-divider ((t (:foreground "gray15")))))
 
 ;; setup projectile
 (projectile-mode +1)
@@ -138,3 +110,25 @@
 
 ;; setup neotree
 (global-set-key (kbd "C-x C-n") 'neotree-toggle)
+
+;; disable audible bell sound
+(setq ring-bell-function 'ignore)
+
+;; faster quit
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Misc keybindings
+(global-set-key (kbd "M-i") 'imenu)
+(global-set-key (kbd "M-o") 'other-window)
+
+;; Helm
+(require 'helm-config)
+
+;; Set transparency of emacs
+(defun set-transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
+
+;; auto pair brackets
+(setq electric-pair-mode 1)
