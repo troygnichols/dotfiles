@@ -85,6 +85,9 @@
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(custom-enabled-themes (quote (wombat)))
+ '(custom-safe-themes
+   (quote
+    ("830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" default)))
  '(fringe-mode 0 nil (fringe))
  '(global-subword-mode t)
  '(global-superword-mode t)
@@ -92,7 +95,7 @@
  '(ido-mode nil nil (ido))
  '(package-selected-packages
    (quote
-    (helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
+    (solarized-theme dired-sidebar helm markdown-mode go-mode highlight-indentation typescript-mode evil avy)))
  '(sentence-end-double-space nil)
  '(window-divider-default-right-width 1))
 (custom-set-faces
