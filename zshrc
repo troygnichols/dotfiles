@@ -1,6 +1,4 @@
-# I don't remember why this was turned on,
-# but it messes things up in emacs shell.
-# export TERM="xterm-256color"
+export TERM="xterm-256color"
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -161,11 +159,6 @@ function mkcd() {
   cd $DIR
 }
 
-if [ $TERM = "eterm-color" ]; then
-  # prompt for emacs (width sensitive)
-  PS1='\u@\h:\w\$ '
-fi
-
 # extra completions
 
 # this one needs to be sourced for some reason
@@ -178,19 +171,19 @@ autoload -Uz compinit && compinit -i
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # slow...
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # faster version of above NVM loader from https://www.growingwiththeweb.com/2018/01/slow-nvm-init.html
 # load nvm and node laziy
-# if [ -s "$HOME/.nvm/nvm.sh" ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-#   alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-#   alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-#   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-# fi
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+fi
 
 # autoload -U +X bashcompinit && bashcompinit
 # source /usr/local/etc/bash_completion.d/az
