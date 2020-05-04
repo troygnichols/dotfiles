@@ -72,7 +72,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~/.bin:~/.user_scripts
 
 # default editor
-export EDITOR=nvim
+export EDITOR=emacsclient --tty
 
 # source $HOME/.zsh-nocorrect
 
