@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 alias reconfig="exec $SHELL"
 alias va="vagrant"
 alias reload="exec $SHELL"
