@@ -1,4 +1,6 @@
-export TERM="xterm-256color"
+# I think tmux needed this at some point, but it seems to work without it now,
+# and it messes up `M-x shell` in emacs, so commenting out for now.
+# export TERM="xterm-256color"
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -24,7 +26,13 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 #
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+if [[ "$INSIDE_EMACS" ]]; then
+    ZSH_THEME="robbyrussell"
+else
+    # I can't get the right prompt to look right in emacs :(
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -70,7 +78,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:~/.bin:~/.user_scripts
 
 # default editor
-export EDITOR="nvim"
+export EDITOR="emacsclient"
+export VISUAL="emacsclient"
 
 # source $HOME/.zsh-nocorrect
 
