@@ -139,7 +139,7 @@
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
  '(package-selected-packages
    (quote
-    (cliphist fzf ag helm-ag helm-projectile helm-switch-shell helm-taskswitch helm-themes ng2-mode yasnippet-snippets yasnippet csv-mode highlight-parentheses rubocop jq-mode restclient exec-path-from-shell iy-go-to-char pdf-tools dired-sidebar evil-surround zenburn-theme gruvbox-theme ruby-end ruby-electric ace-jump-mode projectile-rails ac-inf-ruby expand-region chruby bundler which-key solarized-theme rspec-mode magit yaml-mode helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
+    (company tide cliphist fzf ag helm-ag helm-projectile helm-switch-shell helm-taskswitch helm-themes ng2-mode yasnippet-snippets yasnippet csv-mode highlight-parentheses rubocop jq-mode restclient exec-path-from-shell iy-go-to-char pdf-tools dired-sidebar evil-surround zenburn-theme gruvbox-theme ruby-end ruby-electric ace-jump-mode projectile-rails ac-inf-ruby expand-region chruby bundler which-key solarized-theme rspec-mode magit yaml-mode helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
  '(pdf-view-midnight-colors (quote ("#fdf4c1" . "#32302f")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -231,9 +231,73 @@
                   (interactive)
                   (cliphist-paste-item)))
 
+;; edit the emacs config file
+(global-set-key (kbd "C-c e")
+                (lambda ()
+                  (interactive)
+                  (find-file "~/.emacs")))
+
+;; Use Helm mini instead of standard buffer menu
+(global-set-key (kbd "C-x b") 'helm-mini)
+
+;; Change transparency presets
+;; 100 %
+(global-set-key (kbd "C-c v0")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 100)))
+
+(global-set-key (kbd "C-c v9")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 95)))
+
+(global-set-key (kbd "C-c v8")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 90)))
+
+(global-set-key (kbd "C-c v7")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 85)))
+
+(global-set-key (kbd "C-c v6")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 80)))
+
+(global-set-key (kbd "C-c v5")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 75)))
+
+(global-set-key (kbd "C-c v4")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 70)))
+
+(global-set-key (kbd "C-c v3")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 65)))
+
+(global-set-key (kbd "C-c v2")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 60)))
+
+(global-set-key (kbd "C-c v1")
+                (lambda ()
+                  (interactive)
+                  (set-frame-parameter (selected-frame) 'alpha 55)))
+
+
 ;; Helm
 (require 'helm-config)
 (helm-mode 1)
+
+(global-set-key (kbd "C-c hp") 'helm-projectile-switch-project)
 
 ;; Set transparency of emacs
 (defun set-transparency (value)
@@ -426,3 +490,29 @@
 
 ;; enable yas-snippets at startup
 (yas-global-mode 1)
+
+;; configure tide typescript IDE
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+;; (add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; company completion framework
+(global-company-mode 1)
+
+(global-set-key (kbd "C-c C-/") 'company-complete)
