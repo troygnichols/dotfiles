@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+IO.read("/usr/share/dict/words").split("\n").then { |words| while true do; word = words.sample; `say -v #{ENV.fetch("VOICE", "Alex")} #{word}`; puts word; end }
