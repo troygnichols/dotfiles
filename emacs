@@ -134,6 +134,7 @@
  '(ido-mode nil nil (ido))
  '(line-number-mode t)
  '(lsp-ui-doc-border "#93a1a1")
+ '(neo-theme (quote nerd))
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
@@ -199,7 +200,28 @@
 (projectile-rails-global-mode)
 
 ;; setup neotree
-(global-set-key (kbd "C-x C-n") 'neotree-toggle)
+
+;; make a custom keymap for neotree commands
+(global-set-key (kbd "C-c n n") 'neotree-toggle)
+(global-set-key (kbd "C-c n f") 'my-neotree-find-in-project-dir)
+
+
+;; (global-set-key (kbd "C-c n") 'neotree-toggle)
+;; (global-set-key (kbd "C-c nf") 'my-neotree-find-in-project-dir)
+
+;; similar to find-file-in-project
+(defun my-neotree-find-in-project-dir ()
+    "Open NeoTree using the git root."
+    (interactive)
+    (let ((project-dir (projectile-project-root))
+          (file-name (buffer-file-name)))
+      (neotree-toggle)
+      (if project-dir
+          (if (neo-global--window-exists-p)
+              (progn
+                (neotree-dir project-dir)
+                (neotree-find file-name)))
+        (message "Could not find git project root."))))
 
 ;; disable audible bell sound
 (setq ring-bell-function 'ignore)
@@ -208,9 +230,10 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Misc keybindings
-(global-set-key (kbd "M-i") 'helm-imenu)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c /") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c n") 'neotree-toggle)
+
 
 ;; join line to following line
 (global-set-key (kbd "C-c C-j")
@@ -237,73 +260,54 @@
                   (interactive)
                   (find-file "~/.emacs")))
 
-;; Use Helm mini instead of standard buffer menu
-(global-set-key (kbd "C-x b") 'helm-mini)
 
-;; Change transparency presets
-;; 100 %
-(global-set-key (kbd "C-c v0")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 100)))
+;; Set transparency of emacs
 
-(global-set-key (kbd "C-c v9")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 95)))
+;; interactive function to set transparency manually via M-x set-transparency
+(defun set-transparency (value)
+  "Sets the transparency of the frame window. 0=transparent/100=opaque"
+  (interactive "nTransparency Value 0 - 100 opaque:")
+  (set-frame-parameter (selected-frame) 'alpha value))
 
-(global-set-key (kbd "C-c v8")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 90)))
+;; transparency presets
 
-(global-set-key (kbd "C-c v7")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 85)))
+;; create several non-interactive functions like set-transparency-100 set-transparency-95...
+(mapcar
+ (lambda (perc)
+   (defalias (intern (concat "set-transparency-" (number-to-string perc)))
+     `(lambda () (set-frame-parameter (selected-frame) 'alpha ,perc))))
+ '(100 95 90 85 80 75 70))
 
-(global-set-key (kbd "C-c v6")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 80)))
+;; map transparency preset keys
+(global-set-key (kbd "C-c v 0") 'set-transparency-100)
+(global-set-key (kbd "C-c v 9") 'set-transparency-95)
+(global-set-key (kbd "C-c v 8") 'set-transparency-90)
+(global-set-key (kbd "C-c v 7") 'set-transparency-85)
+(global-set-key (kbd "C-c v 6") 'set-transparency-80)
+(global-set-key (kbd "C-c v 5") 'set-transparency-75)
+(global-set-key (kbd "C-c v 4") 'set-transparency-70)
+(global-set-key (kbd "C-c v 3") 'set-transparency-65)
+(global-set-key (kbd "C-c v 2") 'set-transparency-60)
+(global-set-key (kbd "C-c v 1") 'set-transparency-)
 
-(global-set-key (kbd "C-c v5")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 75)))
-
-(global-set-key (kbd "C-c v4")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 70)))
-
-(global-set-key (kbd "C-c v3")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 65)))
-
-(global-set-key (kbd "C-c v2")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 60)))
-
-(global-set-key (kbd "C-c v1")
-                (lambda ()
-                  (interactive)
-                  (set-frame-parameter (selected-frame) 'alpha 55)))
 
 
 ;; Helm
 (require 'helm-config)
 (helm-mode 1)
 
-(global-set-key (kbd "C-c hp") 'helm-projectile-switch-project)
+;; Override default M-x with helm's replacement
+(global-set-key (kbd "M-x") 'helm-M-x)
 
-;; Set transparency of emacs
-(defun set-transparency (value)
-  "Sets the transparency of the frame window. 0=transparent/100=opaque"
-  (interactive "nTransparency Value 0 - 100 opaque:")
-  (set-frame-parameter (selected-frame) 'alpha value))
+;; XXX not sure if this is a good binding
+(global-set-key (kbd "C-c h p") 'helm-projectile-switch-project)
+
+;; Replace default imenu with helm version
+(global-set-key (kbd "M-i") 'helm-imenu)
+
+;; Use Helm mini instead of standard buffer menu
+(global-set-key (kbd "C-x b") 'helm-mini)
+
 
 ;; auto pair brackets
 (setq electric-pair-mode 1)
