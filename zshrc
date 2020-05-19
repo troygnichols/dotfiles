@@ -27,9 +27,10 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
 if [[ "$INSIDE_EMACS" ]]; then
-    ZSH_THEME="robbyrussell"
+    # ZSH_THEME="robbyrussell"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#595959"
 else
-    # I can't get the right prompt to look right in emacs :(
     ZSH_THEME="powerlevel10k/powerlevel10k"
 fi
 
