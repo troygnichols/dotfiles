@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 alias reconfig="exec $SHELL"
 alias va="vagrant"
 alias reload="exec $SHELL"
@@ -27,5 +29,7 @@ alias be="bundle exec"
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
 alias die="kill -9 %"
+
+alias xm=exercism
 
 # vim: syntax=zsh
