@@ -30,4 +30,6 @@ alias be="bundle exec"
 alias k="kill %"
 alias die="kill -9 %"
 
+alias xm=exercism
+
 # vim: syntax=zsh
