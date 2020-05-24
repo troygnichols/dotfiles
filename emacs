@@ -7,14 +7,42 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
-(package-refresh-contents)
+;; (package-refresh-contents)
 
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
-;; Make sure C-u (vim page up) works
-(setq evil-want-C-u-scroll t)
-(require 'evil)
-;; (evil-mode 1)
+;; Determine whether my-setup-evil-mode sets up evil mode or non-evil mode bindings
+(setq my-use-evil-mode nil)
+
+(defun my-setup-evil-mode ()
+  "Setup evil mode, or non-evil mode bindings, depending on MY-USE-EVIL-MODE."
+  (interactive)
+  (if my-use-evil-mode
+      (progn
+        (message "Setting up evil mode.")
+        (unless (package-installed-p 'evil)
+          (package-install 'evil))
+
+        (require 'evil)
+
+        ;; Make sure C-u (vim page up) works
+        (setq evil-want-C-u-scroll t)
+        (evil-mode 1)
+
+        ;; evil mode setup
+        (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
+        (define-key evil-insert-state-map (kbd "C-g C-g") 'evil-normal-state)
+
+        ;; makes % match text objects from a variety of languages, .e.g
+        ;; html: <div></div>, ruby: do...end, etc
+        (require 'evil-matchit)
+        (global-evil-matchit-mode 1))
+    (progn
+      (message "Not using evil mode.")
+      ;; (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
+      ;; (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
+      (global-set-key (kbd "C-c t") 'iy-go-up-to-char)
+      (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward))))
+
+(my-setup-evil-mode)
 
 (unless (package-installed-p 'projectile-rails)
  (package-install 'projectile-rails))
@@ -23,15 +51,26 @@
  (package-install 'neotree))
 
 (unless (package-installed-p 'avy)
- (package-install 'avy))
+(package-install 'avy))
 
-;; Disable some UX stuff
+;; Cleanup some UX stuff
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
+(if (display-graphic-p)
+    (progn
+      ;; Running in graphics mode
+
+      ;; Set scrollbar state
+      (toggle-scroll-bar -1))
+  (progn
+    ;; Running in terminal
+
+    ;; Disable the top menu bar (File Edit ...)
+    (menu-bar-mode 0)
+    ))
 
 (set-face-attribute 'region nil :background "#666")
 
-(set-cursor-color "#ffffff")
+;; (set-cursor-color "#ffffff")
 
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -70,8 +109,6 @@
 (global-set-key (kbd "C-c C-w C-j") 'windmove-down)
 (global-set-key (kbd "C-c C-w C-k") 'windmove-up)
 (global-set-key (kbd "C-c C-w C-l") 'windmove-right)
-;; Duplicate line
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y\C-p")
 
 ;; Navigating by line
 ;; (global-set-key (kbd "C-;") 'avy-goto-line)
@@ -106,10 +143,6 @@
 (global-set-key (kbd "C-c n n") 'neotree-toggle)
 (global-set-key (kbd "C-c n f") 'my-neotree-find-in-project-dir)
 
-
-;; (global-set-key (kbd "C-c n") 'neotree-toggle)
-;; (global-set-key (kbd "C-c nf") 'my-neotree-find-in-project-dir)
-
 ;; similar to find-file-in-project
 (defun my-neotree-find-in-project-dir ()
     "Open NeoTree using the git root."
@@ -134,6 +167,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
+
+;; Duplicate line
+(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y\C-p")
 
 ;; Upcase a single character
 (global-set-key (kbd "C-c u") 'upcase-char)
@@ -179,7 +215,6 @@
                   (find-file "~/.emacs")))
 
 
-
 ;; spotify playback
 (global-set-key (kbd "C-c s p") 'helm-spotify-plus-toggle-play-pause)
 (global-set-key (kbd "C-c s n") 'helm-spotify-plus-next)
@@ -190,19 +225,25 @@
           (lambda ()
             (local-set-key (kbd "C-c r f") 'projectile-rails-goto-file-at-point)))
 
-;; In rspec-compilation mode (mode when running an rspec test),
-;; use following binding to enable debugging. This disables read-only mode
-;; and runs inf-ruby-switch-from-compilation to allow user input
-;; into a debugger e.g. pry.
+;; enable debugging in an Rspec buffer
 (add-hook 'rspec-compilation-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c r d") 'my-rspec-enable-debugging)))
+            (local-set-key (kbd "C-c , p") 'my-rspec-enable-debugging)))
 
 (defun my-rspec-enable-debugging ()
-  "Enable debugging in an rspec compilation window"
+  "Enable debugging in an Rspec Compilation buffer.
+
+   When an rspec test pauses on a debugger statement, e.g. byebug or pry,
+   call this function to make the buffer writable and make it possible
+   to work with the interative debugging session."
   (interactive)
   (read-only-mode 0)
-  (inf-ruby-switch-from-compilation))
+  (inf-ruby-switch-from-compilation)
+  (end-of-buffer))
+
+;; install rspec snippets
+(eval-after-load 'rspec-mode
+ '(rspec-install-snippets))
 
 ;; Set transparency of emacs
 
@@ -269,10 +310,6 @@
 (global-set-key (kbd "C-c M-g") 'global-magit-file-mode)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch)
 
-;; evil mode setup
-(define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
-(define-key evil-insert-state-map (kbd "C-g C-g") 'evil-normal-state)
-
 ;; expand-region - expand selection out to semantic "container" (e.g. content inside quotes)
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
@@ -284,9 +321,6 @@
 
 ;; enable which-key (show available commands in temporary buffer)
 (which-key-mode 1)
-
-;; Make pry work with rspec-mode (https://github.com/pezra/rspec-mode/#debugging)
-(add-hook 'after-init-hook 'inf-ruby-switch-from-compilation)
 
 ;; ace-jump-mode (jump to words or characters easily)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
@@ -300,23 +334,13 @@
 (global-set-key (kbd "C-(") 'winner-undo)
 (global-set-key (kbd "C-)") 'winner-redo)
 
-;; makes % match text objects from a variety of languages, .e.g
-;; html: <div></div>, ruby: do...end, etc
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
-
 ;; set default ruby version with chruby
 (chruby-use "2.6.6")
 
 ;; use enhanced ruby mode (enh-ruby-mode) for all ruby files
 (add-to-list 'auto-mode-alist
              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . enh-ruby-mode))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
 
 ;; alignment
 (defun align-to-colon (begin end)
@@ -331,15 +355,6 @@
   (align-regexp begin end (concat char "\\(\\s-*\\)") 1 1
                 (y-or-n-p "Repeat throughout line? ")))
 
-
-;; iy-go-to-char (these really only make sense outside of evil-mode)
-(global-set-key (kbd "C-c f") 'iy-go-to-char)
-(global-set-key (kbd "C-c F") 'iy-go-to-char-backward)
-; (global-set-key (kbd "C-c ;") 'iy-go-to-or-up-to-continue)
-; (global-set-key (kbd "C-c ,") 'iy-go-to-or-up-to-continue-backward)
-
-(global-set-key (kbd "C-c t") 'iy-go-up-to-char)
-(global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward)
 
 ;; start emacs server on startup
 (defun run-server ()
@@ -366,10 +381,10 @@
 (setenv "EDITOR" (getenv "VISUAL"))
 
 ;; Hack to make ruby consoles with abnormal prompts work
-;; (add-hook 'inf-ruby-mode-hook
-;;           (lambda() (let ((p "\\|\\(^chef \\(([\\.[:digit:]]+)>\\)? *\\)"))
-;;                        (setq inf-ruby-first-prompt-pattern (concat inf-ruby-first-prompt-pattern p))
-;;                        (setq inf-ruby-prompt-pattern (concat inf-ruby-prompt-pattern p)))))
+(add-hook 'inf-ruby-mode-hook
+          (lambda() (let ((p "\\|\\(^chef \\(([\\.[:digit:]]+)>\\)? *\\)"))
+                       (setq inf-ruby-first-prompt-pattern (concat inf-ruby-first-prompt-pattern p))
+                       (setq inf-ruby-prompt-pattern (concat inf-ruby-prompt-pattern p)))))
 
 
 ;;; ---------------------
@@ -397,7 +412,6 @@
 ;;; Code:
 ;;
 (require 'jq-mode)
-
 
 ;; --- jq support
 (defun restclient-result-end-point ()
@@ -604,7 +618,6 @@
                (modes  . '(ng2-ts-mode tide-mode typescript-mode javascript-mode))))
 
 
-
 ;; multiple cursors
 ;; hold Meta and click to add more cursors (C-g to remove extra cursors)
 (global-unset-key (kbd "M-<down-mouse-1>"))
@@ -612,11 +625,6 @@
 ;; add a new cursor on the next line
 (global-set-key (kbd "C-c m m") 'mc/mmlte--down)
 (global-set-key (kbd "C-c m n") 'mc/mmlte--up)
-
-;;;a asdfasdf
-;; asdf
-;;;; ;asdfa aksdlfjsf
-
 
 ;; toggle company quickhelp (show documentation along with company auto completion candidates)
 (company-quickhelp-mode 0)
