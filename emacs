@@ -1,6 +1,7 @@
 ;;; package --- Summary
 ;; .emacs - the big emacs config file
 
+;; load the packaging system from package.el
 (package-initialize)
 
 ;; load restclient-jq - allow restclient mode to use jq to process JSON results
@@ -171,6 +172,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
+
+;; swap windows
+(global-set-key (kbd "C-c C-w C-s") 'ace-swap-window)
 
 ;; Duplicate line
 (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y\C-p")
@@ -563,6 +567,13 @@
 (setq prettier-js-args '(
   "--single-quote" "true"
 ))
+
+;; set up nov mode (nov.el) for reading .epub documents
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(setq nov-text-width 100)
+
+;; set up pdf-tools
+(pdf-loader-install)
 
 (provide '.emacs)
 ;;; .emacs ends here
