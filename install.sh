@@ -48,6 +48,7 @@ files=(
   data/_lipsum_static.txt
   p10k.zsh
   emacs
+  emacs.custom.el
 )
 
 echo "*** Creating backup directory: $backup"
