@@ -173,7 +173,7 @@
                 (neotree-find file-name)))
         (message "Could not find git project root."))))
 
-;; disable audible bell sound
+;; disable audible sound
 (setq ring-bell-function 'ignore)
 
 ;; faster quit
@@ -351,11 +351,11 @@
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
     (global-set-key (kbd "<f6>") 'ivy-
     (global-set-key (kbd "C-c v") 'ivy-push-view)
-    (global-set-key (kbd "C-c V") 'ivy-pop-
+    (global-set-key (kbd "C-c V") 'ivy-pop-view)
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-m") 'counsel-M-x)
     (global-set-key (kbd "C-c C-m") 'counsel-M-x)
-    (global-set-key (kbd "C-c b") 'counsel-bookmark)p
+    (global-set-key (kbd "C-c b") 'counsel-bookmark)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
