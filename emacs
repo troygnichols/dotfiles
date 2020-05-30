@@ -188,14 +188,18 @@
 ;; Revert/refresh the current buffer
 (global-set-key (kbd "<f5>") 'revert-buffer)
 
+;; Rename the current buffer
+(global-set-key (kbd "<f2>") 'rename-buffer)
+(global-set-key (kbd "C-c r") 'rename-buffer)
+
 ;; Open magit git interface
 (global-set-key (kbd "M-g M-g") 'magit)
 
 ;; Align text (should select a region first)
 (global-set-key (kbd "C-c a") 'align)
 
-;; Switch to other window
-(global-set-key (kbd "M-o") 'other-window)
+;; Use ace-window to switch to another window
+(global-set-key (kbd "M-o") 'ace-window)
 
 ;; join line to following line
 (global-set-key (kbd "C-c C-j")
@@ -560,20 +564,43 @@
 ;; Add extra info directory
 (add-to-list 'Info-default-directory-list "~/Info")
 
-;; treat sub-words (ThisIsFourWords) as words
+;; treat sub-words (ThisIsFiveSubWords) as words
 (global-subword-mode +1)
 
 ;; prettier-js config
-(setq prettier-js-args '(
-  "--single-quote" "true"
-))
+;; (setq prettier-js-args '(
+;;   "--single-quote" "true"
+;;   ))
+
+;; add prettier-js-mode minor mode, runs prettier-js on save
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+(add-hook 'tide-mode-hook 'prettier-js-mode)
+(add-hook 'ng2-html-mode-hook 'prettier-js-mode)
 
 ;; set up nov mode (nov.el) for reading .epub documents
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
-(setq nov-text-width 100)
+(setq nov-text-width 90)
 
-;; set up pdf-tools
+;; set up pdf-tools for reading and working with PDF documents
 (pdf-loader-install)
+
+;; enable which-func mode which tells you which function
+;; (or semantic context, like a class, e.g.) point is currently in
+(which-function-mode 1)
+
+;; give ng2-html mode some like sgml mode keybindings
+(add-hook 'ng2-html-mode-hook
+          (lambda ()
+            (progn
+              (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+              (local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward))))
+
+;; set the indent level for json mode
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
 
 (provide '.emacs)
 ;;; .emacs ends here
