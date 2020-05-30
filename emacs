@@ -238,11 +238,6 @@
                   (find-file "~/.emacs")))
 
 
-;; spotify playback
-(global-set-key (kbd "C-c s p") 'helm-spotify-plus-toggle-play-pause)
-(global-set-key (kbd "C-c s n") 'helm-spotify-plus-next)
-(global-set-key (kbd "C-c s N") 'helm-spotify-plus-previous)
-
 ;; in ruby mode: find file under cursor TODO
 (add-hook 'enh-ruby-mode-hook
           (lambda ()
@@ -299,31 +294,74 @@
 
 
 
-;; Helm
-(require 'helm-config)
-(helm-mode 1)
+;; Helm / Ivy
 
-;; Override default M-x with helm's replacement
-(global-set-key (kbd "M-x") 'helm-M-x)
+;; Determine whether my-setup-helm-ivy sets up helm or ivy, set to "helm" or "ivy"
+(setq my-use-helm-or-ivy "ivy")
 
-;; helm recent files
-(global-set-key (kbd "C-c h r") 'helm-recentf)
+(defun my-setup-helm-or-ivy ()
+  "Setup either helm or ivy depending on the value of MY-SETUP-HELM-OR-IVY."
+  (interactive)
+  (progn
+    (pcase my-use-helm-or-ivy
+      ("helm" (my-setup-helm))
+      ("ivy" (my-setup-ivy))
+      (_ (message "Please set MY-USE-HELM-OR-IVY to 'helm' or 'ivy'")))))
 
-;; helm switch project
-(global-set-key (kbd "C-c h p") 'helm-projectile-switch-project)
+(defun my-setup-helm ()
+  "Set up Emacs to use Helm."
+  (progn
+    (message "Setting up helm")
+    (require 'helm-config)
+    (helm-mode 1)
+    ;; Override default M-x with helm's replacement
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "C-x C-m") 'helm-M-x)
+    ;; helm recent files
+    (global-set-key (kbd "C-c h r") 'helm-recentf)
+    ;; helm switch project
+    (global-set-key (kbd "C-c h p") 'helm-projectile-switch-project)
+    ;; helm projectile ag (grep with ag silver searcher in projectile project)
+    (global-set-key (kbd "C-c h a") 'helm-projectile-ag)
+    ;; Replace default imenu with helm version
+    (global-set-key (kbd "M-i") 'helm-imenu)
+    ;; Use Helm mini instead of standard buffer menu
+    (global-set-key (kbd "C-x b") 'helm-mini)
+    ;; Helm bookmarks
+    (global-set-key (kbd "C-c b") 'helm-filtered-bookmarks)
+    ))
 
-;; helm projectile ag (grep with ag silver searcher in projectile project)
-(global-set-key (kbd "C-c h a") 'helm-projectile-ag)
+(defun my-setup-ivy ()
+  "Set up Emacs to use Ivy."
+  (progn
+    (message "Setting up ivy")
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t)
+    ;; enable this if you want `swiper' to use it
+    ;; (setq search-default-mode #'char-fold-to-regexp)
+    (global-set-key "\C-s" 'swiper)
+    (global-set-key (kbd "C-c C-r") 'ivy-resume)
+    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-m") 'counsel-M-x)
 
-;; Replace default imenu with helm version
-(global-set-key (kbd "M-i") 'helm-imenu)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+    (global-set-key (kbd "<f1> l") 'counsel-find-library)
+    (global-set-key (kbd "<f12> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f12> u") 'counsel-unicode-char)
+    (global-set-key (kbd "C-c g") 'counsel-git)
+    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (global-set-key (kbd "C-x l") 'counsel-locate)
+    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+    ))
 
-;; Use Helm mini instead of standard buffer menu
-(global-set-key (kbd "C-x b") 'helm-mini)
-
-;; Helm bookmarks
-(global-set-key (kbd "C-c b") 'helm-filtered-bookmarks)
-
+(my-setup-helm-or-ivy)
 
 ;; auto pair brackets
 (setq electric-pair-mode 1)
@@ -595,6 +633,9 @@
 
 ;; set up pdf-tools for reading and working with PDF documents
 (pdf-loader-install)
+
+;; maybe make high definition pdfs look better
+(setq pdf-view-use-scaling t)
 
 ;; enable which-func mode which tells you which function
 ;; (or semantic context, like a class, e.g.) point is currently in
