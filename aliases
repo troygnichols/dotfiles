@@ -25,11 +25,12 @@ alias tn="tmux new -s"
 alias rc="nvim $HOME/.zshrc"
 alias mdl="mdless"
 alias be="bundle exec"
+alias xm=exercism
+alias ec="emacsclient -n"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
 alias die="kill -9 %"
 
-alias xm=exercism
 
 # vim: syntax=zsh
