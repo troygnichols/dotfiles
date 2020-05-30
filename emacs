@@ -184,6 +184,13 @@
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;; switch kill-region from C-w to C-x C-k
+(global-set-key (kbd "C-x C-k") 'kill-region)
+(global-set-key (kbd "C-c C-k") 'kill-region)
+
+;; make C-w backward-kill-word (replace default of kill-region)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+
 ;; swap windows
 (global-set-key (kbd "C-c C-w C-s") 'ace-swap-window)
 
@@ -281,17 +288,16 @@
  '(100 95 90 85 80 75 70 65 60 55))
 
 ;; map transparency preset keys
-(global-set-key (kbd "C-c v 0") 'set-transparency-100)
-(global-set-key (kbd "C-c v 9") 'set-transparency-95)
-(global-set-key (kbd "C-c v 8") 'set-transparency-90)
-(global-set-key (kbd "C-c v 7") 'set-transparency-85)
-(global-set-key (kbd "C-c v 6") 'set-transparency-80)
-(global-set-key (kbd "C-c v 5") 'set-transparency-75)
-(global-set-key (kbd "C-c v 4") 'set-transparency-70)
-(global-set-key (kbd "C-c v 3") 'set-transparency-65)
-(global-set-key (kbd "C-c v 2") 'set-transparency-60)
-(global-set-key (kbd "C-c v 1") 'set-transparency-55)
-
+(global-set-key (kbd "C-c 0") 'set-transparency-100)
+(global-set-key (kbd "C-c 9") 'set-transparency-95)
+(global-set-key (kbd "C-c 8") 'set-transparency-90)
+(global-set-key (kbd "C-c 7") 'set-transparency-85)
+(global-set-key (kbd "C-c 6") 'set-transparency-80)
+(global-set-key (kbd "C-c 5") 'set-transparency-75)
+(global-set-key (kbd "C-c 4") 'set-transparency-70)
+(global-set-key (kbd "C-c 3") 'set-transparency-65)
+(global-set-key (kbd "C-c 2") 'set-transparency-60)
+(global-set-key (kbd "C-c 1") 'set-transparency-55)
 
 
 ;; Helm / Ivy
@@ -317,6 +323,7 @@
     ;; Override default M-x with helm's replacement
     (global-set-key (kbd "M-x") 'helm-M-x)
     (global-set-key (kbd "C-x C-m") 'helm-M-x)
+    (global-set-key (kbd "C-c C-m") 'helm-M-x)
     ;; helm recent files
     (global-set-key (kbd "C-c h r") 'helm-recentf)
     ;; helm switch project
@@ -342,10 +349,13 @@
     ;; (setq search-default-mode #'char-fold-to-regexp)
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
-    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "<f6>") 'ivy-
+    (global-set-key (kbd "C-c v") 'ivy-push-view)
+    (global-set-key (kbd "C-c V") 'ivy-pop-
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-m") 'counsel-M-x)
-
+    (global-set-key (kbd "C-c C-m") 'counsel-M-x)
+    (global-set-key (kbd "C-c b") 'counsel-bookmark)p
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
     (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
@@ -360,6 +370,8 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
     ))
+    ;; enable counsel-projectile
+    (counsel-projectile-mode 1)
 
 (my-setup-helm-or-ivy)
 
@@ -653,6 +665,9 @@
           (lambda ()
             (make-local-variable 'js-indent-level)
             (setq js-indent-level 2)))
+
+;; Shortcut alias for query-replace-regexp, run M-x qrr
+(defalias 'qrr 'query-replace-regexp)
 
 (provide '.emacs)
 ;;; .emacs ends here
