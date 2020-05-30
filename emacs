@@ -4,8 +4,16 @@
 ;; load the packaging system from package.el
 (package-initialize)
 
-;; load restclient-jq - allow restclient mode to use jq to process JSON results
-(load "~/.emacs.d/restclient-jq.el")
+;; load restclient-jq - allow restclient mode to use jq to process JSON results.
+;; (fetch it from remote url if it's already there)
+(let
+    ((restclient-jq-filename "~/.emacs.d/restclient-jq.el")
+     (restclient-jq-url
+      "https://raw.githubusercontent.com/pashky/restclient.el/master/restclient-jq.el"))
+  (progn
+    (unless (file-exists-p restclient-jq-filename)
+      (url-copy-file restclient-jq-url restclient-jq-filename))
+    (load "~/.emacs.d/restclient-jq.el")))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -16,6 +24,9 @@
 ;; keep the auto-generated customize settings in a separate file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
+
+;; install selected packaged
+(package-install-selected-packages)
 
 ;; Determine whether my-setup-evil-mode sets up evil mode or non-evil mode bindings
 (setq my-use-evil-mode nil)
