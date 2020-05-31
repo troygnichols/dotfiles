@@ -1,8 +1,16 @@
 ;;; package --- Summary
 ;; .emacs - the big emacs config file
 
-;; load the packaging system from package.el
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+;; Initializize the packaging system
 (package-initialize)
+
+;; Re-sync package list.
+;; TODO: can I do this in a way that will not block startup?
+;; Can I schedule it to happen once a day?
+;; (package-refresh-contents)
 
 ;; load restclient-jq - allow restclient mode to use jq to process JSON results.
 ;; (fetch it from remote url if it's already there)
@@ -13,19 +21,15 @@
   (progn
     (unless (file-exists-p restclient-jq-filename)
       (url-copy-file restclient-jq-url restclient-jq-filename))
-    (load "~/.emacs.d/restclient-jq.el")))
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
-
-;; (package-refresh-contents)
+    (load "~/.emacs.d/restclient-jq.el")
+    ))
 
 ;; keep the auto-generated customize settings in a separate file
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file)
 
 ;; install selected packaged
+;; TODO: Does this work on a fresh install where package-refresh-contents has not run yet?
 (package-install-selected-packages)
 
 ;; Determine whether my-setup-evil-mode sets up evil mode or non-evil mode bindings
@@ -137,11 +141,10 @@
 ;; Show line numbers
 ;; (global-display-line-numbers-mode)
 
-;; Enable ido mode everywhere
+;; Setup ido mode
 (setq ido-enable-flex-matching t)
 ;; (setq ido-everywhere t)
 ;; (ido-mode 1)
-(ido-mode 0)
 (setq ido-use-filename-at-point 'guess)
 
 ;; setup projectile
@@ -349,10 +352,10 @@
     ;; (setq search-default-mode #'char-fold-to-regexp)
     (global-set-key "\C-s" 'swiper)
     (global-set-key (kbd "C-c C-r") 'ivy-resume)
-    (global-set-key (kbd "<f6>") 'ivy-
+    (global-set-key (kbd "<f6>") 'ivy-resume)
     (global-set-key (kbd "C-c v") 'ivy-push-view)
     (global-set-key (kbd "C-c V") 'ivy-pop-view)
-    (global-set-key (kbd "M-x") 'counsel-M-x)
+    ;; (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-m") 'counsel-M-x)
     (global-set-key (kbd "C-c C-m") 'counsel-M-x)
     (global-set-key (kbd "C-c b") 'counsel-bookmark)
@@ -369,9 +372,9 @@
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-    ))
     ;; enable counsel-projectile
     (counsel-projectile-mode 1)
+    ))
 
 (my-setup-helm-or-ivy)
 
