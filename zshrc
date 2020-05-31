@@ -155,6 +155,13 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# fzf binds Ctrl+t (C-t) to its find file widget, but that overrides
+# the default emacs style shell binding for transpose-chars.
+# Rebind Ctrl+t (C-t) back transpose-chars and use Ctrl+x Ctrl+t
+# (C-x C-t) for the fzf find file widget.
+bindkey '^X^T' fzf-file-widget
+bindkey '^T' transpose-chars
+
 # mkdir + cd
 function mkcd() {
   DIR="$1"
