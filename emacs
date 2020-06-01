@@ -356,7 +356,7 @@
     (global-set-key (kbd "C-c v") 'ivy-push-view)
     (global-set-key (kbd "C-c V") 'ivy-pop-view)
     ;; (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x C-m") 'counsel-M-x)
+    (global-set-key (kbd "C-x C-m") 'execute-extended-command)
     (global-set-key (kbd "C-c C-m") 'counsel-M-x)
     (global-set-key (kbd "C-c b") 'counsel-bookmark)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -371,6 +371,7 @@
     (global-set-key (kbd "C-c k") 'counsel-ag)
     (global-set-key (kbd "C-x l") 'counsel-locate)
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (global-set-key (kbd "M-i") 'counsel-semantic-or-imenu)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
     ;; enable counsel-projectile
     (counsel-projectile-mode 1)
