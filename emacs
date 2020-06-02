@@ -187,6 +187,12 @@
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;; Shorter window splitting commands
+(global-set-key (kbd "M-1") 'delete-other-windows)
+(global-set-key (kbd "M-2") 'split-window-below)
+(global-set-key (kbd "M-3") 'split-window-right)
+(global-set-key (kbd "M-0") 'delete-window)
+
 ;; switch kill-region from C-w to C-x C-k
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-c C-k") 'kill-region)
