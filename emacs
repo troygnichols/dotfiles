@@ -634,9 +634,6 @@
 ;; Add extra info directory
 (add-to-list 'Info-default-directory-list "~/Info")
 
-;; treat sub-words (ThisIsFiveSubWords) as words
-(global-subword-mode +1)
-
 ;; prettier-js config
 ;; (setq prettier-js-args '(
 ;;   "--single-quote" "true"
