@@ -187,6 +187,13 @@
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;; Find file at point (under the cursor)
+(global-set-key (kbd "C-c f") 'find-file-at-point)
+
+;; Drag the current line up or down in the buffer
+(global-set-key (kbd "M-p")  'move-line-up)
+(global-set-key (kbd "M-n")  'move-line-down)
+
 ;; Shorter window splitting commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'split-window-below)
@@ -233,13 +240,6 @@
             (lambda ()
                   (interactive)
                   (join-line -1)))
-
-;; join line to previous line
-(global-set-key (kbd "C-c J")
-                ;; join to prev line
-                (lambda ()
-                  (interactive)
-                  (join-line 1)))
 
 ;; cliphist - make Emacs work with Flycut (Mac clipboard manager)
 (global-set-key (kbd "C-M-y")
@@ -345,6 +345,8 @@
     (global-set-key (kbd "C-x b") 'helm-mini)
     ;; Helm bookmarks
     (global-set-key (kbd "C-c b") 'helm-filtered-bookmarks)
+    ;; enable global anzu mode (show number of search matches in modeline)
+    (global-anzu-mode +1)
     ))
 
 (defun my-setup-ivy ()
@@ -406,7 +408,7 @@
 (which-key-mode 1)
 
 ;; ace-jump-mode (jump to words or characters easily)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "M-9") 'ace-jump-mode)
 
 ;; delete extra witespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -552,9 +554,6 @@
 ;; XXX this breaks the C-; binding for goto line (somehow???)
 ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-;; enable global anzu mode (show number of search matches in modeline)
-(global-anzu-mode +1)
-
 ;; robe - ruby helpers
 ;; M-. to follow symbol to definition, etc
 (add-hook 'ruby-mode-hook 'robe-mode)
@@ -678,6 +677,22 @@
 
 ;; Shortcut alias for query-replace-regexp, run M-x qrr
 (defalias 'qrr 'query-replace-regexp)
+
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
 
 (provide '.emacs)
 ;;; .emacs ends here
