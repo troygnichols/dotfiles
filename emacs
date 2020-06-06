@@ -484,6 +484,9 @@
 ;; company force auto-complete to appear
 (global-set-key (kbd "C-c C-/") 'company-complete)
 
+;; company completions, don't downcase everything
+(setq company-dabbrev-downcase nil)
+
 ;; Enable global flycheck mode (highlight errors)
 (global-flycheck-mode +1)
 
