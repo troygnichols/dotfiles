@@ -91,6 +91,7 @@
  '(rustic-ansi-faces
    ["#27212E" "#964C7B" "#74DFC4" "#FFE261" "#40B4C4" "#EB64B9" "#B4DCE7" "#FFFFFF"])
  '(sentence-end-double-space nil)
+ '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
