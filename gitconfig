@@ -41,6 +41,10 @@
   rbc = rebase --continue
   rba = rebase --abort
   st = status
+  # count commits on all branches
+  count = rev-list --all --count
+  # count commits on given rev (branch, hash, whatever)
+  countrev = rev-list --count
 [url "git@bitbucket.org:"]
 	insteadOf = "https://bitbucket.org/"
 [diff]
