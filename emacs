@@ -910,5 +910,8 @@
 
 ;;; End Handmade Hero section
 
+;; Scroll by 3 lines at once e.g. when point reaches top/bottom of page
+(setq scroll-step 3)
+
 (provide '.emacs)
 ;;; .emacs ends here
