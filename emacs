@@ -694,5 +694,49 @@
   (indent-according-to-mode))
 
 
+;;; Handmade Hero build helpers
+
+;; Set HH-MODE-ENABLED to t to enable Handmade Hero compilation functionality
+(setq hh-mode-enabled t)
+
+(setq hh-compilation-directory-locked nil)
+(setq hh-makescript "build_vm_host")
+(setq hh-make-command (concat "bash " hh-makescript))
+
+(defun hh-compilation-mode-hook ()
+  (if hh-mode-enabled
+      (progn
+        (make-local-variable 'truncate-lines)
+        (setq truncate-lines nil))
+        ))
+
+(add-hook 'compilation-mode-hook 'hh-compilation-mode-hook)
+
+(defun hh-find-project-directory-recursive ()
+  "Recursively search for a makefile."
+  (interactive)
+  (if (file-exists-p hh-makescript) t
+      (cd "../")
+      (hh-find-project-directory-recursive)))
+
+(defun hh-find-project-directory ()
+  "Find the Handmade Hero project directory."
+  (interactive)
+  (setq hh-find-project-from-directory default-directory)
+  (switch-to-buffer-other-window "*compilation*")
+  (if hh-compilation-directory-locked (cd hh-last-compilation-directory)
+  (cd hh-find-project-from-directory)
+  (hh-find-project-directory-recursive)
+  (setq hh-last-compilation-directory default-directory)))
+
+(defun hh-make-without-asking ()
+  "Make the current build."
+  (interactive)
+  (if (hh-find-project-directory) (compile hh-make-command))
+  (other-window 1))
+(define-key global-map (kbd "C-c h m") 'hh-make-without-asking)
+
+;;; End Handmade Hero section
+
 (provide '.emacs)
 ;;; .emacs ends here
