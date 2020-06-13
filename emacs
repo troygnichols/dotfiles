@@ -136,7 +136,10 @@
 ;; Navigating by line
 (global-set-key (kbd "C-;") 'avy-goto-line)
 ;; (global-set-key (kbd "C-;") 'ace-jump-line-mode)
-(global-set-key (kbd "C-:") 'goto-line)
+;; (global-set-key (kbd "C-:") 'goto-line)
+(global-set-key (kbd "C-:") 'avy-goto-word-1)
+(global-set-key (kbd "M-9") 'avy-goto-word-1)
+(global-set-key (kbd "M-8") 'avy-goto-char)
 
 ;; Show line numbers
 ;; (global-display-line-numbers-mode)
@@ -187,6 +190,9 @@
 ;; Misc keybindings ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
+;; Kill previous sentence
+(global-set-key (kbd "<C-backspace>") 'backward-kill-sentence)
+
 ;; Find file at point (under the cursor)
 (global-set-key (kbd "C-c f") 'find-file-at-point)
 
@@ -217,7 +223,7 @@
 (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y\C-p")
 
 ;; Upcase a single character
-(global-set-key (kbd "C-c u") 'upcase-char)
+(global-set-key (kbd "C-c M-u") 'upcase-char)
 
 ;; Downcase a single character
 (global-set-key (kbd "C-c d") 'downcase-dwim)
@@ -418,9 +424,6 @@
 
 ;; enable which-key (show available commands in temporary buffer)
 (which-key-mode 1)
-
-;; ace-jump-mode (jump to words or characters easily)
-(define-key global-map (kbd "M-9") 'ace-jump-mode)
 
 ;; delete extra witespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -748,15 +751,15 @@
 
 ;;; Handmade Hero build helpers
 
-;; Set HH-MODE-ENABLED to t to enable Handmade Hero compilation functionality
-(setq hh-mode-enabled t)
+;; Set HH-ENABLED to t to enable Handmade Hero helpers
+(setq hh-enabled t)
 
 (setq hh-compilation-directory-locked nil)
 (setq hh-makescript "build_vm_host")
 (setq hh-make-command (concat "bash " hh-makescript))
 
 (defun hh-compilation-mode-hook ()
-  (if hh-mode-enabled
+  (if hh-enabled
       (progn
         (make-local-variable 'truncate-lines)
         (setq truncate-lines nil))
@@ -837,9 +840,10 @@
   ; Set my style for the current buffer
   (c-add-style "HandmadeHero" handmade-hero-c-style t)
 
-  ; 1-space tabs
-  (setq tab-width 2
-        indent-tabs-mode nil)
+  ;; (setq tab-width 2  ;; how big is a tab
+  ;;       indent-tabs-mode nil)  ;; use tab indentation?
+
+  (setq c-basic-offset 2)
 
   ; Additional style stuff
   (c-set-offset 'member-init-intro '++)
@@ -910,7 +914,7 @@
   ;; (define-key c++-mode-map "\ea" 'yank)
   ;; (define-key c++-mode-map "\ez" 'kill-region)
 
-  ; devenv.com error parsing
+  ; devenv error parsing
   (add-to-list 'compilation-error-regexp-alist 'casey-devenv)
   (add-to-list 'compilation-error-regexp-alist-alist '(casey-devenv
    "*\\([0-9]+>\\)?\\(\\(?:[a-zA-Z]:\\)?[^:(\t\n]+\\)(\\([0-9]+\\)) : \\(?:see declaration\\|\\(?:warnin\\(g\\)\\|[a-z ]+\\) C[0-9]+:\\)"
@@ -933,7 +937,7 @@
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
-(global-set-key (kbd "S-C-m") 'tgn-open-line-below)
+(global-set-key [(control return)] 'tgn-open-line-below) ;; C-m aka <C-return>
 
 ;; open line above current line
 (defun tgn-open-line-above ()
@@ -946,6 +950,24 @@
 
 ;; Enable subword mode (treat FooBar or foo-bar as two words)
 (global-subword-mode 1)
+
+;; Upcase previous word
+(defun tgn-upcase-previous-word (&optional num-words)
+  "Upcase the word (or NUM-WORDS words) before point. Does not treat subwords as words."
+  (interactive)
+  (let ((orig-subword-mode subword-mode))
+    (subword-mode 0)
+    (upcase-word (- (or num-words 1)))
+    (subword-mode orig-subword-mode)))
+
+;; Capitalize Previous word
+(defun tgn-capitalize-previous-word ()
+  "Capitalize the word before point."
+  (interactive)
+  (capitalize-word -1))
+
+(global-set-key (kbd "C-c u") 'tgn-upcase-previous-word)
+(global-set-key (kbd "C-c M-c") 'tgn-capitalize-previous-word)
 
 (provide '.emacs)
 ;;; .emacs ends here
