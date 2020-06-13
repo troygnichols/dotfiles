@@ -202,7 +202,10 @@
 
 ;; switch kill-region from C-w to C-x C-k
 (global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-c C-k") 'kill-region)
+
+;; kill whole line
+(global-set-key (kbd "C-c K") 'kill-whole-line)
+(global-set-key (kbd "C-c C-k") 'kill-whole-line)
 
 ;; make C-w backward-kill-word (replace default of kill-region)
 (global-set-key (kbd "C-w") 'backward-kill-word)
@@ -221,6 +224,7 @@
 
 ;; Revert/refresh the current buffer
 (global-set-key (kbd "<f5>") 'revert-buffer)
+(global-set-key (kbd "C-c R") 'revert-buffer)
 
 ;; Rename the current buffer
 (global-set-key (kbd "<f2>") 'rename-buffer)
@@ -232,8 +236,12 @@
 ;; Align text (should select a region first)
 (global-set-key (kbd "C-c a") 'align)
 
+;; Cycle through other windows
+(global-set-key (kbd "M-o") 'other-window)
+
 ;; Use ace-window to switch to another window
-(global-set-key (kbd "M-o") 'ace-window)
+(global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "C-c o") 'ace-window)
 
 ;; join line to following line
 (global-set-key (kbd "C-c C-j")
@@ -333,6 +341,8 @@
     (global-set-key (kbd "M-x") 'helm-M-x)
     (global-set-key (kbd "C-x C-m") 'helm-M-x)
     (global-set-key (kbd "C-c C-m") 'helm-M-x)
+    (add-hook 'web-mode-hook (lambda ()
+                               (local-set-key (kbd "C-c C-m") 'helm-M-x)))
     ;; helm recent files
     (global-set-key (kbd "C-c h r") 'helm-recentf)
     ;; helm switch project
@@ -366,6 +376,8 @@
     ;; (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-m") 'execute-extended-command)
     (global-set-key (kbd "C-c C-m") 'counsel-M-x)
+    (add-hook 'web-mode-hook (lambda ()
+                               (local-set-key (kbd "C-c C-m") 'counsel-M-x)))
     (global-set-key (kbd "C-c b") 'counsel-bookmark)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (global-set-key (kbd "<f1> f") 'counsel-describe-function)
@@ -551,6 +563,7 @@
 
 ;; emmet config (html templating system)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 
 ;; enable spell checking in comments and strings in source code
@@ -693,6 +706,34 @@
   (forward-line -1)
   (indent-according-to-mode))
 
+;; Configure Ediff diff viewer
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; Take changes from both inputs (put both A and B into C)
+;; https://stackoverflow.com/a/29757750/42489
+(defun ediff-copy-both-to-C ()
+  "Take the diffs from A and B and put them into C."
+  (interactive)
+  (ediff-copy-diff ediff-current-difference nil 'C nil
+                   (concat
+                    (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                    (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+
+;; Press d to take diffs from both A and B
+(defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
+(add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
+
+;; Add web-mode-edit-element to web-mode
+(add-hook 'web-mode-hook 'web-mode-edit-element-minor-mode)
+
+;; Open .html files in web-mode
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+
+;; Use C-c C-o binding from ng2-html mode (switch to Angular relevant component)
+(add-hook 'web-mode-hook (lambda()
+                           (require 'ng2-mode)
+                           (local-set-key (kbd "C-c C-o") 'ng2-open-counterpart)
+                           (setq web-mode-markup-indent-offset 2)))
 
 ;;; Handmade Hero build helpers
 

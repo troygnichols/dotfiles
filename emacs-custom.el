@@ -86,13 +86,15 @@
  '(objed-cursor-color "#964C7B")
  '(package-selected-packages
    (quote
-    (clang-format vterm-toggle enh-ruby-mode origami projectile-ripgrep git-link counsel-projectile command-log-mode counsel ivy nov company-restclient ob-restclient restclient-helm change-inner prettier-js jq-format json-mode doom-themes spacemacs-theme company-quickhelp vterm egg-timer multiple-cursors ng2-mode robe robots-txt-mode ruby-hash-syntax ruby-interpolation ruby-tools anzu goto-char-preview emmet-mode helm-spotify-plus smartparens slack company tide cliphist fzf ag helm-ag helm-projectile helm-switch-shell helm-taskswitch helm-themes yasnippet-snippets yasnippet csv-mode highlight-parentheses rubocop jq-mode restclient exec-path-from-shell iy-go-to-char pdf-tools dired-sidebar evil-surround zenburn-theme gruvbox-theme ruby-end ruby-electric ace-jump-mode projectile-rails ac-inf-ruby expand-region chruby bundler which-key solarized-theme rspec-mode magit yaml-mode helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
+    (enh-ruby-mode origami projectile-ripgrep git-link counsel-projectile command-log-mode counsel ivy nov company-restclient ob-restclient restclient-helm change-inner prettier-js jq-format json-mode doom-themes spacemacs-theme company-quickhelp vterm egg-timer multiple-cursors ng2-mode robe robots-txt-mode ruby-hash-syntax ruby-interpolation ruby-tools anzu goto-char-preview emmet-mode helm-spotify-plus smartparens slack company tide cliphist fzf ag helm-ag helm-projectile helm-switch-shell helm-taskswitch helm-themes yasnippet-snippets yasnippet csv-mode highlight-parentheses rubocop jq-mode restclient exec-path-from-shell iy-go-to-char pdf-tools dired-sidebar evil-surround zenburn-theme gruvbox-theme ruby-end ruby-electric ace-jump-mode projectile-rails ac-inf-ruby expand-region chruby bundler which-key solarized-theme rspec-mode magit yaml-mode helm markdown-mode go-mode highlight-indentation typescript-mode neotree evil avy)))
  '(pdf-view-midnight-colors (quote ("#fdf4c1" . "#32302f")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(rustic-ansi-faces
    ["#27212E" "#964C7B" "#74DFC4" "#FFE261" "#40B4C4" "#EB64B9" "#B4DCE7" "#FFFFFF"])
+ '(scroll-preserve-screen-position t)
  '(sentence-end-double-space nil)
+ '(sh-basic-offset 2)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
