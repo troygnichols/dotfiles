@@ -32,13 +32,13 @@
 ;; TODO: Does this work on a fresh install where package-refresh-contents has not run yet?
 (package-install-selected-packages)
 
-;; Determine whether my-setup-evil-mode sets up evil mode or non-evil mode bindings
-(setq my-use-evil-mode nil)
+;; Determine whether tgn-setup-evil-mode sets up evil mode or non-evil mode bindings
+(setq tgn-use-evil-mode nil)
 
-(defun my-setup-evil-mode ()
-  "Setup evil mode, or non-evil mode bindings, depending on MY-USE-EVIL-MODE."
+(defun tgn-setup-evil-mode ()
+  "Setup evil mode, or non-evil mode bindings, depending on TGN-USE-EVIL-MODE."
   (interactive)
-  (if my-use-evil-mode
+  (if tgn-use-evil-mode
       (progn
         (message "Setting up evil mode.")
         (unless (package-installed-p 'evil)
@@ -65,7 +65,7 @@
       (global-set-key (kbd "C-c t") 'iy-go-up-to-char)
       (global-set-key (kbd "C-c T") 'iy-go-up-to-char-backward))))
 
-(my-setup-evil-mode)
+(tgn-setup-evil-mode)
 
 (unless (package-installed-p 'projectile-rails)
  (package-install 'projectile-rails))
@@ -160,10 +160,10 @@
 
 ;; make a custom keymap for neotree commands
 (global-set-key (kbd "C-c n n") 'neotree-toggle)
-(global-set-key (kbd "C-c n f") 'my-neotree-find-in-project-dir)
+(global-set-key (kbd "C-c n f") 'tgn-neotree-find-in-project-dir)
 
 ;; similar to find-file-in-project
-(defun my-neotree-find-in-project-dir ()
+(defun tgn-neotree-find-in-project-dir ()
     "Open NeoTree using the git root."
     (interactive)
     (let ((project-dir (projectile-project-root))
@@ -270,9 +270,9 @@
 ;; enable debugging in an Rspec buffer
 (add-hook 'rspec-compilation-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c , p") 'my-rspec-enable-debugging)))
+            (local-set-key (kbd "C-c , p") 'tgn-rspec-enable-debugging)))
 
-(defun my-rspec-enable-debugging ()
+(defun tgn-rspec-enable-debugging ()
   "Enable debugging in an Rspec Compilation buffer.
 
    When an rspec test pauses on a debugger statement, e.g. byebug or pry,
@@ -319,19 +319,19 @@
 
 ;; Helm / Ivy
 
-;; Determine whether my-setup-helm-ivy sets up helm or ivy, set to "helm" or "ivy"
-(setq my-use-helm-or-ivy "ivy")
+;; Determine whether tgn-setup-helm-ivy sets up helm or ivy, set to "helm" or "ivy"
+(setq tgn-use-helm-or-ivy "ivy")
 
-(defun my-setup-helm-or-ivy ()
-  "Setup either helm or ivy depending on the value of MY-SETUP-HELM-OR-IVY."
+(defun tgn-setup-helm-or-ivy ()
+  "Setup either helm or ivy depending on the value of TGN-SETUP-HELM-OR-IVY."
   (interactive)
   (progn
-    (pcase my-use-helm-or-ivy
-      ("helm" (my-setup-helm))
-      ("ivy" (my-setup-ivy))
-      (_ (message "Please set MY-USE-HELM-OR-IVY to 'helm' or 'ivy'")))))
+    (pcase tgn-use-helm-or-ivy
+      ("helm" (tgn-setup-helm))
+      ("ivy" (tgn-setup-ivy))
+      (_ (message "Please set TGN-USE-HELM-OR-IVY to 'helm' or 'ivy'")))))
 
-(defun my-setup-helm ()
+(defun tgn-setup-helm ()
   "Set up Emacs to use Helm."
   (progn
     (message "Setting up helm")
@@ -359,7 +359,7 @@
     (global-anzu-mode +1)
     ))
 
-(defun my-setup-ivy ()
+(defun tgn-setup-ivy ()
   "Set up Emacs to use Ivy."
   (progn
     (message "Setting up ivy")
@@ -397,7 +397,7 @@
     (counsel-projectile-mode 1)
     ))
 
-(my-setup-helm-or-ivy)
+(tgn-setup-helm-or-ivy)
 
 ;; auto pair brackets
 (setq electric-pair-mode 1)
