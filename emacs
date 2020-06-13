@@ -202,7 +202,10 @@
 
 ;; switch kill-region from C-w to C-x C-k
 (global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-c C-k") 'kill-region)
+
+;; kill whole line
+(global-set-key (kbd "C-c K") 'kill-whole-line)
+(global-set-key (kbd "C-c C-k") 'kill-whole-line)
 
 ;; make C-w backward-kill-word (replace default of kill-region)
 (global-set-key (kbd "C-w") 'backward-kill-word)
@@ -221,6 +224,7 @@
 
 ;; Revert/refresh the current buffer
 (global-set-key (kbd "<f5>") 'revert-buffer)
+(global-set-key (kbd "C-c R") 'revert-buffer)
 
 ;; Rename the current buffer
 (global-set-key (kbd "<f2>") 'rename-buffer)
