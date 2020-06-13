@@ -7,6 +7,12 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(avy-all-windows (quote all-frames))
+ '(avy-background t)
+ '(avy-highlight-first t)
+ '(avy-indent-line-overlay nil)
+ '(avy-style (quote words))
+ '(clang-format+-context (quote buffer))
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(compilation-message-face (quote default))

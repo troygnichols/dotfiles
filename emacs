@@ -134,8 +134,8 @@
 (global-set-key (kbd "C-c C-w C-l") 'windmove-right)
 
 ;; Navigating by line
-;; (global-set-key (kbd "C-;") 'avy-goto-line)
-(global-set-key (kbd "C-;") 'ace-jump-line-mode)
+(global-set-key (kbd "C-;") 'avy-goto-line)
+;; (global-set-key (kbd "C-;") 'ace-jump-line-mode)
 (global-set-key (kbd "C-:") 'goto-line)
 
 ;; Show line numbers
