@@ -775,6 +775,139 @@
   (other-window 1))
 (define-key global-map (kbd "C-c h m") 'hh-make-without-asking)
 
+(defconst handmade-hero-c-style
+  '((c-electric-pound-behavior   . nil)
+    (c-tab-always-indent         . t)
+    (c-comment-only-line-offset  . 0)
+    (c-hanging-braces-alist      . ((class-open)
+                                    (class-close)
+                                    (defun-open)
+                                    (defun-close)
+                                    (inline-open)
+                                    (inline-close)
+                                    (brace-list-open)
+                                    (brace-list-close)
+                                    (brace-list-intro)
+                                    (brace-list-entry)
+                                    (block-open)
+                                    (block-close)
+                                    (substatement-open)
+                                    (statement-case-open)
+                                    (class-open)))
+    (c-hanging-colons-alist      . ((inher-intro)
+                                    (case-label)
+                                    (label)
+                                    (access-label)
+                                    (access-key)
+                                    (member-init-intro)))
+    (c-cleanup-list              . (scope-operator
+                                    list-close-comma
+                                    defun-close-semi))
+    (c-offsets-alist             . ((arglist-close         .  c-lineup-arglist)
+                                    (label                 . -2)
+                                    (access-label          . -2)
+                                    (substatement-open     .  0)
+                                    (statement-case-intro  .  2)
+                                    (statement-block-intro .  c-lineup-for)
+                                    (case-label            .  2)
+                                    (block-open            .  0)
+                                    (inline-open           .  0)
+                                    (topmost-intro-cont    .  0)
+                                    (knr-argdecl-intro     . -2)
+                                    (brace-list-open       .  0)
+                                    (brace-list-intro      .  2)))
+    (c-echo-syntactic-information-p . t))
+  "Handmade Hero C++ Style")
+
+(defun handmade-hero-c-hook ()
+  ; Set my style for the current buffer
+  (c-add-style "HandmadeHero" handmade-hero-c-style t)
+
+  ; 1-space tabs
+  (setq tab-width 2
+        indent-tabs-mode nil)
+
+  ; Additional style stuff
+  (c-set-offset 'member-init-intro '++)
+
+  ; No hungry backspace
+  (c-toggle-auto-hungry-state -1)
+
+  ; Newline indents, semi-colon doesn't
+  (define-key c++-mode-map "\C-m" 'newline-and-indent)
+  (setq c-hanging-semi&comma-criteria '((lambda () 'stop)))
+
+  ; Handle super-tabbify (TAB completes, shift-TAB actually tabs)
+  (setq dabbrev-case-replace t)
+  (setq dabbrev-case-fold-search t)
+  (setq dabbrev-upcase-means-case-search t)
+
+  ; Abbrevation expansion
+  (abbrev-mode 1)
+
+  (defun handmade-hero-find-corresponding-file ()
+    "Find the file that corresponds to this one."
+    (interactive)
+    (setq CorrespondingFileName nil)
+    (setq BaseFileName (file-name-sans-extension buffer-file-name))
+    (if (string-match "\\.c" buffer-file-name)
+        (setq CorrespondingFileName (concat BaseFileName ".h")))
+    (if (string-match "\\.h" buffer-file-name)
+        (if (file-exists-p (concat BaseFileName ".c")) (setq CorrespondingFileName (concat BaseFileName ".c"))
+          (setq CorrespondingFileName (concat BaseFileName ".cpp"))))
+    (if (string-match "\\.hin" buffer-file-name)
+        (setq CorrespondingFileName (concat BaseFileName ".cin")))
+    (if (string-match "\\.cin" buffer-file-name)
+        (setq CorrespondingFileName (concat BaseFileName ".hin")))
+    (if (string-match "\\.cpp" buffer-file-name)
+        (setq CorrespondingFileName (concat BaseFileName ".h")))
+    (if CorrespondingFileName (find-file CorrespondingFileName)
+      (error "Unable to find a corresponding file")))
+
+  (defun handmade-hero-find-corresponding-file-other-window ()
+    "Find the file that corresponds to this one."
+    (interactive)
+    (find-file-other-window buffer-file-name)
+    (casey-find-corresponding-file)
+    (other-window -1))
+  (define-key c++-mode-map [f12] 'handmade-hero-find-corresponding-file)
+  (define-key c++-mode-map [M-f12] 'handmade-hero-find-corresponding-file-other-window)
+
+  ; Alternate bindings for F-keyless setups (ie MacOS X terminal)
+  ;; (define-key c++-mode-map "\ec" 'casey-find-corresponding-file)
+  ;; (define-key c++-mode-map "\eC" 'casey-find-corresponding-file-other-window)
+
+  ;; (define-key c++-mode-map "\es" 'casey-save-buffer)
+
+  ;; (define-key c++-mode-map "\t" 'dabbrev-expand)
+  ;; (define-key c++-mode-map [S-tab] 'indent-for-tab-command)
+  ;; (define-key c++-mode-map "\C-y" 'indent-for-tab-command)
+  ;; (define-key c++-mode-map [C-tab] 'indent-region)
+  ;; (define-key c++-mode-map "	" 'indent-region)
+
+  ;; (define-key c++-mode-map "\ej" 'imenu)
+
+  ;; (define-key c++-mode-map "\e." 'c-fill-paragraph)
+
+  ;; (define-key c++-mode-map "\e/" 'c-mark-function)
+
+  ;; (define-key c++-mode-map "\e " 'set-mark-command)
+  ;; (define-key c++-mode-map "\eq" 'append-as-kill)
+  ;; (define-key c++-mode-map "\ea" 'yank)
+  ;; (define-key c++-mode-map "\ez" 'kill-region)
+
+  ; devenv.com error parsing
+  (add-to-list 'compilation-error-regexp-alist 'casey-devenv)
+  (add-to-list 'compilation-error-regexp-alist-alist '(casey-devenv
+   "*\\([0-9]+>\\)?\\(\\(?:[a-zA-Z]:\\)?[^:(\t\n]+\\)(\\([0-9]+\\)) : \\(?:see declaration\\|\\(?:warnin\\(g\\)\\|[a-z ]+\\) C[0-9]+:\\)"
+    2 3 nil (4)))
+
+  ; Turn on line numbers
+  ;(linum-mode)
+  )
+
+(add-hook 'c-mode-common-hook 'handmade-hero-c-hook)
+
 ;;; End Handmade Hero section
 
 (provide '.emacs)
