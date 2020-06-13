@@ -927,5 +927,25 @@
 ;; Scroll by 3 lines at once e.g. when point reaches top/bottom of page
 (setq scroll-step 3)
 
+;; open line below current line
+(defun tgn-open-line-below ()
+  "Open a new line for editing, properly indented below the current line."
+  (interactive)
+  (move-end-of-line nil)
+  (newline-and-indent))
+(global-set-key (kbd "S-C-m") 'tgn-open-line-below)
+
+;; open line above current line
+(defun tgn-open-line-above ()
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (indent-according-to-mode))
+(global-set-key [(control shift return)] 'tgn-open-line-above)
+
+;; Enable subword mode (treat FooBar or foo-bar as two words)
+(global-subword-mode 1)
+
 (provide '.emacs)
 ;;; .emacs ends here
