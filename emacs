@@ -635,9 +635,22 @@
 ;; hold Meta and click to add more cursors (C-g to remove extra cursors)
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+
+(defun tgn-add-cursor-below ()
+  "Add another cursor below current point. Make sure we are in multi-cursor mode first."
+  (interactive)
+  (multiple-cursors-mode 1)
+  (mc/mmlte--down))
+
+(defun tgn-add-cursor-above ()
+  "Add another cursor above current point. Make sure we are in multi-cursor mode first."
+  (interactive)
+  (multiple-cursors-mode 1)
+  (mc/mmlte--up))
+
 ;; add a new cursor on the next line
-(global-set-key (kbd "C-c m m") 'mc/mmlte--down)
-(global-set-key (kbd "C-c m n") 'mc/mmlte--up)
+(global-set-key (kbd "C-c m m") 'tgn-add-cursor-below)
+(global-set-key (kbd "C-c m n") 'tgn-add-cursor-above)
 
 ;; toggle company quickhelp (show documentation along with company auto completion candidates)
 (company-quickhelp-mode 0)
