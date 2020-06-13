@@ -502,8 +502,6 @@
 ;; Enable global flycheck mode (highlight errors)
 (global-flycheck-mode +1)
 
-(message "1")
-
 ;; Toggle flycheck mode
 (global-set-key (kbd "C-c w") 'global-flycheck-mode)
 
