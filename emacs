@@ -219,9 +219,6 @@
 ;; swap windows
 (global-set-key (kbd "C-c C-w C-s") 'ace-swap-window)
 
-;; Duplicate line
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y\C-p")
-
 ;; Upcase a single character
 (global-set-key (kbd "C-c M-u") 'upcase-char)
 
@@ -968,6 +965,37 @@
 
 (global-set-key (kbd "C-c u") 'tgn-upcase-previous-word)
 (global-set-key (kbd "C-c M-c") 'tgn-capitalize-previous-word)
+
+
+(defun tgn-duplicate-line ()
+  "Create a duplicate of the current line, below it. Leave the point in the same place."
+  (interactive)
+  (save-excursion
+    (move-beginning-of-line nil)
+    (let ((string-to-duplicate (buffer-substring-no-properties
+                (point)
+                (save-excursion
+                  (move-end-of-line nil)
+                  (point))
+                )))
+      (move-end-of-line nil)
+      (newline)
+      (insert string-to-duplicate)
+      ))
+  )
+
+(defun tgn-duplicate-line-follow ()
+  "Duplicate the current line and move point down, preserving the horiztonal position."
+  (interactive)
+  (tgn-duplicate-line)
+  (call-interactively 'next-line))
+
+;; Duplicate line and move the cursor down
+(global-set-key (kbd "C-c C-d") 'tgn-duplicate-line)
+;; Alternative binding since some modes (C e.g.) clobber C-c C-d
+(global-set-key (kbd "C-c C-=") 'tgn-duplicate-line)
+;; Duplicate line and leave the cursor where it is
+(global-set-key (kbd "C-S-d") 'tgn-duplicate-line-follow)
 
 (provide '.emacs)
 ;;; .emacs ends here
