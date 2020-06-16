@@ -12,7 +12,15 @@
 ;; Can I schedule it to happen once a day?
 ;; (package-refresh-contents)
 
-;; load restclient-jq - allow restclient mode to use jq to process JSON results.
+;; keep the auto-generated customize settings in a separate file
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file)
+
+;; install selected packaged
+;; TODO: Does this work on a fresh install where package-refresh-contents has not run yet?
+(package-install-selected-packages)
+
+;;; load restclient-jq - allow restclient mode to use jq to process JSON results.
 ;; (fetch it from remote url if it's already there)
 (let
     ((restclient-jq-filename "~/.emacs.d/restclient-jq.el")
@@ -24,13 +32,6 @@
     (load "~/.emacs.d/restclient-jq.el")
     ))
 
-;; keep the auto-generated customize settings in a separate file
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file)
-
-;; install selected packaged
-;; TODO: Does this work on a fresh install where package-refresh-contents has not run yet?
-(package-install-selected-packages)
 
 ;; Determine whether tgn-setup-evil-mode sets up evil mode or non-evil mode bindings
 (setq tgn-use-evil-mode nil)
