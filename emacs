@@ -1073,5 +1073,14 @@ otherwise always use the same name."
 ;; Duplicate line and leave the cursor where it is
 (global-set-key (kbd "C-S-d") 'tgn-duplicate-line-follow)
 
+;; Always use visual line mode in org-mode
+(add-hook 'org-mode-hook #'visual-line-mode)
+
+;; Menu bar off (run M-x menu-bar-mode to get menu back)
+(menu-bar-mode 0)
+
+;; go fullscreen on startup
+(add-to-list 'default-frame-alist '(fullscreen . fullboth))
+
 (provide '.emacs)
 ;;; .emacs ends here
