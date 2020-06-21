@@ -263,8 +263,13 @@
 (global-set-key (kbd "C-c e")
                 (lambda ()
                   (interactive)
-                  (find-file "~/.emacs")))
+                  (find-file user-init-file)))
 
+;; flycheck next error
+(global-set-key (kbd "C-S-n") 'flycheck-next-error)
+
+;; flycheck previous error
+(global-set-key (kbd "C-S-p") 'flycheck-previous-error)
 
 ;; in ruby mode: find file under cursor TODO
 (add-hook 'enh-ruby-mode-hook
