@@ -274,7 +274,11 @@
 ;; enable debugging in an Rspec buffer
 (add-hook 'rspec-compilation-mode-hook
           (lambda ()
-            (local-set-key (kbd "C-c , p") 'tgn-rspec-enable-debugging)))
+            (local-set-key (kbd "C-c , p") 'tgn-rspec-enable-debugging)
+            (local-set-key (kbd "C-c , r") 'rspec-rerun)
+            (local-set-key (kbd "C-c , a") 'rspec-verify-all)
+            (local-set-key (kbd "C-c , f") 'rspec-run-last-failed)
+            (local-set-key (kbd "C-c , y") 'rspec-yank-last-command)))
 
 (defun tgn-rspec-enable-debugging ()
   "Enable debugging in an Rspec Compilation buffer.
