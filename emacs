@@ -263,8 +263,13 @@
 (global-set-key (kbd "C-c e")
                 (lambda ()
                   (interactive)
-                  (find-file "~/.emacs")))
+                  (find-file user-init-file)))
 
+;; flycheck next error
+(global-set-key (kbd "C-S-n") 'flycheck-next-error)
+
+;; flycheck previous error
+(global-set-key (kbd "C-S-p") 'flycheck-previous-error)
 
 ;; in ruby mode: find file under cursor TODO
 (add-hook 'enh-ruby-mode-hook
@@ -753,14 +758,46 @@
 
 ;;; Handmade Hero build helpers
 
-;; Set HH-ENABLED to t to enable Handmade Hero helpers
-(setq hh-enabled t)
+(defvar hh-enabled t "Set HH-ENABLED to t to enable Handmade Hero helpers.")
 
-(setq hh-compilation-directory-locked nil)
-(setq hh-makescript "build_vm_host")
-(setq hh-make-command (concat "bash " hh-makescript))
+(defvar hh-compilation-directory-locked nil)
+
+;; (setq hh-makescript "build_vm_host")
+(defvar hh-makescript "build.bat"
+  "The main script that builds the Handmade Hero project.")
+
+;; (defvar hh-make-command (concat "bash " hh-makescript))
+(defvar hh-make-command hh-makescript)
+
+(defvar hh-debug-script "debug_vs.bat"
+  "A script which opens the Handmade Hero project for debugging.")
+
+(defvar hh-executable-filename "win32_handmade.exe"
+  "The name of the main Handmade Hero executable file.")
+
+(defvar hh-debug-in-visualstudio-running nil
+  "Do not edit this manually.
+Will be temporarily set to t while the compilation for starting the
+Visual Studio debugger is running.")
+
+(defvar hh-run-executable-running nil
+  "Do not edit this manually.
+Will be temporarily set to t while the compilation for starting the
+Handmade Hero executable.")
+
+(defun hh-compilation-buffer-name (_mode-name)
+  "Get the name for the compilation buffer.
+If we are currently opening the Visual Studio debugger or running the executable,
+use a special name so as not to collide with the normal compilation buffer,
+otherwise always use the same name."
+  ;; (if hh-debug-in-visualstudio-running "*hh-visualstudio-debug*" "*hh-compilation*"))
+  (cond
+   (hh-debug-in-visualstudio-running "*hh-visualstudio-debug*")
+   (hh-run-executable-running "*hh-run-exe*")
+   (t "*hh-compilation*")))
 
 (defun hh-compilation-mode-hook ()
+  "Handmade Hero C mode hook"
   (if hh-enabled
       (progn
         (make-local-variable 'truncate-lines)
@@ -769,29 +806,64 @@
 
 (add-hook 'compilation-mode-hook 'hh-compilation-mode-hook)
 
-(defun hh-find-project-directory-recursive ()
-  "Recursively search for a makefile."
+(defun hh-find-project-directory-recursive (target-file)
+  "Recursively search for TARGET-FILE and set the current directory there."
   (interactive)
-  (if (file-exists-p hh-makescript) t
+  (if (file-exists-p target-file) t
       (cd "../")
-      (hh-find-project-directory-recursive)))
+      (hh-find-project-directory-recursive target-file)))
 
 (defun hh-find-project-directory ()
-  "Find the Handmade Hero project directory."
+  "Find the Handmade Hero project directory and set it as current directory."
   (interactive)
   (setq hh-find-project-from-directory default-directory)
-  (switch-to-buffer-other-window "*compilation*")
+  (switch-to-buffer-other-window (hh-compilation-buffer-name "_dummy-mode-name"))
   (if hh-compilation-directory-locked (cd hh-last-compilation-directory)
   (cd hh-find-project-from-directory)
-  (hh-find-project-directory-recursive)
+  (hh-find-project-directory-recursive hh-makescript)
   (setq hh-last-compilation-directory default-directory)))
 
 (defun hh-make-without-asking ()
   "Make the current build."
   (interactive)
   (if (hh-find-project-directory) (compile hh-make-command))
+  ;; switch focus back to the main window where we came from
   (other-window 1))
 (define-key global-map (kbd "C-c h m") 'hh-make-without-asking)
+
+(defun hh-debug-in-visualstudio ()
+  "Open the project in Visual Studio."
+  (interactive)
+  ;; Set this variable temporarily so the buffer will be named differently
+  ;; from the normal compilation buffer and live separately.
+  (setq hh-debug-in-visualstudio-running t)
+  (if (hh-find-project-directory)
+      (progn
+        (cd "misc")
+        (compile hh-debug-script)
+        ;; switch focus back to the main window where we came from
+        (other-window 1)
+        (setq hh-debug-in-visualstudio-running nil)
+        )
+    ))
+(define-key global-map (kbd "C-c h d") 'hh-debug-in-visualstudio)
+
+(defun hh-run-executable ()
+  "Run the Handmade Hero executable."
+  (interactive)
+  ;; Set this variable temporarily so the buffer will be named differently
+  ;; from the normal compilation buffer and live separately.
+  (setq hh-run-executable-running t)
+  (if (hh-find-project-directory)
+      (progn
+        (cd "_build")
+        (compile hh-executable-filename)
+        ;; switch focus back to the main window where we came from
+        (other-window 1)
+        (setq hh-run-executable-running nil)
+        )
+  ))
+(define-key global-map (kbd "C-c h e") 'hh-run-executable)
 
 (defconst handmade-hero-c-style
   '((c-electric-pound-behavior   . nil)
@@ -822,30 +894,33 @@
                                     list-close-comma
                                     defun-close-semi))
     (c-offsets-alist             . ((arglist-close         .  c-lineup-arglist)
-                                    (label                 . -2)
-                                    (access-label          . -2)
+                                    (label                 . -4)
+                                    (access-label          . -4)
                                     (substatement-open     .  0)
-                                    (statement-case-intro  .  2)
+                                    (statement-case-intro  .  4)
                                     ;; (statement-block-intro .  c-lineup-for)
-                                    (statement-block-intro .  2)
-                                    (case-label            .  2)
+                                    (statement-block-intro .  4)
+                                    (case-label            .  4)
                                     (block-open            .  0)
                                     (inline-open           .  0)
                                     (topmost-intro-cont    .  0)
-                                    (knr-argdecl-intro     . -2)
+                                    (knr-argdecl-intro     . -4)
                                     (brace-list-open       .  0)
-                                    (brace-list-intro      .  2)))
+                                    (brace-list-intro      .  4)))
     (c-echo-syntactic-information-p . t))
   "Handmade Hero C++ Style")
 
 (defun handmade-hero-c-hook ()
+  ;; Use special compliation buffer name
+  (setq compilation-buffer-name-function 'hh-compilation-buffer-name)
+
   ; Set my style for the current buffer
   (c-add-style "HandmadeHero" handmade-hero-c-style t)
 
   ;; (setq tab-width 2  ;; how big is a tab
   ;;       indent-tabs-mode nil)  ;; use tab indentation?
 
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 4)
 
   ; Additional style stuff
   (c-set-offset 'member-init-intro '++)
@@ -1001,6 +1076,15 @@
 (global-set-key (kbd "C-c C-=") 'tgn-duplicate-line)
 ;; Duplicate line and leave the cursor where it is
 (global-set-key (kbd "C-S-d") 'tgn-duplicate-line-follow)
+
+;; Always use visual line mode in org-mode
+(add-hook 'org-mode-hook #'visual-line-mode)
+
+;; Menu bar off (run M-x menu-bar-mode to get menu back)
+(menu-bar-mode 0)
+
+;; go fullscreen on startup
+(add-to-list 'default-frame-alist '(fullscreen . fullboth))
 
 (provide '.emacs)
 ;;; .emacs ends here
