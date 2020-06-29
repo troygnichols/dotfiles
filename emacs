@@ -1030,12 +1030,15 @@ otherwise always use the same name."
 
 ;; Upcase previous word
 (defun tgn-upcase-previous-word (&optional num-words)
-  "Upcase the word (or NUM-WORDS words) before point. Does not treat subwords as words."
+  "Upcase the word (or NUM-WORDS words) before point. Do not treat subwords as words."
   (interactive)
-  (let ((orig-subword-mode subword-mode))
-    (subword-mode 0)
+  (let ((orig-subword-mode subword-mode)
+        (orig-superword-mode superword-mode))
+    (subword-mode -1)
+    (superword-mode 1)
     (upcase-word (- (or num-words 1)))
-    (subword-mode orig-subword-mode)))
+    (subword-mode (if orig-subword-mode 1 -1))
+    (superword-mode (if orig-superword-mode 1 -1))))
 
 ;; Capitalize Previous word
 (defun tgn-capitalize-previous-word ()
@@ -1085,6 +1088,34 @@ otherwise always use the same name."
 
 ;; go fullscreen on startup
 (add-to-list 'default-frame-alist '(fullscreen . fullboth))
+
+
+;; Manage subword and superword modes
+
+(defun tgn-toggle-subword-mode ()
+  "Toggle subword mode in the current buffer."
+  (interactive)
+  (if subword-mode
+      (progn
+        (subword-mode -1)
+        (message "subword-mode disabled"))
+    (progn
+      (subword-mode 1)
+      (message "subword-mode enabled"))))
+(global-set-key (kbd "M-s M-s") 'tgn-toggle-subword-mode)
+
+(defun tgn-toggle-superword-mode ()
+  "Toggle superword mode in the current buffer."
+  (interactive)
+  (if superword-mode
+      (progn
+        (superword-mode -1)
+        (message "superword-mode disabled"))
+    (progn
+      (superword-mode 1)
+      (message "superword-mode enabled"))))
+(global-set-key (kbd "M-S") 'tgn-toggle-superword-mode)
+
 
 (provide '.emacs)
 ;;; .emacs ends here
