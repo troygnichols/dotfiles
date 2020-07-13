@@ -1,8 +1,6 @@
 # -*- mode: shell-script -*-
 
-alias reconfig="exec $SHELL"
 alias va="vagrant"
-alias reload="exec $SHELL"
 alias serve="webhere.sh"
 alias ansi="fancy-ansi.sh"
 alias sq="sqlite3 -column -header"
@@ -19,6 +17,7 @@ alias lcl="lsd -lh"
 alias unix="date +%s"
 alias nv="nvim"
 alias t=tmux
+alias ts=travis
 alias ta="tmux attach -t"
 alias tl="tmux ls"
 alias tn="tmux new -s"

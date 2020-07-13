@@ -162,6 +162,10 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 bindkey '^X^T' fzf-file-widget
 bindkey '^T' transpose-chars
 
+# de-dupe path
+# https://www.linuxjournal.com/content/removing-duplicate-path-entries
+export PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+
 # mkdir + cd
 function mkcd() {
   DIR="$1"
@@ -174,6 +178,11 @@ function mkcd() {
     mkdir -p $DIR
   fi
   cd $DIR
+}
+
+function reload() {
+  echo "Reloading shell."
+  exec $SHELL;
 }
 
 # extra completions
@@ -207,3 +216,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# added by travis gem
+[ ! -s /Users/tgn/.travis/travis.sh ] || source /Users/tgn/.travis/travis.sh
