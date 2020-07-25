@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+green='\033[32;40m'
+yellow='\033[33;40m'
+red='\033[31;40m'
+nocolor='\033[0m'
+
+printf "
+  FILE PERMISSION MODES:
+
+  ${green}1 r-- (Read)   ${nocolor}
+  ${yellow}2 -w- (Write) ${nocolor}
+  3 rw- ${nocolor}
+  ${red}4 --x (eXecute) ${nocolor}
+  5 r-x ${nocolor}
+  6 -wx
+  7 rwx
+
+"
