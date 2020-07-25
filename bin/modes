@@ -6,14 +6,16 @@ red='\033[31;40m'
 nocolor='\033[0m'
 
 printf "
-  FILE PERMISSION MODES:
+  File permission modes:
 
-  ${green}1 r-- (Read)   ${nocolor}
-  ${yellow}2 -w- (Write) ${nocolor}
-  3 rw- ${nocolor}
-  ${red}4 --x (eXecute) ${nocolor}
-  5 r-x ${nocolor}
-  6 -wx
-  7 rwx
-
+  OCT BIN    SYM
+  --------------
+  7   111    rwx
+  6   110    rw-
+  5   101    r-x
+  ${green}4   100    r-- (Read) ${nocolor}
+  3   011    -wx
+  ${yellow}2   010    -w- (Write) ${nocolor}
+  ${red}1   001    --x (eXecute)   ${nocolor}
+  0   000    --- (None)
 "
