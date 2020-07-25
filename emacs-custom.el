@@ -149,4 +149,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(enh-ruby-heredoc-delimiter-face ((t (:foreground "medium spring green"))))
- '(erm-syn-errline ((t (:box nil :underline (:color "orange red" :style wave))))))
+ '(erm-syn-errline ((t (:box nil :underline (:color "orange red" :style wave)))))
+ '(erm-syn-warnline ((t (:underline (:color "orange" :style wave))))))
