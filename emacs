@@ -467,7 +467,8 @@
 (defun run-server ()
   "Run the Emacs server if it is not running."
   (require 'server)
-  (unless (server-running-p)
+  (unless (eq (server-running-p) t)
+    (message "Starting server")
     (server-start)))
 
 (run-server)
@@ -646,6 +647,7 @@
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
 
+(require 'multiple-cursors)
 (defun tgn-add-cursor-below ()
   "Add another cursor below current point. Make sure we are in multi-cursor mode first."
   (interactive)
@@ -663,7 +665,7 @@
 (global-set-key (kbd "C-c m n") 'tgn-add-cursor-above)
 
 ;; toggle company quickhelp (show documentation along with company auto completion candidates)
-(company-quickhelp-mode 0)
+(company-quickhelp-mode 1)
 
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin))
@@ -712,6 +714,7 @@
 ;; Shortcut alias for query-replace-regexp, run M-x qrr
 (defalias 'qrr 'query-replace-regexp)
 
+;; TODO: should work on selection as well
 (defun move-line-up ()
   "Move up the current line."
   (interactive)
@@ -772,7 +775,7 @@
 (defvar hh-debug-script "debug_vs.bat"
   "A script which opens the Handmade Hero project for debugging.")
 
-(defvar hh-executable-filename "win32_handmade.exe"
+(defvar hh-executable-filename "run_exe.bat"
   "The name of the main Handmade Hero executable file.")
 
 (defvar hh-debug-in-visualstudio-running nil
@@ -856,7 +859,7 @@ otherwise always use the same name."
   (setq hh-run-executable-running t)
   (if (hh-find-project-directory)
       (progn
-        (cd "_build")
+        (cd "misc")
         (compile hh-executable-filename)
         ;; switch focus back to the main window where we came from
         (other-window 1)
@@ -967,6 +970,8 @@ otherwise always use the same name."
     (other-window -1))
   (define-key c++-mode-map [f12] 'handmade-hero-find-corresponding-file)
   (define-key c++-mode-map [M-f12] 'handmade-hero-find-corresponding-file-other-window)
+  (global-set-key (kbd "C-c h o") 'handmade-hero-find-corresponding-file)
+  (global-set-key (kbd "C-c h O") 'handmade-hero-find-corresponding-file-other-window)
 
   ; Alternate bindings for F-keyless setups (ie MacOS X terminal)
   ;; (define-key c++-mode-map "\ec" 'casey-find-corresponding-file)
