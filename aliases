@@ -27,6 +27,8 @@ alias be="bundle exec"
 alias xm=exercism
 alias ec="emacsclient -n"
 alias rn="react-native"
+alias ci="circleci"
+alias gpr="make-pull-request"
 
 # kill the last Ctrl-Z suspended process
 alias k="kill %"
