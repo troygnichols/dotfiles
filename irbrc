@@ -1,3 +1,5 @@
+# -*- mode: ruby -*-
+
 require 'rubygems'
 
 puts 'Loading global .irbrc'
