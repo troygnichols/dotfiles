@@ -43,4 +43,12 @@ def qbm
   ret
 end
 
+def sep(spacing: 0, before: 0, after: 0)
+  (spacing+before).times{puts}
+  ENV['COLUMNS'].to_i.times{print('-')}
+  if (spacing+after) > 0
+    (spacing+after+1).times{puts}
+  end
+end
+
 # vim: syntax=ruby
